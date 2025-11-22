@@ -37,7 +37,7 @@ export default function ProjectCard({ project, index }) {
 
         {/* Tech Stack */}
         <div className="flex flex-wrap gap-2 mb-4">
-          {project.techStack.map((tech, idx) => (
+          {(project.technologies || project.techStack || []).map((tech, idx) => (
             <span
               key={idx}
               className="px-3 py-1 text-xs font-medium bg-indigo-900/50 text-indigo-300 rounded-full border border-indigo-700"

@@ -287,11 +287,10 @@ export default function HeroSection() {
                         <div className="absolute -left-6 top-3 w-2 h-2 bg-indigo-500 rounded-full opacity-60 group-hover:opacity-100 group-hover:scale-125 transition-all duration-300" />
                         
                         <h3 
-                          className="text-2xl md:text-3xl lg:text-4xl font-black text-white/95 leading-tight group-hover:text-indigo-300 transition-colors duration-500 italic"
+                          className="text-2xl md:text-3xl lg:text-4xl font-black text-white/95 leading-tight group-hover:text-indigo-300 transition-colors duration-500"
                           style={{ 
                             fontFamily: 'var(--font-space-grotesk), "Arial Black", sans-serif',
                             fontWeight: '900',
-                            transform: 'skew(-8deg)',
                             letterSpacing: '-0.02em'
                           }}
                         >

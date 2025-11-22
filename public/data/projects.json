@@ -1,0 +1,64 @@
+{
+  "projects": [
+    {
+      "id": 1,
+      "title": "E-Commerce Platform",
+      "description": "A full-stack e-commerce solution built with Next.js, featuring user authentication, payment processing, and admin dashboard.",
+      "image": "/images/projects/ecommerce.jpg",
+      "technologies": ["Next.js", "React", "Node.js", "MongoDB", "Stripe"],
+      "githubUrl": "https://github.com/A-Piyas-04/ecommerce-platform",
+      "liveUrl": "https://ecommerce-demo.vercel.app",
+      "featured": true,
+      "category": "Full Stack",
+      "completedDate": "2024-01-15"
+    },
+    {
+      "id": 2,
+      "title": "Task Management App",
+      "description": "A collaborative task management application with real-time updates, drag-and-drop functionality, and team collaboration features.",
+      "image": "/images/projects/taskmanager.jpg",
+      "technologies": ["React", "TypeScript", "Firebase", "Material-UI"],
+      "githubUrl": "https://github.com/A-Piyas-04/task-manager",
+      "liveUrl": "https://taskmanager-demo.vercel.app",
+      "featured": true,
+      "category": "Frontend",
+      "completedDate": "2023-12-10"
+    },
+    {
+      "id": 3,
+      "title": "Weather Dashboard",
+      "description": "A responsive weather application that provides current weather conditions, forecasts, and interactive maps using multiple APIs.",
+      "image": "/images/projects/weather.jpg",
+      "technologies": ["JavaScript", "CSS3", "OpenWeather API", "Chart.js"],
+      "githubUrl": "https://github.com/A-Piyas-04/weather-dashboard",
+      "liveUrl": "https://weather-dashboard-demo.vercel.app",
+      "featured": false,
+      "category": "Frontend",
+      "completedDate": "2023-11-20"
+    },
+    {
+      "id": 4,
+      "title": "Automation Bot",
+      "description": "A Python-based automation bot that streamlines repetitive tasks, data processing, and report generation for business workflows.",
+      "image": "/images/projects/automation.jpg",
+      "technologies": ["Python", "Selenium", "Pandas", "SQLite"],
+      "githubUrl": "https://github.com/A-Piyas-04/automation-bot",
+      "liveUrl": null,
+      "featured": false,
+      "category": "Automation",
+      "completedDate": "2023-10-05"
+    },
+    {
+      "id": 5,
+      "title": "Portfolio Website",
+      "description": "A modern, responsive portfolio website built with Next.js, featuring smooth animations, dark theme, and optimized performance.",
+      "image": "/images/projects/portfolio.jpg",
+      "technologies": ["Next.js", "Tailwind CSS", "Framer Motion", "EmailJS"],
+      "githubUrl": "https://github.com/A-Piyas-04/portfolio",
+      "liveUrl": "https://ahnaf-portfolio.vercel.app",
+      "featured": true,
+      "category": "Frontend",
+      "completedDate": "2024-02-01"
+    }
+  ]
+}

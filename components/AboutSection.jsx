@@ -68,12 +68,73 @@ export default function AboutSection() {
           </motion.div>
         </motion.div>
 
-        {/* Strengths Section */}
+        {/* Academic Background Section */}
         <motion.div
           initial={{ opacity: 0, y: 50 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: '-100px' }}
           transition={{ duration: 0.6, delay: 0.2 }}
+          className="mt-16"
+        >
+          <SectionHeader
+            title="Academic Background"
+            subtitle="Educational foundation and achievements"
+            center
+          />
+          <div className="max-w-4xl mx-auto mt-12">
+            <motion.div
+              initial={{ opacity: 0, x: -30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.1 }}
+              className="card bg-gradient-to-br from-slate-800/50 to-indigo-900/30 border-indigo-500/30"
+            >
+              <div className="flex flex-col md:flex-row md:items-center gap-6">
+                <div className="flex-shrink-0">
+                  <div className="w-16 h-16 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-full flex items-center justify-center">
+                    <span className="text-2xl font-bold text-white">🎓</span>
+                  </div>
+                </div>
+                <div className="flex-grow">
+                  <h3 className="text-2xl font-bold text-white mb-2">
+                    Islamic University of Technology (IUT)
+                  </h3>
+                  <p className="text-indigo-300 font-medium mb-3">
+                    Bachelor of Science in Software Engineering
+                  </p>
+                  <p className="text-gray-400 mb-4">
+                    Department of Computer Science and Engineering
+                  </p>
+                  <div className="flex flex-wrap gap-4 text-sm">
+                    <div className="bg-slate-700/50 px-3 py-1 rounded-full">
+                      <span className="text-gray-300">CGPA: </span>
+                      <span className="text-indigo-300 font-semibold">3.87</span>
+                    </div>
+                    <div className="bg-slate-700/50 px-3 py-1 rounded-full">
+                      <span className="text-gray-300">Status: </span>
+                      <span className="text-green-400 font-semibold">Undergraduate</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className="mt-6 pt-6 border-t border-slate-700/50">
+                <p className="text-gray-400 text-sm leading-relaxed">
+                  <strong className="text-indigo-300">About IUT:</strong> The Islamic University of Technology is an international university 
+                  established under the auspices of the Organization of Islamic Cooperation (OIC). 
+                  It serves as a center of excellence in engineering, technology, and applied sciences, 
+                  fostering innovation and research across the Islamic world.
+                </p>
+              </div>
+            </motion.div>
+          </div>
+        </motion.div>
+
+        {/* Strengths Section */}
+        <motion.div
+          initial={{ opacity: 0, y: 50 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: '-100px' }}
+          transition={{ duration: 0.6, delay: 0.4 }}
           className="mt-16"
         >
           <SectionHeader
