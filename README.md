@@ -17,10 +17,15 @@ portfolio/
 ├── app/
 │   ├── layout.jsx          # Root layout with metadata
 │   ├── page.jsx            # Home page
-│   ├── about/page.jsx      # About page
-│   ├── projects/page.jsx   # Projects page
-│   ├── skills/page.jsx     # Skills page
-│   ├── contact/page.jsx    # Contact page
+│   ├── about/
+│   │   └── page.jsx        # About page
+│   ├── projects/
+│   │   └── page.jsx        # Projects page
+│   ├── skills/
+│   │   └── page.jsx        # Skills page
+│   ├── contact/
+│   │   ├── layout.jsx     # Contact page metadata
+│   │   └── page.jsx        # Contact page
 │   └── globals.css         # Global styles
 ├── components/
 │   ├── Navbar.jsx          # Navigation component
@@ -31,11 +36,10 @@ portfolio/
 │   └── SectionHeader.jsx   # Section header component
 ├── public/
 │   └── images/             # Image assets
-└── styles/
-    └── globals.css         # Additional global styles (if needed)
+└── .env.example            # Environment variables template
 ```
 
-## 🛠️ Setup Instructions
+## 🛠️ Quick Start
 
 ### Prerequisites
 
@@ -50,14 +54,10 @@ npm install
 ```
 
 2. Configure EmailJS (for contact form):
+   - Copy `.env.example` to `.env.local`
    - Sign up at [EmailJS](https://www.emailjs.com/)
    - Create a service and template
-   - Add your credentials to `.env.local`:
-   ```
-   NEXT_PUBLIC_EMAILJS_SERVICE_ID=your_service_id
-   NEXT_PUBLIC_EMAILJS_TEMPLATE_ID=your_template_id
-   NEXT_PUBLIC_EMAILJS_PUBLIC_KEY=your_public_key
-   ```
+   - Add your credentials to `.env.local`
 
 3. Run development server:
 ```bash
@@ -74,30 +74,32 @@ npm run build
 
 This creates an optimized production build in the `out/` directory (static export).
 
-## 🚢 Deploy to Vercel
+## 📚 Documentation
 
-1. Push your code to GitHub
-2. Import your repository in [Vercel](https://vercel.com)
-3. Vercel will automatically detect Next.js and configure the build
-4. Add your environment variables in Vercel dashboard
-5. Deploy!
+- **[DEPLOYMENT.md](./DEPLOYMENT.md)** - Complete deployment guide and EmailJS setup
+- **[Customization Guide](./DEPLOYMENT.md#-customization-guide)** - How to customize colors, content, and animations
+
+## ✨ Features
+
+- ✅ Fully responsive design (mobile, tablet, desktop)
+- ✅ Smooth animations with Framer Motion
+- ✅ SEO optimized with metadata
+- ✅ Contact form with EmailJS integration
+- ✅ Modern, clean UI with Tailwind CSS
+- ✅ Accessible and performant
+- ✅ Static export ready for Vercel
 
 ## 🎨 Customization
 
-### Colors
+### Quick Updates
 
-Edit `tailwind.config.js` to customize the color palette. The primary color scheme is defined in the `colors.primary` object.
+- **Personal Info:** `app/page.jsx` (HeroSection)
+- **Projects:** `app/projects/page.jsx`
+- **Skills:** `app/skills/page.jsx`
+- **Social Links:** `components/Footer.jsx` and `app/contact/page.jsx`
+- **Colors:** `tailwind.config.js`
 
-### Content
-
-- **Personal Info:** Update name, title, and bio in respective page components
-- **Projects:** Edit project data in `app/projects/page.jsx`
-- **Skills:** Modify skill categories in `app/skills/page.jsx`
-- **Social Links:** Update links in `components/Footer.jsx` and `components/Navbar.jsx`
-
-### Animations
-
-Framer Motion animations can be customized in individual components. Look for `motion` components and `variants` objects.
+See [DEPLOYMENT.md](./DEPLOYMENT.md) for detailed customization instructions.
 
 ## 📝 License
 
