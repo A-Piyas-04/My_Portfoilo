@@ -257,42 +257,60 @@ export default function HeroSection() {
           >
             <motion.div
               variants={itemVariants}
-              className="space-y-6"
+              className="space-y-10"
             >
-              <motion.p
-                className="text-indigo-400/80 font-medium text-sm md:text-base tracking-wider uppercase mb-6"
-                initial={{ opacity: 0, x: -20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.6, delay: 0.3 }}
+              {/* Professional header with design element */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.2 }}
+                className="relative"
               >
-                I Am A
-              </motion.p>
-              
-              <div className="space-y-4">
-                {['Full-Stack Software Developer', 'Automation Developer', 'Tech enthusiast'].map((profession, index) => (
-                  <motion.div
-                    key={profession}
-                    initial={{ opacity: 0, x: -30 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ duration: 0.6, delay: 0.5 + index * 0.2 }}
-                    className="group"
-                  >
-                    <h3 
-                      className="text-xl md:text-2xl lg:text-3xl font-bold text-white group-hover:text-indigo-400 transition-colors duration-300 italic"
-                      style={{ fontFamily: 'var(--font-playfair), "Georgia", serif' }}
-                    >
-                      {profession}
-                    </h3>
-                    <motion.div
-                      className="h-0.5 bg-gradient-to-r from-indigo-500 to-purple-500 mt-2"
-                      initial={{ scaleX: 0 }}
-                      animate={{ scaleX: 1 }}
-                      transition={{ duration: 0.6, delay: 0.7 + index * 0.2 }}
-                      style={{ transformOrigin: 'left' }}
-                    />
-                  </motion.div>
-                ))}
-              </div>
+                {/* Simple geometric accent */}
+                <div className="absolute -left-4 top-0 w-1 h-full bg-gradient-to-b from-indigo-500 via-purple-500 to-transparent rounded-full" />
+                
+                <div className="pl-8">
+                  {/* <p className="text-indigo-400/90 font-medium text-sm tracking-[0.2em] uppercase mb-8">
+                    Expertise
+                  </p> */}
+                  
+                  <div className="space-y-8">
+                    {['Aspiring Software Engineer','Full-Stack Developer', 'Automation Specialist','UI/UX Designer'].map((profession, index) => (
+                      <motion.div
+                        key={profession}
+                        initial={{ opacity: 0, x: -20 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{ duration: 0.6, delay: 0.4 + index * 0.15 }}
+                        className="group relative"
+                      >
+                        {/* Simple dot indicator */}
+                        <div className="absolute -left-6 top-3 w-2 h-2 bg-indigo-500 rounded-full opacity-60 group-hover:opacity-100 group-hover:scale-125 transition-all duration-300" />
+                        
+                        <h3 
+                          className="text-2xl md:text-3xl lg:text-4xl font-black text-white/95 leading-tight group-hover:text-indigo-300 transition-colors duration-500 italic"
+                          style={{ 
+                            fontFamily: 'var(--font-space-grotesk), "Arial Black", sans-serif',
+                            fontWeight: '900',
+                            transform: 'skew(-8deg)',
+                            letterSpacing: '-0.02em'
+                          }}
+                        >
+                          {profession}
+                        </h3>
+                        
+                        {/* Simple line accent */}
+                        <motion.div
+                          className="h-0.5 bg-gradient-to-r from-indigo-500 via-purple-500 to-transparent mt-3 rounded-full"
+                          initial={{ scaleX: 0 }}
+                          animate={{ scaleX: 1 }}
+                          transition={{ duration: 0.8, delay: 0.6 + index * 0.15 }}
+                          style={{ transformOrigin: 'left' }}
+                        />
+                      </motion.div>
+                    ))}
+                  </div>
+                </div>
+              </motion.div>
             </motion.div>
           </motion.div>
 
