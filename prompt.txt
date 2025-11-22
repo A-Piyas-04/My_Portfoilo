@@ -1,0 +1,211 @@
+You are an expert full-stack engineer, senior front-end architect, UI/UX designer, and technical writer.
+Your task is to build a complete, production-ready personal portfolio website for a Software Developer using the exact stack and structure described below.
+
+🔧 TECHNOLOGY STACK (strict)
+
+Framework: Next.js 14 (App Router)
+
+Styling: Tailwind CSS
+
+Animation: Framer Motion
+
+Deployment-ready: Vercel optimized
+
+No backend server, no database
+
+Contact Form: Use a client-side email API (EmailJS OR Resend)
+
+This must be a static, SEO-friendly, lightweight portfolio.
+
+📁 PROJECT STRUCTURE (strict)
+
+Generate a clean folder structure like:
+
+app/
+ ├── page.jsx
+ ├── about/page.jsx
+ ├── projects/page.jsx
+ ├── skills/page.jsx
+ └── contact/page.jsx
+components/
+ ├── Navbar.jsx
+ ├── Footer.jsx
+ ├── HeroSection.jsx
+ ├── ProjectCard.jsx
+ ├── SkillCard.jsx
+ └── SectionHeader.jsx
+public/
+ └── images/
+styles/
+ └── globals.css
+
+
+Each component must be modular, reusable, clean, and accessible.
+
+🎨 DESIGN & UX REQUIREMENTS
+
+Minimal, modern, clean UI
+
+Light animations using Framer Motion
+
+Fully responsive for mobile, tablet, desktop
+
+Professional color palette (developer portfolio style)
+
+Smooth scrolling
+
+Consistent spacing & typography
+
+High contrast and accessible design
+
+Show subtle hover effects, shadows, transitions
+
+📄 REQUIRED PAGES
+1️⃣ Home Page (Hero Section)
+
+Include:
+
+Name: Ahnaf Shahriar Pias
+
+Title: Software Developer
+
+Short tagline
+
+“Hire Me” and “Download CV” buttons
+
+Smooth entrance animations
+
+2️⃣ About Page
+
+Include:
+
+A short biography
+
+Background
+
+Strengths
+
+Tools + technologies as icon grid
+
+Timeline section (education, experience, hackathons)
+
+3️⃣ Projects Page
+
+Showcase dummy projects (3–6) with:
+
+Project title
+
+Description
+
+Tech stack
+
+Optional live link (but not required)
+
+GitHub button
+
+Large thumbnail
+
+Clean project card UI
+
+Generate realistic software dev projects like:
+
+Task manager
+
+E-commerce frontend
+
+API dashboard
+
+Landing page UI
+
+Full-stack MERN sample
+
+4️⃣ Skills Page
+
+Create multiple categories:
+
+Languages
+
+Frameworks
+
+Databases (still include even if not used here)
+
+Tools & Platforms
+
+Soft skills
+
+Render beautiful icon-based grids.
+
+5️⃣ Contact Page
+
+Email form using EmailJS or Resend
+
+GitHub, LinkedIn, Email buttons
+
+Simple professional layout
+
+🧭 NAVIGATION
+
+Navbar:
+
+Home
+
+About
+
+Projects
+
+Skills
+
+Contact
+
+Sticky + responsive.
+Smooth active-state animations.
+
+Footer:
+
+Copyright
+
+Quick links
+
+Social icons
+
+📌 ADDITIONAL INSTRUCTIONS
+
+Write all code in Next.js App Router style
+
+Use functional components with hooks
+
+Use Tailwind classes correctly
+
+Make the code clean, commented, readable
+
+Include SEO metadata for every page
+
+Include Framer Motion variants for animations
+
+Use reusable components to avoid repetition
+
+Include dummy images for projects
+
+Write dummy but realistic project descriptions
+
+🎁 FINAL OUTPUT FORMAT
+
+Your final answer should include:
+
+A full professional explanation of the project
+
+Complete folder + file structure
+
+All component code files
+
+All pages code files
+
+Tailwind + config setup
+
+How to deploy to Vercel
+
+How to configure EmailJS/Resend
+
+How to customize text, colors, animations
+
+Deliver everything as if handing over a client-ready project.
