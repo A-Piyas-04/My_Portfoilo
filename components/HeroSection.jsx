@@ -1,7 +1,8 @@
 'use client'
 
 import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion'
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
+import Image from 'next/image'
 
 export default function HeroSection() {
   const containerRef = useRef(null)
@@ -27,6 +28,17 @@ export default function HeroSection() {
     window.addEventListener('mousemove', handleMouseMove)
     return () => window.removeEventListener('mousemove', handleMouseMove)
   }, [mouseX, mouseY])
+
+  // Parallax effect on scroll
+  const [scrollY, setScrollY] = useState(0)
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrollY(window.scrollY)
+    }
+    window.addEventListener('scroll', handleScroll)
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [])
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -78,18 +90,27 @@ export default function HeroSection() {
       ref={containerRef}
       className="min-h-screen flex items-center justify-center relative overflow-hidden bg-gradient-to-br from-slate-950 via-indigo-950 to-purple-950 pt-20"
     >
-      {/* Animated gradient background */}
+      {/* Parallax background layers */}
       <div className="absolute inset-0 overflow-hidden">
-        <div 
+        {/* Base gradient with parallax */}
+        <motion.div 
           className="absolute inset-0 opacity-30"
           style={{
             background: 'radial-gradient(circle at 20% 50%, rgba(99, 102, 241, 0.3) 0%, transparent 50%), radial-gradient(circle at 80% 80%, rgba(139, 92, 246, 0.3) 0%, transparent 50%), radial-gradient(circle at 40% 20%, rgba(59, 130, 246, 0.2) 0%, transparent 50%)',
             backgroundSize: '200% 200%',
-            animation: 'gradient 15s ease infinite',
+            y: scrollY * 0.3,
+          }}
+          animate={{
+            backgroundPosition: ['0% 0%', '100% 100%'],
+          }}
+          transition={{
+            duration: 15,
+            repeat: Infinity,
+            repeatType: 'reverse',
           }}
         />
         
-        {/* Floating particles */}
+        {/* Floating particles with parallax */}
         {particles.map((i) => (
           <motion.div
             key={i}
@@ -99,6 +120,7 @@ export default function HeroSection() {
               height: Math.random() * 300 + 100,
               left: `${Math.random() * 100}%`,
               top: `${Math.random() * 100}%`,
+              y: scrollY * (0.1 + Math.random() * 0.2),
             }}
             animate={{
               y: [0, -30, 0],
@@ -115,12 +137,13 @@ export default function HeroSection() {
         ))}
       </div>
 
-      {/* Grid pattern overlay */}
-      <div 
+      {/* Grid pattern overlay with parallax */}
+      <motion.div 
         className="absolute inset-0 opacity-10"
         style={{
           backgroundImage: 'linear-gradient(rgba(99, 102, 241, 0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(99, 102, 241, 0.1) 1px, transparent 1px)',
           backgroundSize: '50px 50px',
+          y: scrollY * 0.1,
         }}
       />
 
@@ -155,7 +178,7 @@ export default function HeroSection() {
               </motion.span>
             </motion.div>
 
-            {/* Advanced Animated Name with 3D effect */}
+            {/* Advanced Animated Name with 3D effect - Reduced glow */}
             <motion.h1
               className="text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-extrabold mb-6 leading-tight"
               style={{ perspective: '1000px' }}
@@ -174,7 +197,7 @@ export default function HeroSection() {
                     }}
                     whileHover={{ 
                       scale: 1.1,
-                      textShadow: '0 0 30px rgba(99, 102, 241, 0.5)',
+                      textShadow: '0 0 15px rgba(99, 102, 241, 0.3)',
                       transition: { duration: 0.3 }
                     }}
                   >
@@ -185,10 +208,10 @@ export default function HeroSection() {
                     ) : (
                       <span className="text-white">{part}</span>
                     )}
-                    {/* Glow effect */}
+                    {/* Reduced glow effect */}
                     <motion.span
-                      className="absolute inset-0 bg-gradient-to-r from-indigo-400/50 via-purple-400/50 to-pink-400/50 blur-xl -z-10"
-                      animate={{ opacity: [0.5, 1, 0.5] }}
+                      className="absolute inset-0 bg-gradient-to-r from-indigo-400/20 via-purple-400/20 to-pink-400/20 blur-xl -z-10"
+                      animate={{ opacity: [0.2, 0.4, 0.2] }}
                       transition={{ duration: 2, repeat: Infinity }}
                     />
                   </motion.span>
@@ -290,7 +313,7 @@ export default function HeroSection() {
             </motion.div>
           </motion.div>
 
-          {/* Enhanced Image Placeholder with 3D effect */}
+          {/* Profile Image with 3D effect */}
           <motion.div
             initial={{ opacity: 0, scale: 0.8, rotateY: -20 }}
             animate={{ opacity: 1, scale: 1, rotateY: 0 }}
@@ -299,25 +322,22 @@ export default function HeroSection() {
             style={{ x, y, transformStyle: 'preserve-3d' }}
           >
             <div className="relative w-full h-[500px] md:h-[600px] rounded-3xl overflow-hidden border-2 border-indigo-500/30 shadow-2xl">
-              {/* Animated gradient background */}
-              <motion.div
-                className="absolute inset-0 bg-gradient-to-br from-indigo-600/30 via-purple-600/30 to-pink-600/30"
-                animate={{
-                  backgroundPosition: ['0% 0%', '100% 100%'],
-                }}
-                transition={{
-                  duration: 10,
-                  repeat: Infinity,
-                  repeatType: 'reverse',
-                }}
-                style={{
-                  backgroundSize: '200% 200%',
-                }}
-              />
+              {/* Profile Image */}
+              <div className="relative w-full h-full">
+                <Image
+                  src="/images/dp.jpg"
+                  alt="Ahnaf Shahriar Pias"
+                  fill
+                  className="object-cover"
+                  priority
+                />
+                {/* Gradient overlay */}
+                <div className="absolute inset-0 bg-gradient-to-br from-indigo-600/20 via-purple-600/20 to-pink-600/20" />
+              </div>
               
               {/* Glowing border effect */}
               <motion.div
-                className="absolute inset-0 rounded-3xl"
+                className="absolute inset-0 rounded-3xl pointer-events-none"
                 style={{
                   background: 'linear-gradient(45deg, transparent 30%, rgba(99, 102, 241, 0.5) 50%, transparent 70%)',
                   backgroundSize: '200% 200%',
@@ -331,41 +351,11 @@ export default function HeroSection() {
                 }}
               />
 
-              {/* Placeholder content with floating animation */}
-              <motion.div
-                className="absolute inset-0 flex items-center justify-center z-20"
-                animate={{ y: [0, -10, 0] }}
-                transition={{ duration: 4, repeat: Infinity }}
-              >
-                <div className="text-center">
-                  <motion.div
-                    className="w-32 h-32 md:w-40 md:h-40 mx-auto mb-4 rounded-full bg-gradient-to-br from-indigo-500 via-purple-500 to-pink-500 flex items-center justify-center text-4xl md:text-5xl font-bold text-white shadow-2xl relative overflow-hidden"
-                    animate={{ rotate: [0, 360] }}
-                    transition={{ duration: 20, repeat: Infinity, ease: 'linear' }}
-                    whileHover={{ scale: 1.1, boxShadow: '0 0 50px rgba(99, 102, 241, 0.8)' }}
-                  >
-                    <span className="relative z-10">ASP</span>
-                    <motion.div
-                      className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent"
-                      animate={{ x: ['-100%', '100%'] }}
-                      transition={{ duration: 2, repeat: Infinity }}
-                    />
-                  </motion.div>
-                  <motion.p
-                    className="text-gray-300 text-sm md:text-base"
-                    animate={{ opacity: [0.5, 1, 0.5] }}
-                    transition={{ duration: 2, repeat: Infinity }}
-                  >
-                    Your Photo Here
-                  </motion.p>
-                </div>
-              </motion.div>
-
               {/* Floating orbs */}
               {[1, 2, 3].map((i) => (
                 <motion.div
                   key={i}
-                  className="absolute rounded-full bg-gradient-to-r from-indigo-400/20 to-purple-400/20 blur-2xl"
+                  className="absolute rounded-full bg-gradient-to-r from-indigo-400/20 to-purple-400/20 blur-2xl pointer-events-none"
                   style={{
                     width: 100 + i * 50,
                     height: 100 + i * 50,

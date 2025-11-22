@@ -4,40 +4,70 @@ import { motion } from 'framer-motion'
 import SectionHeader from './SectionHeader'
 import SkillCard from './SkillCard'
 
+// Icon mapping for all skills
+const skillIcons = {
+  'JavaScript': 'JS',
+  'TypeScript': 'TS',
+  'Python': '🐍',
+  'Java': '☕',
+  'C++': 'C++',
+  'React': '⚛️',
+  'Next.js': '▲',
+  'Node.js': '🟢',
+  'Express': '🚂',
+  'Vue.js': '💚',
+  'MongoDB': '🍃',
+  'PostgreSQL': '🐘',
+  'MySQL': '🗄️',
+  'Redis': '🔴',
+  'Git': '📦',
+  'Docker': '🐳',
+  'AWS': '☁️',
+  'CI/CD': '🔄',
+  'Linux': '🐧',
+  'n8n': '🔗',
+  'Problem Solving': '💡',
+  'Team Collaboration': '🤝',
+  'Communication': '💬',
+  'Time Management': '⏰',
+  'Adaptability': '🔄',
+}
+
 const skillCategories = {
   Languages: [
-    { name: 'JavaScript', level: 90 },
-    { name: 'TypeScript', level: 85 },
-    { name: 'Python', level: 80 },
-    { name: 'Java', level: 75 },
-    { name: 'C++', level: 70 },
+    { name: 'JavaScript', level: 90, icon: skillIcons['JavaScript'] },
+    { name: 'TypeScript', level: 85, icon: skillIcons['TypeScript'] },
+    { name: 'Python', level: 80, icon: skillIcons['Python'] },
+    { name: 'Java', level: 75, icon: skillIcons['Java'] },
+    { name: 'C++', level: 70, icon: skillIcons['C++'] },
   ],
   Frameworks: [
-    { name: 'React', level: 95 },
-    { name: 'Next.js', level: 90 },
-    { name: 'Node.js', level: 85 },
-    { name: 'Express', level: 85 },
-    { name: 'Vue.js', level: 75 },
+    { name: 'React', level: 95, icon: skillIcons['React'] },
+    { name: 'Next.js', level: 90, icon: skillIcons['Next.js'] },
+    { name: 'Node.js', level: 85, icon: skillIcons['Node.js'] },
+    { name: 'Express', level: 85, icon: skillIcons['Express'] },
+    { name: 'Vue.js', level: 75, icon: skillIcons['Vue.js'] },
   ],
   Databases: [
-    { name: 'MongoDB', level: 85 },
-    { name: 'PostgreSQL', level: 80 },
-    { name: 'MySQL', level: 75 },
-    { name: 'Redis', level: 70 },
+    { name: 'MongoDB', level: 85, icon: skillIcons['MongoDB'] },
+    { name: 'PostgreSQL', level: 80, icon: skillIcons['PostgreSQL'] },
+    { name: 'MySQL', level: 75, icon: skillIcons['MySQL'] },
+    { name: 'Redis', level: 70, icon: skillIcons['Redis'] },
   ],
   'Tools & Platforms': [
-    { name: 'Git', level: 90 },
-    { name: 'Docker', level: 80 },
-    { name: 'AWS', level: 75 },
-    { name: 'CI/CD', level: 75 },
-    { name: 'Linux', level: 80 },
+    { name: 'Git', level: 90, icon: skillIcons['Git'] },
+    { name: 'Docker', level: 80, icon: skillIcons['Docker'] },
+    { name: 'AWS', level: 75, icon: skillIcons['AWS'] },
+    { name: 'CI/CD', level: 75, icon: skillIcons['CI/CD'] },
+    { name: 'Linux', level: 80, icon: skillIcons['Linux'] },
+    { name: 'n8n', level: 85, icon: skillIcons['n8n'] },
   ],
   'Soft Skills': [
-    { name: 'Problem Solving' },
-    { name: 'Team Collaboration' },
-    { name: 'Communication' },
-    { name: 'Time Management' },
-    { name: 'Adaptability' },
+    { name: 'Problem Solving', icon: skillIcons['Problem Solving'] },
+    { name: 'Team Collaboration', icon: skillIcons['Team Collaboration'] },
+    { name: 'Communication', icon: skillIcons['Communication'] },
+    { name: 'Time Management', icon: skillIcons['Time Management'] },
+    { name: 'Adaptability', icon: skillIcons['Adaptability'] },
   ],
 }
 
@@ -86,4 +116,3 @@ export default function SkillsSection() {
     </section>
   )
 }
-

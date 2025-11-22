@@ -5,6 +5,7 @@ import AboutSection from '@/components/AboutSection'
 import ProjectsSection from '@/components/ProjectsSection'
 import SkillsSection from '@/components/SkillsSection'
 import ContactSection from '@/components/ContactSection'
+import CursorFollower from '@/components/CursorFollower'
 
 export const metadata = {
   title: 'Ahnaf Shahriar Pias - Software Developer Portfolio',
@@ -14,6 +15,7 @@ export const metadata = {
 export default function Home() {
   return (
     <>
+      <CursorFollower />
       <Navbar />
       <main>
         <HeroSection />
