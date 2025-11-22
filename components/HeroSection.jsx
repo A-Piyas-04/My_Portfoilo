@@ -53,17 +53,37 @@ export default function HeroSection() {
     }),
   }
 
-  const name = "Ahnaf Shahriar Pias"
+  const name = "AHNAF SHAHRIAR PIAS"
   const nameWords = name.split(' ')
 
-  // Geometric shapes for background - increased visibility
+  // Geometric shapes for background - More shapes with increased visibility
   const geometricShapes = [
+    // Hexagons
     { type: 'hexagon', x: '10%', y: '20%', size: 120, delay: 0 },
-    { type: 'triangle', x: '85%', y: '15%', size: 100, delay: 0.5 },
-    { type: 'circle', x: '15%', y: '70%', size: 80, delay: 1 },
     { type: 'hexagon', x: '90%', y: '75%', size: 100, delay: 1.5 },
+    { type: 'hexagon', x: '5%', y: '50%', size: 90, delay: 2 },
+    { type: 'hexagon', x: '95%', y: '30%', size: 110, delay: 0.8 },
+    { type: 'hexagon', x: '75%', y: '85%', size: 85, delay: 2.5 },
+    
+    // Triangles
+    { type: 'triangle', x: '85%', y: '15%', size: 100, delay: 0.5 },
+    { type: 'triangle', x: '20%', y: '10%', size: 80, delay: 1.2 },
+    { type: 'triangle', x: '80%', y: '60%', size: 95, delay: 1.8 },
+    { type: 'triangle', x: '30%', y: '90%', size: 75, delay: 2.2 },
+    
+    // Circles
+    { type: 'circle', x: '15%', y: '70%', size: 80, delay: 1 },
+    { type: 'circle', x: '70%', y: '25%', size: 70, delay: 1.5 },
+    { type: 'circle', x: '50%', y: '80%', size: 90, delay: 0.7 },
+    { type: 'circle', x: '25%', y: '35%', size: 65, delay: 2.3 },
+    { type: 'circle', x: '60%', y: '5%', size: 75, delay: 1.3 },
+    
+    // Lines
     { type: 'line', x: '50%', y: '10%', width: 200, delay: 0.3 },
     { type: 'line', x: '5%', y: '50%', width: 150, delay: 0.8 },
+    { type: 'line', x: '95%', y: '50%', width: 180, delay: 1.2 },
+    { type: 'line', x: '20%', y: '90%', width: 160, delay: 1.7 },
+    { type: 'line', x: '80%', y: '5%', width: 140, delay: 2.1 },
   ]
 
   return (
@@ -106,7 +126,7 @@ export default function HeroSection() {
         />
       </div>
 
-      {/* Futuristic Geometric Shapes - Fixed visibility */}
+      {/* Futuristic Geometric Shapes - Increased visibility and quantity */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none z-[1]">
         {/* Hexagons */}
         {geometricShapes.filter(s => s.type === 'hexagon').map((shape, i) => (
@@ -121,7 +141,7 @@ export default function HeroSection() {
             }}
             initial={{ opacity: 0, scale: 0 }}
             animate={{ 
-              opacity: [0.25, 0.35, 0.25],
+              opacity: [0.4, 0.5, 0.4],
               scale: [1, 1.1, 1],
               rotate: [0, 360],
             }}
@@ -131,12 +151,12 @@ export default function HeroSection() {
               delay: shape.delay,
             }}
           >
-            <svg width={shape.size} height={shape.size} viewBox="0 0 100 100" className="text-indigo-400/30">
+            <svg width={shape.size} height={shape.size} viewBox="0 0 100 100" className="text-indigo-400/50">
               <polygon
                 points="50,5 90,25 90,75 50,95 10,75 10,25"
                 fill="none"
                 stroke="currentColor"
-                strokeWidth="1.5"
+                strokeWidth="2"
               />
             </svg>
           </motion.div>
@@ -155,7 +175,7 @@ export default function HeroSection() {
             }}
             initial={{ opacity: 0 }}
             animate={{ 
-              opacity: [0.2, 0.3, 0.2],
+              opacity: [0.35, 0.45, 0.35],
               rotate: [0, -360],
             }}
             transition={{
@@ -164,12 +184,12 @@ export default function HeroSection() {
               delay: shape.delay,
             }}
           >
-            <svg width={shape.size} height={shape.size} viewBox="0 0 100 100" className="text-purple-400/30">
+            <svg width={shape.size} height={shape.size} viewBox="0 0 100 100" className="text-purple-400/50">
               <polygon
                 points="50,10 90,90 10,90"
                 fill="none"
                 stroke="currentColor"
-                strokeWidth="1.5"
+                strokeWidth="2"
               />
             </svg>
           </motion.div>
@@ -179,7 +199,7 @@ export default function HeroSection() {
         {geometricShapes.filter(s => s.type === 'circle').map((shape, i) => (
           <motion.div
             key={`circle-${i}`}
-            className="absolute rounded-full border-2 border-indigo-400/25"
+            className="absolute rounded-full border-2 border-indigo-400/40"
             style={{
               left: shape.x,
               top: shape.y,
@@ -188,7 +208,7 @@ export default function HeroSection() {
               transform: 'translate(-50%, -50%)',
             }}
             animate={{ 
-              opacity: [0.2, 0.3, 0.2],
+              opacity: [0.3, 0.45, 0.3],
               scale: [1, 1.2, 1],
             }}
             transition={{
@@ -213,7 +233,7 @@ export default function HeroSection() {
             }}
             initial={{ opacity: 0, scaleX: 0 }}
             animate={{ 
-              opacity: [0.2, 0.35, 0.2],
+              opacity: [0.3, 0.5, 0.3],
               scaleX: [1, 1.2, 1],
             }}
             transition={{
@@ -222,7 +242,7 @@ export default function HeroSection() {
               delay: shape.delay,
             }}
           >
-            <div className="w-full h-full bg-gradient-to-r from-transparent via-indigo-400/30 to-transparent" />
+            <div className="w-full h-full bg-gradient-to-r from-transparent via-indigo-400/50 to-transparent" />
           </motion.div>
         ))}
       </div>
@@ -262,8 +282,11 @@ export default function HeroSection() {
 
             {/* Name - Reduced size with unique font */}
             <motion.h1
-              className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold leading-tight"
-              style={{ fontFamily: 'var(--font-space-grotesk), sans-serif' }}
+      className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold leading-tight"
+      style={{ fontFamily: '"Consolas", "Courier New", monospace' }}
+      
+
+                    
               variants={itemVariants}
             >
               <span className="flex flex-wrap gap-3 md:gap-4 justify-center lg:justify-start">
@@ -304,7 +327,7 @@ export default function HeroSection() {
               className="space-y-3"
             >
               <motion.h2
-                className="text-2xl md:text-3xl lg:text-4xl text-slate-300 font-light tracking-tight"
+                className="text-2xl md:text-3xl lg:text-4xl text-slate-300 font-bold tracking-tight"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 1 }}
@@ -423,8 +446,8 @@ export default function HeroSection() {
             className="relative flex justify-center lg:justify-end"
           >
             {/* Just the image - no borders, boxes, or decorative elements - larger size */}
-            <div className="relative w-full max-w-xl lg:max-w-2xl">
-              <div className="relative aspect-[3/4] w-full rounded-2xl overflow-hidden">
+            <div className="relative w-full max-w-7x2 lg:max-w-6x2" >
+              <div className="relative aspect-[.65] w-full rounded-2xl overflow-hidden">
                 <Image
                   src="/images/dp.jpg"
                   alt="Ahnaf Shahriar Pias"
