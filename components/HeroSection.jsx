@@ -1,19 +1,9 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { useEffect, useState } from 'react'
 import Image from 'next/image'
 
 export default function HeroSection() {
-  const [scrollY, setScrollY] = useState(0)
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setScrollY(window.scrollY)
-    }
-    window.addEventListener('scroll', handleScroll)
-    return () => window.removeEventListener('scroll', handleScroll)
-  }, [])
 
   // Text reveal animation variants
   const containerVariants = {
@@ -257,13 +247,78 @@ export default function HeroSection() {
       />
 
       <div className="container-custom relative z-10">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-20 items-center">
-          {/* Text Content - Left Side */}
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-12 items-center">
+          {/* Professions - Left Side */}
           <motion.div
             variants={containerVariants}
             initial="hidden"
             animate="visible"
-            className="text-center lg:text-left space-y-8"
+            className="text-center lg:text-left order-2 lg:order-1"
+          >
+            <motion.div
+              variants={itemVariants}
+              className="space-y-6"
+            >
+              <motion.p
+                className="text-indigo-400/80 font-medium text-sm md:text-base tracking-wider uppercase mb-6"
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.6, delay: 0.3 }}
+              >
+                I Am A
+              </motion.p>
+              
+              <div className="space-y-4">
+                {['Full Stack Developer', 'Software Developer', 'Automation Developer'].map((profession, index) => (
+                  <motion.div
+                    key={profession}
+                    initial={{ opacity: 0, x: -30 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ duration: 0.6, delay: 0.5 + index * 0.2 }}
+                    className="group"
+                  >
+                    <h3 className="text-xl md:text-2xl lg:text-3xl font-bold text-white group-hover:text-indigo-400 transition-colors duration-300">
+                      {profession}
+                    </h3>
+                    <motion.div
+                      className="h-0.5 bg-gradient-to-r from-indigo-500 to-purple-500 mt-2"
+                      initial={{ scaleX: 0 }}
+                      animate={{ scaleX: 1 }}
+                      transition={{ duration: 0.6, delay: 0.7 + index * 0.2 }}
+                      style={{ transformOrigin: 'left' }}
+                    />
+                  </motion.div>
+                ))}
+              </div>
+            </motion.div>
+          </motion.div>
+
+          {/* Profile Image - Center */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 1, delay: 0.6, ease: [0.22, 1, 0.36, 1] }}
+            className="relative flex justify-center order-1 lg:order-2"
+          >
+            <div className="relative w-full max-w-sm lg:max-w-md">
+              <div className="relative aspect-[3/4] w-full rounded-2xl overflow-hidden">
+                <Image
+                  src="/images/dp.jpg"
+                  alt="Ahnaf Shahriar Pias"
+                  fill
+                  className="object-cover"
+                  priority
+                />
+              </div>
+            </div>
+          </motion.div>
+
+          {/* Name - Right Side */}
+          <motion.div
+            variants={containerVariants}
+            initial="hidden"
+            animate="visible"
+            className="text-center lg:text-right space-y-6 order-3"
           >
             {/* Greeting - Subtle fade in */}
             <motion.div
@@ -272,7 +327,7 @@ export default function HeroSection() {
             >
               <motion.p
                 className="text-indigo-400/80 font-medium text-sm md:text-base tracking-wider uppercase"
-                initial={{ opacity: 0, x: -20 }}
+                initial={{ opacity: 0, x: 20 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.6, delay: 0.3 }}
               >
@@ -282,14 +337,11 @@ export default function HeroSection() {
 
             {/* Name - Reduced size with unique font */}
             <motion.h1
-      className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold leading-tight"
-      style={{ fontFamily: '"Consolas", "Courier New", monospace' }}
-      
-
-                    
+              className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold leading-tight"
+              style={{ fontFamily: '"Consolas", "Courier New", monospace' }}
               variants={itemVariants}
             >
-              <span className="flex flex-wrap gap-3 md:gap-4 justify-center lg:justify-start">
+              <span className="flex flex-wrap gap-3 md:gap-4 justify-center lg:justify-end">
                 {nameWords.map((word, index) => (
                   <motion.span
                     key={index}
@@ -310,7 +362,7 @@ export default function HeroSection() {
                           initial={{ scaleX: 0 }}
                           animate={{ scaleX: 1 }}
                           transition={{ duration: 0.8, delay: index * 0.1 + 1.2, ease: 'easeOut' }}
-                          style={{ transformOrigin: 'left' }}
+                          style={{ transformOrigin: 'right' }}
                         />
                       </span>
                     ) : (
@@ -321,25 +373,10 @@ export default function HeroSection() {
               </span>
             </motion.h1>
 
-            {/* Subtitle - Slide up with fade */}
-            <motion.div
-              variants={itemVariants}
-              className="space-y-3"
-            >
-              <motion.h2
-                className="text-2xl md:text-3xl lg:text-4xl text-slate-300 font-bold tracking-tight"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: 1 }}
-              >
-                Software Developer
-              </motion.h2>
-            </motion.div>
-
             {/* Tagline - Fade in */}
             <motion.p
               variants={itemVariants}
-              className="text-lg md:text-xl text-slate-400 max-w-2xl mx-auto lg:mx-0 leading-relaxed font-light"
+              className="text-lg md:text-xl text-slate-400 max-w-xl mx-auto lg:mx-0 leading-relaxed font-light"
             >
               Crafting elegant solutions to complex problems. Passionate about innovative web development and exceptional user experiences.
             </motion.p>
@@ -347,7 +384,7 @@ export default function HeroSection() {
             {/* CTA Buttons - Elegant design */}
             <motion.div
               variants={itemVariants}
-              className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start pt-4"
+              className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-end pt-4"
             >
               {/* Download CV Button - Primary */}
               <motion.a
@@ -436,27 +473,6 @@ export default function HeroSection() {
                 </motion.svg>
               </motion.a>
             </motion.div>
-          </motion.div>
-
-          {/* Profile Image - Right Side - Larger size, no borders */}
-          <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 1, delay: 0.6, ease: [0.22, 1, 0.36, 1] }}
-            className="relative flex justify-center lg:justify-end"
-          >
-            {/* Just the image - no borders, boxes, or decorative elements - larger size */}
-            <div className="relative w-full max-w-7x2 lg:max-w-6x2" >
-              <div className="relative aspect-[.65] w-full rounded-2xl overflow-hidden">
-                <Image
-                  src="/images/dp.jpg"
-                  alt="Ahnaf Shahriar Pias"
-                  fill
-                  className="object-cover"
-                  priority
-                />
-              </div>
-            </div>
           </motion.div>
         </div>
       </div>
