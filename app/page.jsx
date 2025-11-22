@@ -1,10 +1,14 @@
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
 import HeroSection from '@/components/HeroSection'
+import AboutSection from '@/components/AboutSection'
+import ProjectsSection from '@/components/ProjectsSection'
+import SkillsSection from '@/components/SkillsSection'
+import ContactSection from '@/components/ContactSection'
 
 export const metadata = {
-  title: 'Ahnaf Shahriar Pias - Software Developer | Home',
-  description: 'Welcome to the portfolio of Ahnaf Shahriar Pias, a passionate Software Developer specializing in modern web development.',
+  title: 'Ahnaf Shahriar Pias - Software Developer Portfolio',
+  description: 'Portfolio website of Ahnaf Shahriar Pias, a Software Developer showcasing projects, skills, and experience.',
 }
 
 export default function Home() {
@@ -13,9 +17,12 @@ export default function Home() {
       <Navbar />
       <main>
         <HeroSection />
+        <AboutSection />
+        <ProjectsSection />
+        <SkillsSection />
+        <ContactSection />
       </main>
       <Footer />
     </>
   )
 }
-

@@ -8,12 +8,12 @@ export default function ProjectCard({ project, index }) {
     <motion.div
       initial={{ opacity: 0, y: 50 }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
+      viewport={{ once: true, margin: '-50px' }}
       transition={{ duration: 0.6, delay: index * 0.1 }}
       className="card group overflow-hidden"
     >
       {/* Project Image */}
-      <div className="relative h-48 md:h-64 mb-4 overflow-hidden rounded-lg bg-gray-200">
+      <div className="relative h-48 md:h-64 mb-4 overflow-hidden rounded-lg bg-gray-700">
         {project.image ? (
           <Image
             src={project.image}
@@ -22,7 +22,7 @@ export default function ProjectCard({ project, index }) {
             className="object-cover transition-transform duration-500 group-hover:scale-110"
           />
         ) : (
-          <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-primary-400 to-primary-600">
+          <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-primary-600 to-primary-800">
             <span className="text-white text-4xl font-bold">
               {project.title.charAt(0)}
             </span>
@@ -32,15 +32,15 @@ export default function ProjectCard({ project, index }) {
 
       {/* Project Info */}
       <div>
-        <h3 className="text-xl font-bold text-gray-900 mb-2">{project.title}</h3>
-        <p className="text-gray-600 mb-4 line-clamp-3">{project.description}</p>
+        <h3 className="text-xl font-bold text-white mb-2">{project.title}</h3>
+        <p className="text-gray-400 mb-4 line-clamp-3">{project.description}</p>
 
         {/* Tech Stack */}
         <div className="flex flex-wrap gap-2 mb-4">
           {project.techStack.map((tech, idx) => (
             <span
               key={idx}
-              className="px-3 py-1 text-xs font-medium bg-primary-100 text-primary-700 rounded-full"
+              className="px-3 py-1 text-xs font-medium bg-primary-900/50 text-primary-300 rounded-full border border-primary-700"
             >
               {tech}
             </span>
@@ -54,7 +54,7 @@ export default function ProjectCard({ project, index }) {
               href={project.githubUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-2 px-4 py-2 text-sm font-medium text-gray-700 bg-gray-100 rounded-lg hover:bg-gray-200 transition-colors"
+              className="flex items-center gap-2 px-4 py-2 text-sm font-medium text-gray-300 bg-gray-700 rounded-lg hover:bg-gray-600 transition-colors"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >
@@ -84,4 +84,3 @@ export default function ProjectCard({ project, index }) {
     </motion.div>
   )
 }
-

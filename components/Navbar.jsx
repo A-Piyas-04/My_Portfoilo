@@ -1,30 +1,58 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import Link from 'next/link'
-import { usePathname } from 'next/navigation'
 import { motion, AnimatePresence } from 'framer-motion'
 
 const navLinks = [
-  { name: 'Home', href: '/' },
-  { name: 'About', href: '/about' },
-  { name: 'Projects', href: '/projects' },
-  { name: 'Skills', href: '/skills' },
-  { name: 'Contact', href: '/contact' },
+  { name: 'Home', href: '#home' },
+  { name: 'About', href: '#about' },
+  { name: 'Projects', href: '#projects' },
+  { name: 'Skills', href: '#skills' },
+  { name: 'Contact', href: '#contact' },
 ]
 
 export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
-  const pathname = usePathname()
+  const [activeSection, setActiveSection] = useState('home')
 
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 20)
+      
+      // Update active section based on scroll position
+      const sections = navLinks.map(link => link.href.substring(1))
+      const current = sections.find(section => {
+        const element = document.getElementById(section)
+        if (element) {
+          const rect = element.getBoundingClientRect()
+          return rect.top <= 100 && rect.bottom >= 100
+        }
+        return false
+      })
+      if (current) setActiveSection(current)
     }
+    
     window.addEventListener('scroll', handleScroll)
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
+
+  const handleSmoothScroll = (e, href) => {
+    e.preventDefault()
+    const targetId = href.substring(1)
+    const element = document.getElementById(targetId)
+    if (element) {
+      const offset = 80 // Navbar height
+      const elementPosition = element.getBoundingClientRect().top
+      const offsetPosition = elementPosition + window.pageYOffset - offset
+
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: 'smooth'
+      })
+      setIsMobileMenuOpen(false)
+    }
+  }
 
   return (
     <motion.nav
@@ -33,34 +61,44 @@ export default function Navbar() {
       transition={{ duration: 0.5 }}
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         isScrolled
-          ? 'bg-white/95 backdrop-blur-md shadow-md'
-          : 'bg-white/80 backdrop-blur-sm'
+          ? 'bg-gray-900/95 backdrop-blur-md shadow-lg border-b border-gray-800'
+          : 'bg-gray-900/80 backdrop-blur-sm'
       }`}
     >
       <div className="container-custom">
         <div className="flex items-center justify-between h-16 md:h-20">
           {/* Logo */}
-          <Link href="/" className="flex items-center space-x-2">
+          <a 
+            href="#home" 
+            onClick={(e) => handleSmoothScroll(e, '#home')}
+            className="flex items-center space-x-2"
+          >
             <motion.div
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="text-2xl font-bold text-primary-600"
+              className="text-2xl font-bold text-primary-400"
             >
               ASP
             </motion.div>
-          </Link>
+          </a>
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-8">
             {navLinks.map((link) => {
-              const isActive = pathname === link.href
+              const sectionId = link.href.substring(1)
+              const isActive = activeSection === sectionId
               return (
-                <Link key={link.name} href={link.href}>
+                <a
+                  key={link.name}
+                  href={link.href}
+                  onClick={(e) => handleSmoothScroll(e, link.href)}
+                  className="relative"
+                >
                   <motion.span
-                    className={`relative text-sm font-medium transition-colors ${
+                    className={`text-sm font-medium transition-colors ${
                       isActive
-                        ? 'text-primary-600'
-                        : 'text-gray-700 hover:text-primary-600'
+                        ? 'text-primary-400'
+                        : 'text-gray-300 hover:text-primary-400'
                     }`}
                     whileHover={{ y: -2 }}
                   >
@@ -68,13 +106,13 @@ export default function Navbar() {
                     {isActive && (
                       <motion.div
                         layoutId="activeIndicator"
-                        className="absolute -bottom-1 left-0 right-0 h-0.5 bg-primary-600"
+                        className="absolute -bottom-1 left-0 right-0 h-0.5 bg-primary-400"
                         initial={false}
                         transition={{ type: 'spring', stiffness: 380, damping: 30 }}
                       />
                     )}
                   </motion.span>
-                </Link>
+                </a>
               )
             })}
           </div>
@@ -82,7 +120,7 @@ export default function Navbar() {
           {/* Mobile Menu Button */}
           <button
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="md:hidden p-2 rounded-lg text-gray-700 hover:bg-gray-100 focus:outline-none"
+            className="md:hidden p-2 rounded-lg text-gray-300 hover:bg-gray-800 focus:outline-none"
             aria-label="Toggle menu"
           >
             <svg
@@ -112,28 +150,29 @@ export default function Navbar() {
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.3 }}
-            className="md:hidden bg-white border-t border-gray-200"
+            className="md:hidden bg-gray-800 border-t border-gray-700"
           >
             <div className="container-custom py-4 space-y-2">
               {navLinks.map((link) => {
-                const isActive = pathname === link.href
+                const sectionId = link.href.substring(1)
+                const isActive = activeSection === sectionId
                 return (
-                  <Link
+                  <a
                     key={link.name}
                     href={link.href}
-                    onClick={() => setIsMobileMenuOpen(false)}
+                    onClick={(e) => handleSmoothScroll(e, link.href)}
                   >
                     <motion.div
                       className={`px-4 py-2 rounded-lg text-base font-medium transition-colors ${
                         isActive
-                          ? 'bg-primary-50 text-primary-600'
-                          : 'text-gray-700 hover:bg-gray-50'
+                          ? 'bg-primary-900/50 text-primary-400'
+                          : 'text-gray-300 hover:bg-gray-700'
                       }`}
                       whileHover={{ x: 4 }}
                     >
                       {link.name}
                     </motion.div>
-                  </Link>
+                  </a>
                 )
               })}
             </div>
@@ -143,4 +182,3 @@ export default function Navbar() {
     </motion.nav>
   )
 }
-

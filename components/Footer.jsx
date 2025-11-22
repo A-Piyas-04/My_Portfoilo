@@ -1,6 +1,5 @@
 'use client'
 
-import Link from 'next/link'
 import { motion } from 'framer-motion'
 
 const socialLinks = [
@@ -34,18 +33,33 @@ const socialLinks = [
 ]
 
 const footerLinks = [
-  { name: 'Home', href: '/' },
-  { name: 'About', href: '/about' },
-  { name: 'Projects', href: '/projects' },
-  { name: 'Skills', href: '/skills' },
-  { name: 'Contact', href: '/contact' },
+  { name: 'Home', href: '#home' },
+  { name: 'About', href: '#about' },
+  { name: 'Projects', href: '#projects' },
+  { name: 'Skills', href: '#skills' },
+  { name: 'Contact', href: '#contact' },
 ]
 
 export default function Footer() {
   const currentYear = new Date().getFullYear()
 
+  const handleSmoothScroll = (e, href) => {
+    e.preventDefault()
+    const targetId = href.substring(1)
+    const element = document.getElementById(targetId)
+    if (element) {
+      const offset = 80
+      const elementPosition = element.getBoundingClientRect().top
+      const offsetPosition = elementPosition + window.pageYOffset - offset
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: 'smooth'
+      })
+    }
+  }
+
   return (
-    <footer className="bg-gray-900 text-gray-300">
+    <footer className="bg-black border-t border-gray-800">
       <div className="container-custom py-12">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {/* Brand Section */}
@@ -79,12 +93,13 @@ export default function Footer() {
             <ul className="space-y-2">
               {footerLinks.map((link) => (
                 <li key={link.name}>
-                  <Link
+                  <a
                     href={link.href}
+                    onClick={(e) => handleSmoothScroll(e, link.href)}
                     className="text-sm text-gray-400 hover:text-primary-400 transition-colors"
                   >
                     {link.name}
-                  </Link>
+                  </a>
                 </li>
               ))}
             </ul>
@@ -96,12 +111,13 @@ export default function Footer() {
             <p className="text-sm text-gray-400 mb-2">
               Ready to collaborate or have a project in mind?
             </p>
-            <Link
-              href="/contact"
-              className="inline-block mt-4 btn-primary text-sm"
+            <a
+              href="#contact"
+              onClick={(e) => handleSmoothScroll(e, '#contact')}
+              className="inline-block mt-4 btn-secondary text-sm"
             >
               Contact Me
-            </Link>
+            </a>
           </div>
         </div>
 
@@ -115,4 +131,3 @@ export default function Footer() {
     </footer>
   )
 }
-
