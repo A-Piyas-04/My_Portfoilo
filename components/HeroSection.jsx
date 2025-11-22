@@ -269,7 +269,7 @@ export default function HeroSection() {
               </motion.p>
               
               <div className="space-y-4">
-                {['Full Stack Developer', 'Software Developer', 'Automation Developer'].map((profession, index) => (
+                {['Full-Stack Software Developer', 'Automation Developer', 'Tech enthusiast'].map((profession, index) => (
                   <motion.div
                     key={profession}
                     initial={{ opacity: 0, x: -30 }}
@@ -277,7 +277,10 @@ export default function HeroSection() {
                     transition={{ duration: 0.6, delay: 0.5 + index * 0.2 }}
                     className="group"
                   >
-                    <h3 className="text-xl md:text-2xl lg:text-3xl font-bold text-white group-hover:text-indigo-400 transition-colors duration-300">
+                    <h3 
+                      className="text-xl md:text-2xl lg:text-3xl font-bold text-white group-hover:text-indigo-400 transition-colors duration-300 italic"
+                      style={{ fontFamily: 'var(--font-playfair), "Georgia", serif' }}
+                    >
                       {profession}
                     </h3>
                     <motion.div
@@ -300,8 +303,8 @@ export default function HeroSection() {
             transition={{ duration: 1, delay: 0.6, ease: [0.22, 1, 0.36, 1] }}
             className="relative flex justify-center order-1 lg:order-2"
           >
-            <div className="relative w-full max-w-sm lg:max-w-md">
-              <div className="relative aspect-[3/4] w-full rounded-2xl overflow-hidden">
+            <div className="relative w-full" style={{ transform: 'scale(1.6)', transformOrigin: 'center' }}>
+              <div className="relative aspect-[3/4] w-full max-w-sm lg:max-w-md rounded-2xl overflow-hidden">
                 <Image
                   src="/images/dp.jpg"
                   alt="Ahnaf Shahriar Pias"
