@@ -22,7 +22,7 @@ export default function ProjectCard({ project, index }) {
             className="object-cover transition-transform duration-500 group-hover:scale-110"
           />
         ) : (
-          <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-primary-600 to-primary-800">
+          <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-indigo-600 via-purple-600 to-pink-600">
             <span className="text-white text-4xl font-bold">
               {project.title.charAt(0)}
             </span>
@@ -40,7 +40,7 @@ export default function ProjectCard({ project, index }) {
           {project.techStack.map((tech, idx) => (
             <span
               key={idx}
-              className="px-3 py-1 text-xs font-medium bg-primary-900/50 text-primary-300 rounded-full border border-primary-700"
+              className="px-3 py-1 text-xs font-medium bg-indigo-900/50 text-indigo-300 rounded-full border border-indigo-700"
             >
               {tech}
             </span>
@@ -69,7 +69,7 @@ export default function ProjectCard({ project, index }) {
               href={project.liveUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-2 px-4 py-2 text-sm font-medium text-white bg-primary-600 rounded-lg hover:bg-primary-700 transition-colors"
+              className="flex items-center gap-2 px-4 py-2 text-sm font-medium text-white bg-gradient-to-r from-indigo-600 to-purple-600 rounded-lg hover:from-indigo-700 hover:to-purple-700 transition-colors"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >

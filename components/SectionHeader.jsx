@@ -24,7 +24,7 @@ export default function SectionHeader({ title, subtitle, center = false }) {
         whileInView={{ width: '100%' }}
         viewport={{ once: true }}
         transition={{ duration: 0.8, delay: 0.2 }}
-        className={`h-1 bg-primary-500 mt-4 ${center ? 'mx-auto' : ''}`}
+        className={`h-1 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 mt-4 ${center ? 'mx-auto' : ''}`}
         style={{ maxWidth: '80px' }}
       />
     </motion.div>

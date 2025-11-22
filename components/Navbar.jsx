@@ -61,8 +61,8 @@ export default function Navbar() {
       transition={{ duration: 0.5 }}
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         isScrolled
-          ? 'bg-gray-900/95 backdrop-blur-md shadow-lg border-b border-gray-800'
-          : 'bg-gray-900/80 backdrop-blur-sm'
+          ? 'bg-slate-950/95 backdrop-blur-md shadow-lg border-b border-indigo-500/20'
+          : 'bg-slate-950/80 backdrop-blur-sm'
       }`}
     >
       <div className="container-custom">
@@ -76,7 +76,7 @@ export default function Navbar() {
             <motion.div
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="text-2xl font-bold text-primary-400"
+              className="text-2xl font-bold text-indigo-400"
             >
               ASP
             </motion.div>
@@ -97,8 +97,8 @@ export default function Navbar() {
                   <motion.span
                     className={`text-sm font-medium transition-colors ${
                       isActive
-                        ? 'text-primary-400'
-                        : 'text-gray-300 hover:text-primary-400'
+                        ? 'text-indigo-400'
+                        : 'text-gray-300 hover:text-indigo-400'
                     }`}
                     whileHover={{ y: -2 }}
                   >
@@ -106,7 +106,7 @@ export default function Navbar() {
                     {isActive && (
                       <motion.div
                         layoutId="activeIndicator"
-                        className="absolute -bottom-1 left-0 right-0 h-0.5 bg-primary-400"
+                        className="absolute -bottom-1 left-0 right-0 h-0.5 bg-gradient-to-r from-indigo-400 via-purple-400 to-pink-400"
                         initial={false}
                         transition={{ type: 'spring', stiffness: 380, damping: 30 }}
                       />
@@ -150,7 +150,7 @@ export default function Navbar() {
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.3 }}
-            className="md:hidden bg-gray-800 border-t border-gray-700"
+            className="md:hidden bg-slate-900 border-t border-indigo-500/20"
           >
             <div className="container-custom py-4 space-y-2">
               {navLinks.map((link) => {
@@ -165,8 +165,8 @@ export default function Navbar() {
                     <motion.div
                       className={`px-4 py-2 rounded-lg text-base font-medium transition-colors ${
                         isActive
-                          ? 'bg-primary-900/50 text-primary-400'
-                          : 'text-gray-300 hover:bg-gray-700'
+                          ? 'bg-indigo-900/50 text-indigo-400'
+                          : 'text-gray-300 hover:bg-slate-800'
                       }`}
                       whileHover={{ x: 4 }}
                     >

@@ -14,11 +14,11 @@ export default function SkillCard({ skill, index }) {
     >
       {/* Icon */}
       <div className="mb-4 flex justify-center">
-        <div className="w-16 h-16 rounded-full bg-primary-900/50 flex items-center justify-center group-hover:bg-primary-800 transition-colors border border-primary-700">
+        <div className="w-16 h-16 rounded-full bg-gradient-to-br from-indigo-900/50 to-purple-900/50 flex items-center justify-center group-hover:from-indigo-800 group-hover:to-purple-800 transition-colors border border-indigo-700/50">
           {skill.icon ? (
             <span className="text-3xl">{skill.icon}</span>
           ) : (
-            <span className="text-2xl font-bold text-primary-400">
+            <span className="text-2xl font-bold bg-gradient-to-r from-indigo-400 to-purple-400 bg-clip-text text-transparent">
               {skill.name.charAt(0)}
             </span>
           )}
@@ -37,7 +37,7 @@ export default function SkillCard({ skill, index }) {
               whileInView={{ width: `${skill.level}%` }}
               viewport={{ once: true }}
               transition={{ duration: 1, delay: index * 0.1 }}
-              className="bg-primary-500 h-2 rounded-full"
+              className="bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 h-2 rounded-full"
             />
           </div>
           <p className="text-xs text-gray-400 mt-1">{skill.level}%</p>

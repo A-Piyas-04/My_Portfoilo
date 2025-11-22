@@ -1,15 +1,39 @@
 'use client'
 
-import { motion } from 'framer-motion'
-import Image from 'next/image'
+import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion'
+import { useEffect, useRef } from 'react'
 
 export default function HeroSection() {
+  const containerRef = useRef(null)
+  const mouseX = useMotionValue(0)
+  const mouseY = useMotionValue(0)
+
+  const springConfig = { damping: 25, stiffness: 200 }
+  const x = useSpring(useTransform(mouseX, [-0.5, 0.5], [-30, 30]), springConfig)
+  const y = useSpring(useTransform(mouseY, [-0.5, 0.5], [-30, 30]), springConfig)
+
+  useEffect(() => {
+    const handleMouseMove = (e) => {
+      if (!containerRef.current) return
+      const rect = containerRef.current.getBoundingClientRect()
+      const width = rect.width
+      const height = rect.height
+      const mouseXRelative = (e.clientX - rect.left) / width - 0.5
+      const mouseYRelative = (e.clientY - rect.top) / height - 0.5
+      mouseX.set(mouseXRelative)
+      mouseY.set(mouseYRelative)
+    }
+
+    window.addEventListener('mousemove', handleMouseMove)
+    return () => window.removeEventListener('mousemove', handleMouseMove)
+  }, [mouseX, mouseY])
+
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.2,
+        staggerChildren: 0.15,
         delayChildren: 0.3,
       },
     },
@@ -21,21 +45,23 @@ export default function HeroSection() {
       opacity: 1,
       y: 0,
       transition: {
-        duration: 0.6,
-        ease: 'easeOut',
+        duration: 0.8,
+        ease: [0.22, 1, 0.36, 1],
       },
     },
   }
 
-  // Animated text variants for name
+  // Advanced text animation variants
   const textVariants = {
-    hidden: { opacity: 0, y: 20 },
+    hidden: { opacity: 0, y: 50, rotateX: -90 },
     visible: (i) => ({
       opacity: 1,
       y: 0,
+      rotateX: 0,
       transition: {
-        delay: i * 0.05,
-        duration: 0.5,
+        delay: i * 0.08,
+        duration: 0.8,
+        ease: [0.22, 1, 0.36, 1],
       },
     }),
   }
@@ -43,13 +69,60 @@ export default function HeroSection() {
   const name = "Ahnaf Shahriar Pias"
   const nameParts = name.split(' ')
 
+  // Floating particles animation
+  const particles = Array.from({ length: 20 }, (_, i) => i)
+
   return (
-    <section id="home" className="min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-900 via-gray-800 to-black pt-20 relative overflow-hidden">
-      {/* Animated background elements */}
+    <section 
+      id="home" 
+      ref={containerRef}
+      className="min-h-screen flex items-center justify-center relative overflow-hidden bg-gradient-to-br from-slate-950 via-indigo-950 to-purple-950 pt-20"
+    >
+      {/* Animated gradient background */}
       <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary-500/10 rounded-full blur-3xl animate-pulse" />
-        <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-primary-600/10 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }} />
+        <div 
+          className="absolute inset-0 opacity-30"
+          style={{
+            background: 'radial-gradient(circle at 20% 50%, rgba(99, 102, 241, 0.3) 0%, transparent 50%), radial-gradient(circle at 80% 80%, rgba(139, 92, 246, 0.3) 0%, transparent 50%), radial-gradient(circle at 40% 20%, rgba(59, 130, 246, 0.2) 0%, transparent 50%)',
+            backgroundSize: '200% 200%',
+            animation: 'gradient 15s ease infinite',
+          }}
+        />
+        
+        {/* Floating particles */}
+        {particles.map((i) => (
+          <motion.div
+            key={i}
+            className="absolute rounded-full bg-gradient-to-r from-indigo-500/20 to-purple-500/20 blur-xl"
+            style={{
+              width: Math.random() * 300 + 100,
+              height: Math.random() * 300 + 100,
+              left: `${Math.random() * 100}%`,
+              top: `${Math.random() * 100}%`,
+            }}
+            animate={{
+              y: [0, -30, 0],
+              x: [0, Math.random() * 50 - 25, 0],
+              scale: [1, 1.2, 1],
+              opacity: [0.3, 0.6, 0.3],
+            }}
+            transition={{
+              duration: Math.random() * 10 + 10,
+              repeat: Infinity,
+              delay: Math.random() * 5,
+            }}
+          />
+        ))}
       </div>
+
+      {/* Grid pattern overlay */}
+      <div 
+        className="absolute inset-0 opacity-10"
+        style={{
+          backgroundImage: 'linear-gradient(rgba(99, 102, 241, 0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(99, 102, 241, 0.1) 1px, transparent 1px)',
+          backgroundSize: '50px 50px',
+        }}
+      />
 
       <div className="container-custom relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
@@ -60,20 +133,34 @@ export default function HeroSection() {
             animate="visible"
             className="text-center lg:text-left"
           >
-            {/* Greeting */}
-            <motion.p
+            {/* Greeting with typing effect */}
+            <motion.div
               variants={itemVariants}
-              className="text-primary-400 font-semibold mb-4 text-lg"
+              className="mb-6"
             >
-              Hello, I&apos;m
-            </motion.p>
+              <motion.span
+                className="text-indigo-400 font-semibold text-lg md:text-xl inline-block"
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.6, delay: 0.5 }}
+              >
+                Hello, I&apos;m
+              </motion.span>
+              <motion.span
+                className="inline-block ml-2 text-purple-400"
+                animate={{ opacity: [1, 0, 1] }}
+                transition={{ duration: 1, repeat: Infinity, repeatDelay: 0.5 }}
+              >
+                |
+              </motion.span>
+            </motion.div>
 
-            {/* Animated Name */}
+            {/* Advanced Animated Name with 3D effect */}
             <motion.h1
-              className="text-5xl md:text-6xl lg:text-7xl font-bold mb-4"
-              variants={itemVariants}
+              className="text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-extrabold mb-6 leading-tight"
+              style={{ perspective: '1000px' }}
             >
-              <span className="flex flex-wrap gap-2 justify-center lg:justify-start">
+              <span className="flex flex-wrap gap-2 md:gap-3 justify-center lg:justify-start">
                 {nameParts.map((part, index) => (
                   <motion.span
                     key={index}
@@ -81,36 +168,65 @@ export default function HeroSection() {
                     variants={textVariants}
                     initial="hidden"
                     animate="visible"
-                    className="inline-block"
+                    className="inline-block relative"
+                    style={{
+                      transformStyle: 'preserve-3d',
+                    }}
+                    whileHover={{ 
+                      scale: 1.1,
+                      textShadow: '0 0 30px rgba(99, 102, 241, 0.5)',
+                      transition: { duration: 0.3 }
+                    }}
                   >
                     {index === nameParts.length - 1 ? (
-                      <span className="text-primary-400">{part}</span>
+                      <span className="bg-gradient-to-r from-indigo-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">
+                        {part}
+                      </span>
                     ) : (
                       <span className="text-white">{part}</span>
                     )}
+                    {/* Glow effect */}
+                    <motion.span
+                      className="absolute inset-0 bg-gradient-to-r from-indigo-400/50 via-purple-400/50 to-pink-400/50 blur-xl -z-10"
+                      animate={{ opacity: [0.5, 1, 0.5] }}
+                      transition={{ duration: 2, repeat: Infinity }}
+                    />
                   </motion.span>
                 ))}
               </span>
             </motion.h1>
 
-            {/* Title with typing effect */}
-            <motion.h2
+            {/* Title with animated underline */}
+            <motion.div
               variants={itemVariants}
-              className="text-2xl md:text-3xl text-gray-300 mb-6"
+              className="mb-6"
             >
-              Software Developer
-            </motion.h2>
+              <motion.h2
+                className="text-2xl md:text-3xl lg:text-4xl text-gray-300 font-medium inline-block"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 1.2 }}
+              >
+                Software Developer
+                <motion.span
+                  className="block h-1 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 mt-2"
+                  initial={{ width: 0 }}
+                  animate={{ width: '100%' }}
+                  transition={{ duration: 0.8, delay: 1.5 }}
+                />
+              </motion.h2>
+            </motion.div>
 
-            {/* Tagline */}
+            {/* Tagline with fade-in */}
             <motion.p
               variants={itemVariants}
-              className="text-lg md:text-xl text-gray-400 mb-10 max-w-2xl mx-auto lg:mx-0"
+              className="text-lg md:text-xl text-gray-400 mb-10 max-w-2xl mx-auto lg:mx-0 leading-relaxed"
             >
               Crafting elegant solutions to complex problems. Passionate about building
               innovative web applications and delivering exceptional user experiences.
             </motion.p>
 
-            {/* CTA Button */}
+            {/* CTA Button with glow effect */}
             <motion.div
               variants={itemVariants}
               className="flex justify-center lg:justify-start"
@@ -118,31 +234,50 @@ export default function HeroSection() {
               <motion.a
                 href="/cv.pdf"
                 download
-                className="btn-secondary border-primary-400 text-primary-400 hover:bg-primary-400 hover:text-gray-900"
-                whileHover={{ scale: 1.05 }}
+                className="relative px-8 py-4 bg-gradient-to-r from-indigo-600 to-purple-600 text-white font-semibold rounded-lg overflow-hidden group"
+                whileHover={{ scale: 1.05, boxShadow: '0 0 30px rgba(99, 102, 241, 0.5)' }}
                 whileTap={{ scale: 0.95 }}
               >
-                Download CV
+                <span className="relative z-10 flex items-center gap-2">
+                  Download CV
+                  <motion.svg
+                    className="w-5 h-5"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                    animate={{ y: [0, 5, 0] }}
+                    transition={{ duration: 1.5, repeat: Infinity }}
+                  >
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+                  </motion.svg>
+                </span>
+                <motion.div
+                  className="absolute inset-0 bg-gradient-to-r from-purple-600 to-pink-600 opacity-0 group-hover:opacity-100 transition-opacity"
+                  animate={{ x: ['-100%', '100%'] }}
+                  transition={{ duration: 2, repeat: Infinity, repeatDelay: 1 }}
+                />
               </motion.a>
             </motion.div>
 
-            {/* Scroll Indicator */}
+            {/* Scroll Indicator with enhanced animation */}
             <motion.div
               variants={itemVariants}
               className="mt-20"
             >
               <motion.a
                 href="#about"
-                className="flex flex-col items-center text-gray-400 hover:text-primary-400 transition-colors"
+                className="flex flex-col items-center text-gray-400 hover:text-indigo-400 transition-colors group"
                 animate={{ y: [0, 10, 0] }}
                 transition={{ repeat: Infinity, duration: 2 }}
               >
-                <span className="text-sm mb-2">Scroll to explore</span>
-                <svg
+                <span className="text-sm mb-2 group-hover:text-indigo-400 transition-colors">Scroll to explore</span>
+                <motion.svg
                   className="w-6 h-6"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
+                  animate={{ y: [0, 5, 0] }}
+                  transition={{ duration: 1.5, repeat: Infinity }}
                 >
                   <path
                     strokeLinecap="round"
@@ -150,47 +285,105 @@ export default function HeroSection() {
                     strokeWidth={2}
                     d="M19 14l-7 7m0 0l-7-7m7 7V3"
                   />
-                </svg>
+                </motion.svg>
               </motion.a>
             </motion.div>
           </motion.div>
 
-          {/* Image Placeholder */}
+          {/* Enhanced Image Placeholder with 3D effect */}
           <motion.div
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.8, delay: 0.5 }}
+            initial={{ opacity: 0, scale: 0.8, rotateY: -20 }}
+            animate={{ opacity: 1, scale: 1, rotateY: 0 }}
+            transition={{ duration: 1, delay: 0.5, ease: [0.22, 1, 0.36, 1] }}
             className="relative"
+            style={{ x, y, transformStyle: 'preserve-3d' }}
           >
-            <div className="relative w-full h-[500px] rounded-2xl overflow-hidden border-2 border-primary-500/30 shadow-2xl">
-              {/* Gradient overlay */}
-              <div className="absolute inset-0 bg-gradient-to-br from-primary-500/20 to-primary-600/20 z-10" />
-              
-              {/* Placeholder content */}
-              <div className="absolute inset-0 flex items-center justify-center z-20">
-                <div className="text-center">
-                  <div className="w-32 h-32 mx-auto mb-4 rounded-full bg-gradient-to-br from-primary-400 to-primary-600 flex items-center justify-center text-4xl font-bold text-white shadow-lg">
-                    ASP
-                  </div>
-                  <p className="text-gray-300 text-sm">Your Photo Here</p>
-                </div>
-              </div>
-
-              {/* Animated border glow */}
+            <div className="relative w-full h-[500px] md:h-[600px] rounded-3xl overflow-hidden border-2 border-indigo-500/30 shadow-2xl">
+              {/* Animated gradient background */}
               <motion.div
-                className="absolute inset-0 rounded-2xl"
-                style={{
-                  background: 'linear-gradient(45deg, transparent, rgba(59, 130, 246, 0.5), transparent)',
-                }}
+                className="absolute inset-0 bg-gradient-to-br from-indigo-600/30 via-purple-600/30 to-pink-600/30"
                 animate={{
                   backgroundPosition: ['0% 0%', '100% 100%'],
                 }}
                 transition={{
-                  duration: 3,
+                  duration: 10,
                   repeat: Infinity,
                   repeatType: 'reverse',
                 }}
+                style={{
+                  backgroundSize: '200% 200%',
+                }}
               />
+              
+              {/* Glowing border effect */}
+              <motion.div
+                className="absolute inset-0 rounded-3xl"
+                style={{
+                  background: 'linear-gradient(45deg, transparent 30%, rgba(99, 102, 241, 0.5) 50%, transparent 70%)',
+                  backgroundSize: '200% 200%',
+                }}
+                animate={{
+                  backgroundPosition: ['0% 0%', '200% 200%'],
+                }}
+                transition={{
+                  duration: 3,
+                  repeat: Infinity,
+                }}
+              />
+
+              {/* Placeholder content with floating animation */}
+              <motion.div
+                className="absolute inset-0 flex items-center justify-center z-20"
+                animate={{ y: [0, -10, 0] }}
+                transition={{ duration: 4, repeat: Infinity }}
+              >
+                <div className="text-center">
+                  <motion.div
+                    className="w-32 h-32 md:w-40 md:h-40 mx-auto mb-4 rounded-full bg-gradient-to-br from-indigo-500 via-purple-500 to-pink-500 flex items-center justify-center text-4xl md:text-5xl font-bold text-white shadow-2xl relative overflow-hidden"
+                    animate={{ rotate: [0, 360] }}
+                    transition={{ duration: 20, repeat: Infinity, ease: 'linear' }}
+                    whileHover={{ scale: 1.1, boxShadow: '0 0 50px rgba(99, 102, 241, 0.8)' }}
+                  >
+                    <span className="relative z-10">ASP</span>
+                    <motion.div
+                      className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent"
+                      animate={{ x: ['-100%', '100%'] }}
+                      transition={{ duration: 2, repeat: Infinity }}
+                    />
+                  </motion.div>
+                  <motion.p
+                    className="text-gray-300 text-sm md:text-base"
+                    animate={{ opacity: [0.5, 1, 0.5] }}
+                    transition={{ duration: 2, repeat: Infinity }}
+                  >
+                    Your Photo Here
+                  </motion.p>
+                </div>
+              </motion.div>
+
+              {/* Floating orbs */}
+              {[1, 2, 3].map((i) => (
+                <motion.div
+                  key={i}
+                  className="absolute rounded-full bg-gradient-to-r from-indigo-400/20 to-purple-400/20 blur-2xl"
+                  style={{
+                    width: 100 + i * 50,
+                    height: 100 + i * 50,
+                    left: `${20 + i * 20}%`,
+                    top: `${10 + i * 15}%`,
+                  }}
+                  animate={{
+                    y: [0, -30, 0],
+                    x: [0, 20, 0],
+                    scale: [1, 1.2, 1],
+                  }}
+                  transition={{
+                    duration: 5 + i * 2,
+                    repeat: Infinity,
+                    delay: i * 0.5,
+                  }}
+                />
+              ))}
             </div>
           </motion.div>
         </div>

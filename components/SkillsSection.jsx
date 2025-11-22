@@ -43,7 +43,7 @@ const skillCategories = {
 
 export default function SkillsSection() {
   return (
-    <section id="skills" className="section-padding bg-gray-800">
+    <section id="skills" className="section-padding bg-gradient-to-br from-slate-900 via-purple-900/20 to-slate-900">
       <div className="container-custom">
         <motion.div
           initial={{ opacity: 0, y: 50 }}

@@ -85,7 +85,7 @@ export default function ContactSection() {
   ]
 
   return (
-    <section id="contact" className="section-padding bg-gray-900">
+    <section id="contact" className="section-padding bg-gradient-to-br from-slate-900 via-indigo-950/30 to-slate-900">
       <div className="container-custom">
         <motion.div
           initial={{ opacity: 0, y: 50 }}

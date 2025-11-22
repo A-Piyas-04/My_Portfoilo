@@ -59,7 +59,7 @@ export default function Footer() {
   }
 
   return (
-    <footer className="bg-black border-t border-gray-800">
+    <footer className="bg-slate-950 border-t border-indigo-500/20">
       <div className="container-custom py-12">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {/* Brand Section */}
@@ -76,7 +76,7 @@ export default function Footer() {
                   href={social.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-gray-400 hover:text-primary-400 transition-colors"
+                  className="text-gray-400 hover:text-indigo-400 transition-colors"
                   whileHover={{ scale: 1.2, y: -2 }}
                   whileTap={{ scale: 0.9 }}
                   aria-label={social.name}
@@ -96,7 +96,7 @@ export default function Footer() {
                   <a
                     href={link.href}
                     onClick={(e) => handleSmoothScroll(e, link.href)}
-                    className="text-sm text-gray-400 hover:text-primary-400 transition-colors"
+                    className="text-sm text-gray-400 hover:text-indigo-400 transition-colors"
                   >
                     {link.name}
                   </a>

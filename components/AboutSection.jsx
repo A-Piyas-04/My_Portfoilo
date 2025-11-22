@@ -2,49 +2,6 @@
 
 import { motion } from 'framer-motion'
 import SectionHeader from './SectionHeader'
-import SkillCard from './SkillCard'
-
-const technologies = [
-  { name: 'JavaScript', icon: 'JS' },
-  { name: 'TypeScript', icon: 'TS' },
-  { name: 'React', icon: '⚛️' },
-  { name: 'Next.js', icon: '▲' },
-  { name: 'Node.js', icon: '🟢' },
-  { name: 'Python', icon: '🐍' },
-  { name: 'MongoDB', icon: '🍃' },
-  { name: 'PostgreSQL', icon: '🐘' },
-  { name: 'Git', icon: '📦' },
-  { name: 'Docker', icon: '🐳' },
-  { name: 'AWS', icon: '☁️' },
-  { name: 'Tailwind CSS', icon: '💨' },
-]
-
-const timeline = [
-  {
-    year: '2024',
-    title: 'Software Developer',
-    organization: 'Current Position',
-    description: 'Building scalable web applications and contributing to innovative projects.',
-  },
-  {
-    year: '2023',
-    title: 'Full Stack Developer',
-    organization: 'Previous Role',
-    description: 'Developed and maintained multiple web applications using modern technologies.',
-  },
-  {
-    year: '2022',
-    title: 'Hackathon Winner',
-    organization: 'Tech Innovation Challenge',
-    description: 'Led a team to build an innovative solution that won first place.',
-  },
-  {
-    year: '2021',
-    title: 'Bachelor&apos;s Degree',
-    organization: 'Computer Science',
-    description: 'Graduated with honors, specializing in software engineering and web development.',
-  },
-]
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -67,7 +24,7 @@ const itemVariants = {
 
 export default function AboutSection() {
   return (
-    <section id="about" className="section-padding bg-gray-800">
+    <section id="about" className="section-padding bg-gradient-to-br from-slate-900 via-purple-900/20 to-slate-900">
       <div className="container-custom">
         <motion.div
           initial={{ opacity: 0, y: 50 }}
@@ -130,7 +87,7 @@ export default function AboutSection() {
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
               transition={{ delay: 0.1 }}
-              className="card text-center"
+              className="card text-center bg-gradient-to-br from-slate-800/50 to-purple-900/30 border-purple-500/30"
             >
               <div className="text-4xl mb-4">💡</div>
               <h3 className="text-xl font-bold text-white mb-2">Problem Solving</h3>
@@ -143,7 +100,7 @@ export default function AboutSection() {
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
               transition={{ delay: 0.2 }}
-              className="card text-center"
+              className="card text-center bg-gradient-to-br from-slate-800/50 to-purple-900/30 border-purple-500/30"
             >
               <div className="text-4xl mb-4">🚀</div>
               <h3 className="text-xl font-bold text-white mb-2">Fast Learner</h3>
@@ -156,7 +113,7 @@ export default function AboutSection() {
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
               transition={{ delay: 0.3 }}
-              className="card text-center"
+              className="card text-center bg-gradient-to-br from-slate-800/50 to-purple-900/30 border-purple-500/30"
             >
               <div className="text-4xl mb-4">🤝</div>
               <h3 className="text-xl font-bold text-white mb-2">Team Player</h3>
@@ -166,84 +123,7 @@ export default function AboutSection() {
             </motion.div>
           </div>
         </motion.div>
-
-        {/* Technologies Section */}
-        <motion.div
-          initial={{ opacity: 0, y: 50 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: '-100px' }}
-          transition={{ duration: 0.6, delay: 0.4 }}
-          className="mt-16"
-        >
-          <SectionHeader
-            title="Tools & Technologies"
-            subtitle="Technologies I work with"
-            center
-          />
-          <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-6 mt-12">
-            {technologies.map((tech, index) => (
-              <SkillCard key={tech.name} skill={tech} index={index} />
-            ))}
-          </div>
-        </motion.div>
-
-        {/* Timeline Section */}
-        <motion.div
-          initial={{ opacity: 0, y: 50 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: '-100px' }}
-          transition={{ duration: 0.6, delay: 0.6 }}
-          className="max-w-3xl mx-auto mt-16"
-        >
-          <SectionHeader
-            title="Timeline"
-            subtitle="My journey so far"
-            center
-          />
-          <div className="relative mt-12">
-            {/* Timeline Line */}
-            <div className="absolute left-4 md:left-1/2 top-0 bottom-0 w-0.5 bg-primary-500/30 transform md:-translate-x-1/2" />
-
-            {/* Timeline Items */}
-            {timeline.map((item, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, x: index % 2 === 0 ? -50 : 50 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.1 }}
-                className={`relative flex items-start mb-8 ${
-                  index % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'
-                }`}
-              >
-                {/* Timeline Dot */}
-                <div className="absolute left-4 md:left-1/2 w-8 h-8 bg-primary-500 rounded-full border-4 border-gray-800 shadow-lg transform md:-translate-x-1/2 z-10" />
-
-                {/* Content */}
-                <div
-                  className={`ml-12 md:ml-0 md:w-1/2 ${
-                    index % 2 === 0 ? 'md:pr-12 md:text-right' : 'md:pl-12 md:ml-auto'
-                  }`}
-                >
-                  <div className="card">
-                    <div className="text-primary-400 font-bold text-lg mb-1">
-                      {item.year}
-                    </div>
-                    <h3 className="text-xl font-bold text-white mb-1">
-                      {item.title}
-                    </h3>
-                    <p className="text-primary-400 font-medium mb-2">
-                      {item.organization}
-                    </p>
-                    <p className="text-gray-400">{item.description}</p>
-                  </div>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </motion.div>
       </div>
     </section>
   )
 }
-
