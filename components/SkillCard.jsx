@@ -1,6 +1,7 @@
 'use client'
 
 import { motion } from 'framer-motion'
+import Image from 'next/image'
 
 export default function SkillCard({ skill, index }) {
   return (
@@ -12,10 +13,18 @@ export default function SkillCard({ skill, index }) {
       whileHover={{ y: -5, scale: 1.05 }}
       className="card text-center group"
     >
-      {/* Icon */}
+      {/* Icon - SVG Logo */}
       <div className="mb-4 flex justify-center">
-        <div className="w-16 h-16 rounded-full bg-gradient-to-br from-indigo-900/50 to-purple-900/50 flex items-center justify-center group-hover:from-indigo-800 group-hover:to-purple-800 transition-colors border border-indigo-700/50">
-          {skill.icon ? (
+        <div className="w-16 h-16 rounded-full bg-gradient-to-br from-indigo-900/50 to-purple-900/50 flex items-center justify-center group-hover:from-indigo-800 group-hover:to-purple-800 transition-colors border border-indigo-700/50 p-3">
+          {skill.iconPath ? (
+            <Image
+              src={skill.iconPath}
+              alt={skill.name}
+              width={40}
+              height={40}
+              className="object-contain"
+            />
+          ) : skill.icon ? (
             <span className="text-3xl">{skill.icon}</span>
           ) : (
             <span className="text-2xl font-bold bg-gradient-to-r from-indigo-400 to-purple-400 bg-clip-text text-transparent">

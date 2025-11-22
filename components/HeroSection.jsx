@@ -1,34 +1,10 @@
 'use client'
 
-import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion'
-import { useEffect, useRef, useState } from 'react'
+import { motion } from 'framer-motion'
+import { useEffect, useState } from 'react'
 import Image from 'next/image'
 
 export default function HeroSection() {
-  const containerRef = useRef(null)
-  const mouseX = useMotionValue(0)
-  const mouseY = useMotionValue(0)
-
-  const springConfig = { damping: 25, stiffness: 200 }
-  const x = useSpring(useTransform(mouseX, [-0.5, 0.5], [-30, 30]), springConfig)
-  const y = useSpring(useTransform(mouseY, [-0.5, 0.5], [-30, 30]), springConfig)
-
-  useEffect(() => {
-    const handleMouseMove = (e) => {
-      if (!containerRef.current) return
-      const rect = containerRef.current.getBoundingClientRect()
-      const width = rect.width
-      const height = rect.height
-      const mouseXRelative = (e.clientX - rect.left) / width - 0.5
-      const mouseYRelative = (e.clientY - rect.top) / height - 0.5
-      mouseX.set(mouseXRelative)
-      mouseY.set(mouseYRelative)
-    }
-
-    window.addEventListener('mousemove', handleMouseMove)
-    return () => window.removeEventListener('mousemove', handleMouseMove)
-  }, [mouseX, mouseY])
-
   // Parallax effect on scroll
   const [scrollY, setScrollY] = useState(0)
 
@@ -81,69 +57,77 @@ export default function HeroSection() {
   const name = "Ahnaf Shahriar Pias"
   const nameParts = name.split(' ')
 
-  // Floating particles animation
-  const particles = Array.from({ length: 20 }, (_, i) => i)
-
   return (
     <section 
       id="home" 
-      ref={containerRef}
       className="min-h-screen flex items-center justify-center relative overflow-hidden bg-gradient-to-br from-slate-950 via-indigo-950 to-purple-950 pt-20"
     >
-      {/* Parallax background layers */}
+      {/* New background animation - Wave pattern */}
       <div className="absolute inset-0 overflow-hidden">
-        {/* Base gradient with parallax */}
-        <motion.div 
-          className="absolute inset-0 opacity-30"
+        {/* Animated wave layers */}
+        <motion.div
+          className="absolute inset-0 opacity-20"
           style={{
-            background: 'radial-gradient(circle at 20% 50%, rgba(99, 102, 241, 0.3) 0%, transparent 50%), radial-gradient(circle at 80% 80%, rgba(139, 92, 246, 0.3) 0%, transparent 50%), radial-gradient(circle at 40% 20%, rgba(59, 130, 246, 0.2) 0%, transparent 50%)',
-            backgroundSize: '200% 200%',
-            y: scrollY * 0.3,
+            background: `
+              repeating-linear-gradient(
+                0deg,
+                transparent,
+                transparent 2px,
+                rgba(99, 102, 241, 0.1) 2px,
+                rgba(99, 102, 241, 0.1) 4px
+              ),
+              repeating-linear-gradient(
+                90deg,
+                transparent,
+                transparent 2px,
+                rgba(139, 92, 246, 0.1) 2px,
+                rgba(139, 92, 246, 0.1) 4px
+              )
+            `,
+            y: scrollY * 0.2,
           }}
           animate={{
             backgroundPosition: ['0% 0%', '100% 100%'],
           }}
           transition={{
-            duration: 15,
+            duration: 20,
             repeat: Infinity,
             repeatType: 'reverse',
           }}
         />
-        
-        {/* Floating particles with parallax */}
-        {particles.map((i) => (
+
+        {/* Circular gradient orbs */}
+        {[1, 2, 3, 4].map((i) => (
           <motion.div
             key={i}
-            className="absolute rounded-full bg-gradient-to-r from-indigo-500/20 to-purple-500/20 blur-xl"
+            className="absolute rounded-full"
             style={{
-              width: Math.random() * 300 + 100,
-              height: Math.random() * 300 + 100,
-              left: `${Math.random() * 100}%`,
-              top: `${Math.random() * 100}%`,
-              y: scrollY * (0.1 + Math.random() * 0.2),
+              width: 400 + i * 100,
+              height: 400 + i * 100,
+              left: `${i * 20}%`,
+              top: `${i * 15}%`,
+              background: `radial-gradient(circle, rgba(${99 + i * 20}, ${102 + i * 10}, ${241 - i * 20}, 0.15) 0%, transparent 70%)`,
+              y: scrollY * (0.1 + i * 0.05),
             }}
             animate={{
-              y: [0, -30, 0],
-              x: [0, Math.random() * 50 - 25, 0],
-              scale: [1, 1.2, 1],
-              opacity: [0.3, 0.6, 0.3],
+              scale: [1, 1.1, 1],
+              opacity: [0.1, 0.2, 0.1],
             }}
             transition={{
-              duration: Math.random() * 10 + 10,
+              duration: 8 + i * 2,
               repeat: Infinity,
-              delay: Math.random() * 5,
+              delay: i * 0.5,
             }}
           />
         ))}
       </div>
 
-      {/* Grid pattern overlay with parallax */}
-      <motion.div 
-        className="absolute inset-0 opacity-10"
+      {/* Subtle grid overlay */}
+      <div 
+        className="absolute inset-0 opacity-5"
         style={{
           backgroundImage: 'linear-gradient(rgba(99, 102, 241, 0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(99, 102, 241, 0.1) 1px, transparent 1px)',
           backgroundSize: '50px 50px',
-          y: scrollY * 0.1,
         }}
       />
 
@@ -255,8 +239,8 @@ export default function HeroSection() {
               className="flex justify-center lg:justify-start"
             >
               <motion.a
-                href="/cv.pdf"
-                download
+                href="/images/Ahnaf_Shahriar_Pias_Resume.pdf"
+                download="Ahnaf_Shahriar_Pias_Resume.pdf"
                 className="relative px-8 py-4 bg-gradient-to-r from-indigo-600 to-purple-600 text-white font-semibold rounded-lg overflow-hidden group"
                 whileHover={{ scale: 1.05, boxShadow: '0 0 30px rgba(99, 102, 241, 0.5)' }}
                 whileTap={{ scale: 0.95 }}
@@ -313,14 +297,8 @@ export default function HeroSection() {
             </motion.div>
           </motion.div>
 
-          {/* Profile Image with 3D effect */}
-          <motion.div
-            initial={{ opacity: 0, scale: 0.8, rotateY: -20 }}
-            animate={{ opacity: 1, scale: 1, rotateY: 0 }}
-            transition={{ duration: 1, delay: 0.5, ease: [0.22, 1, 0.36, 1] }}
-            className="relative"
-            style={{ x, y, transformStyle: 'preserve-3d' }}
-          >
+          {/* Profile Image - No animations */}
+          <div className="relative">
             <div className="relative w-full h-[500px] md:h-[600px] rounded-3xl overflow-hidden border-2 border-indigo-500/30 shadow-2xl">
               {/* Profile Image */}
               <div className="relative w-full h-full">
@@ -331,51 +309,9 @@ export default function HeroSection() {
                   className="object-cover"
                   priority
                 />
-                {/* Gradient overlay */}
-                <div className="absolute inset-0 bg-gradient-to-br from-indigo-600/20 via-purple-600/20 to-pink-600/20" />
               </div>
-              
-              {/* Glowing border effect */}
-              <motion.div
-                className="absolute inset-0 rounded-3xl pointer-events-none"
-                style={{
-                  background: 'linear-gradient(45deg, transparent 30%, rgba(99, 102, 241, 0.5) 50%, transparent 70%)',
-                  backgroundSize: '200% 200%',
-                }}
-                animate={{
-                  backgroundPosition: ['0% 0%', '200% 200%'],
-                }}
-                transition={{
-                  duration: 3,
-                  repeat: Infinity,
-                }}
-              />
-
-              {/* Floating orbs */}
-              {[1, 2, 3].map((i) => (
-                <motion.div
-                  key={i}
-                  className="absolute rounded-full bg-gradient-to-r from-indigo-400/20 to-purple-400/20 blur-2xl pointer-events-none"
-                  style={{
-                    width: 100 + i * 50,
-                    height: 100 + i * 50,
-                    left: `${20 + i * 20}%`,
-                    top: `${10 + i * 15}%`,
-                  }}
-                  animate={{
-                    y: [0, -30, 0],
-                    x: [0, 20, 0],
-                    scale: [1, 1.2, 1],
-                  }}
-                  transition={{
-                    duration: 5 + i * 2,
-                    repeat: Infinity,
-                    delay: i * 0.5,
-                  }}
-                />
-              ))}
             </div>
-          </motion.div>
+          </div>
         </div>
       </div>
     </section>
