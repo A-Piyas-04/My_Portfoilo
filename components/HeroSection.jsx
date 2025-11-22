@@ -56,13 +56,23 @@ export default function HeroSection() {
   const name = "Ahnaf Shahriar Pias"
   const nameWords = name.split(' ')
 
+  // Geometric shapes for background - increased visibility
+  const geometricShapes = [
+    { type: 'hexagon', x: '10%', y: '20%', size: 120, delay: 0 },
+    { type: 'triangle', x: '85%', y: '15%', size: 100, delay: 0.5 },
+    { type: 'circle', x: '15%', y: '70%', size: 80, delay: 1 },
+    { type: 'hexagon', x: '90%', y: '75%', size: 100, delay: 1.5 },
+    { type: 'line', x: '50%', y: '10%', width: 200, delay: 0.3 },
+    { type: 'line', x: '5%', y: '50%', width: 150, delay: 0.8 },
+  ]
+
   return (
     <section 
       id="home" 
       className="min-h-screen flex items-center justify-center relative overflow-hidden pt-20"
     >
       {/* Subtle glassmorphism background */}
-      <div className="absolute inset-0">
+      <div className="absolute inset-0 z-0">
         {/* Base gradient - softer and more subtle */}
         <div 
           className="absolute inset-0 bg-gradient-to-br from-slate-950 via-indigo-950/50 to-slate-950"
@@ -96,9 +106,130 @@ export default function HeroSection() {
         />
       </div>
 
+      {/* Futuristic Geometric Shapes - Fixed visibility */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none z-[1]">
+        {/* Hexagons */}
+        {geometricShapes.filter(s => s.type === 'hexagon').map((shape, i) => (
+          <motion.div
+            key={`hex-${i}`}
+            className="absolute"
+            style={{
+              left: shape.x,
+              top: shape.y,
+              width: shape.size,
+              height: shape.size,
+            }}
+            initial={{ opacity: 0, scale: 0 }}
+            animate={{ 
+              opacity: [0.25, 0.35, 0.25],
+              scale: [1, 1.1, 1],
+              rotate: [0, 360],
+            }}
+            transition={{
+              duration: 20 + i * 5,
+              repeat: Infinity,
+              delay: shape.delay,
+            }}
+          >
+            <svg width={shape.size} height={shape.size} viewBox="0 0 100 100" className="text-indigo-400/30">
+              <polygon
+                points="50,5 90,25 90,75 50,95 10,75 10,25"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="1.5"
+              />
+            </svg>
+          </motion.div>
+        ))}
+
+        {/* Triangles */}
+        {geometricShapes.filter(s => s.type === 'triangle').map((shape, i) => (
+          <motion.div
+            key={`tri-${i}`}
+            className="absolute"
+            style={{
+              left: shape.x,
+              top: shape.y,
+              width: shape.size,
+              height: shape.size,
+            }}
+            initial={{ opacity: 0 }}
+            animate={{ 
+              opacity: [0.2, 0.3, 0.2],
+              rotate: [0, -360],
+            }}
+            transition={{
+              duration: 25 + i * 5,
+              repeat: Infinity,
+              delay: shape.delay,
+            }}
+          >
+            <svg width={shape.size} height={shape.size} viewBox="0 0 100 100" className="text-purple-400/30">
+              <polygon
+                points="50,10 90,90 10,90"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="1.5"
+              />
+            </svg>
+          </motion.div>
+        ))}
+
+        {/* Circles */}
+        {geometricShapes.filter(s => s.type === 'circle').map((shape, i) => (
+          <motion.div
+            key={`circle-${i}`}
+            className="absolute rounded-full border-2 border-indigo-400/25"
+            style={{
+              left: shape.x,
+              top: shape.y,
+              width: shape.size,
+              height: shape.size,
+              transform: 'translate(-50%, -50%)',
+            }}
+            animate={{ 
+              opacity: [0.2, 0.3, 0.2],
+              scale: [1, 1.2, 1],
+            }}
+            transition={{
+              duration: 15 + i * 3,
+              repeat: Infinity,
+              delay: shape.delay,
+            }}
+          />
+        ))}
+
+        {/* Lines */}
+        {geometricShapes.filter(s => s.type === 'line').map((shape, i) => (
+          <motion.div
+            key={`line-${i}`}
+            className="absolute"
+            style={{
+              left: shape.x,
+              top: shape.y,
+              width: shape.width,
+              height: '2px',
+              transform: 'translate(-50%, -50%)',
+            }}
+            initial={{ opacity: 0, scaleX: 0 }}
+            animate={{ 
+              opacity: [0.2, 0.35, 0.2],
+              scaleX: [1, 1.2, 1],
+            }}
+            transition={{
+              duration: 10 + i * 2,
+              repeat: Infinity,
+              delay: shape.delay,
+            }}
+          >
+            <div className="w-full h-full bg-gradient-to-r from-transparent via-indigo-400/30 to-transparent" />
+          </motion.div>
+        ))}
+      </div>
+
       {/* Subtle grid pattern */}
       <div 
-        className="absolute inset-0 opacity-[0.03]"
+        className="absolute inset-0 opacity-[0.03] z-[1]"
         style={{
           backgroundImage: 'linear-gradient(rgba(99, 102, 241, 0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(99, 102, 241, 0.1) 1px, transparent 1px)',
           backgroundSize: '60px 60px',
@@ -129,9 +260,10 @@ export default function HeroSection() {
               </motion.p>
             </motion.div>
 
-            {/* Name - Text reveal animation */}
+            {/* Name - Reduced size with unique font */}
             <motion.h1
-              className="text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-extrabold leading-tight"
+              className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold leading-tight"
+              style={{ fontFamily: 'var(--font-space-grotesk), sans-serif' }}
               variants={itemVariants}
             >
               <span className="flex flex-wrap gap-3 md:gap-4 justify-center lg:justify-start">
@@ -283,38 +415,24 @@ export default function HeroSection() {
             </motion.div>
           </motion.div>
 
-          {/* Profile Image - Right Side */}
+          {/* Profile Image - Right Side - Larger size, no borders */}
           <motion.div
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 1, delay: 0.6, ease: [0.22, 1, 0.36, 1] }}
             className="relative flex justify-center lg:justify-end"
           >
-            {/* Refined Image Card with glassmorphism */}
-            <div className="relative w-full max-w-md">
-              {/* Outer glow ring */}
-              <div className="absolute -inset-1 bg-gradient-to-r from-indigo-600/20 via-purple-600/20 to-indigo-600/20 rounded-3xl blur-xl opacity-50" />
-              
-              {/* Main card */}
-              <div className="relative rounded-3xl overflow-hidden border border-slate-700/50 bg-slate-900/30 backdrop-blur-sm shadow-2xl">
-                {/* Profile Image */}
-                <div className="relative aspect-[3/4] w-full">
-                  <Image
-                    src="/images/dp.jpg"
-                    alt="Ahnaf Shahriar Pias"
-                    fill
-                    className="object-cover"
-                    priority
-                  />
-                </div>
-
-                {/* Subtle gradient overlay at bottom */}
-                <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-slate-950/50 to-transparent pointer-events-none" />
+            {/* Just the image - no borders, boxes, or decorative elements - larger size */}
+            <div className="relative w-full max-w-xl lg:max-w-2xl">
+              <div className="relative aspect-[3/4] w-full rounded-2xl overflow-hidden">
+                <Image
+                  src="/images/dp.jpg"
+                  alt="Ahnaf Shahriar Pias"
+                  fill
+                  className="object-cover"
+                  priority
+                />
               </div>
-
-              {/* Decorative corner accent */}
-              <div className="absolute -top-4 -right-4 w-24 h-24 bg-gradient-to-br from-indigo-500/20 to-purple-500/20 rounded-full blur-2xl" />
-              <div className="absolute -bottom-4 -left-4 w-32 h-32 bg-gradient-to-tr from-purple-500/20 to-indigo-500/20 rounded-full blur-2xl" />
             </div>
           </motion.div>
         </div>
