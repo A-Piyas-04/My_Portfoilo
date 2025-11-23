@@ -187,7 +187,13 @@ export default function AboutSection() {
               transition={{ delay: 0.1 }}
               className="card text-center bg-gradient-to-br from-slate-800/50 to-purple-900/30 border-purple-500/30"
             >
-              <div className="text-4xl mb-4">💡</div>
+              <div className="mb-4 flex justify-center">
+                <div className="w-16 h-16 rounded-full bg-gradient-to-br from-cyan-500/20 to-blue-500/20 flex items-center justify-center border border-cyan-400/30">
+                  <svg className="w-8 h-8 text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
+                  </svg>
+                </div>
+              </div>
               <h3 className="text-xl font-bold text-white mb-2">Problem Solving</h3>
               <p className="text-gray-400">
                 I thrive on tackling complex challenges and finding innovative solutions.
@@ -200,7 +206,13 @@ export default function AboutSection() {
               transition={{ delay: 0.2 }}
               className="card text-center bg-gradient-to-br from-slate-800/50 to-purple-900/30 border-purple-500/30"
             >
-              <div className="text-4xl mb-4">🚀</div>
+              <div className="mb-4 flex justify-center">
+                <div className="w-16 h-16 rounded-full bg-gradient-to-br from-purple-500/20 to-pink-500/20 flex items-center justify-center border border-purple-400/30">
+                  <svg className="w-8 h-8 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+                  </svg>
+                </div>
+              </div>
               <h3 className="text-xl font-bold text-white mb-2">Fast Learner</h3>
               <p className="text-gray-400">
                 Quick to adapt to new technologies and frameworks, always staying current.
@@ -213,7 +225,13 @@ export default function AboutSection() {
               transition={{ delay: 0.3 }}
               className="card text-center bg-gradient-to-br from-slate-800/50 to-purple-900/30 border-purple-500/30"
             >
-              <div className="text-4xl mb-4">🤝</div>
+              <div className="mb-4 flex justify-center">
+                <div className="w-16 h-16 rounded-full bg-gradient-to-br from-green-500/20 to-emerald-500/20 flex items-center justify-center border border-green-400/30">
+                  <svg className="w-8 h-8 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+                  </svg>
+                </div>
+              </div>
               <h3 className="text-xl font-bold text-white mb-2">Team Player</h3>
               <p className="text-gray-400">
                 Excellent at collaborating and communicating with cross-functional teams.
