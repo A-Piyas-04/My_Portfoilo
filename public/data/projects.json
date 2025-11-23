@@ -2,33 +2,39 @@
   "projects": [
     {
       "id": 1,
-      "title": "E-Commerce Platform",
-      "description": "A full-stack e-commerce solution built with Next.js, featuring user authentication, payment processing, and admin dashboard.",
-      "githubUrl": "https://github.com/A-Piyas-04/ecommerce-platform"
+      "title": "IUTverse",
+      "description": "A comprehensive campus-centric platform designed to streamline communication, collaboration, and resource sharing for students at the Islamic University of Technology (IUT)",
+      "githubUrl": "https://github.com/A-Piyas-04/IUTverse"
     },
     {
       "id": 2,
-      "title": "Task Management App",
-      "description": "A collaborative task management application with real-time updates, drag-and-drop functionality, and team collaboration features.",
-      "githubUrl": "https://github.com/A-Piyas-04/task-manager"
+      "title": "NestUp-BD",
+      "description": "ANestUp-BD is an all-in-one web platform designed to support Bangladeshi people relocating to new cities for exams or other events.",
+      "githubUrl": "https://github.com/A-Piyas-04/NestUp-BD"
     },
     {
       "id": 3,
-      "title": "Weather Dashboard",
-      "description": "A responsive weather application that provides current weather conditions, forecasts, and interactive maps using multiple APIs.",
-      "githubUrl": "https://github.com/A-Piyas-04/weather-dashboard"
+      "title": "PHARMASYNC",
+      "description": "A command-line based Pharmacy Management System implemented in C++.",
+      "githubUrl": "https://github.com/A-Piyas-04/PHARMASYNC"
     },
     {
       "id": 4,
-      "title": "Automation Bot",
-      "description": "A Python-based automation bot that streamlines repetitive tasks, data processing, and report generation for business workflows.",
-      "githubUrl": "https://github.com/A-Piyas-04/automation-bot"
+      "title": "Smoothie Maker Simulator",
+      "description": "A Java Swing application that lets users create and customize their own smoothies with various ingredients, flavors, and toppings.",
+      "githubUrl": "https://github.com/A-Piyas-04/Smoothie_Maker_Simulator"
     },
     {
       "id": 5,
-      "title": "Portfolio Website",
-      "description": "A modern, responsive portfolio website built with Next.js, featuring smooth animations, dark theme, and optimized performance.",
-      "githubUrl": "https://github.com/A-Piyas-04/portfolio"
+      "title": "Campus Lockdown",
+      "description": "A top-down exploration game built with Python and Pygame, where you navigate a dark campus environment using limited visibility and a flashlight to survive and explore.(In Development)",
+      "githubUrl": "https://github.com/A-Piyas-04/Campus_Lockdown"
+    },
+    {
+      "id": 6,
+      "title": "Banking Management System",
+      "description": "It is a simple banking management system following OOP Priciples which offers basic banking features that can be done from an online banking app.",
+      "githubUrl": "https://github.com/A-Piyas-04/Banking-Management-System-Project-"
     }
   ]
 }
