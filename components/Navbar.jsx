@@ -38,22 +38,23 @@ export default function Navbar() {
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
-  const handleSmoothScroll = (e, href) => {
-    e.preventDefault()
-    const targetId = href.substring(1)
-    const element = document.getElementById(targetId)
-    if (element) {
-      const offset = 96 // Navbar height
-      const elementPosition = element.getBoundingClientRect().top
-      const offsetPosition = elementPosition + window.pageYOffset - offset
+   const handleSmoothScroll = (e, href) => {
+     if (e) e.preventDefault()
+     
+     const targetId = href.substring(1)
+     const element = document.getElementById(targetId)
+     
+     if (element) {
+       const offset = 96 // Navbar height
+       const elementPosition = element.getBoundingClientRect().top
+       const offsetPosition = elementPosition + window.pageYOffset - offset
 
-      window.scrollTo({
-        top: offsetPosition,
-        behavior: 'smooth'
-      })
-      setIsMobileMenuOpen(false)
-    }
-  }
+       window.scrollTo({
+         top: offsetPosition,
+         behavior: 'smooth'
+       })
+     }
+   }
 
   return (
     <motion.nav
@@ -93,7 +94,7 @@ export default function Navbar() {
                 className="absolute -inset-2 rounded-full bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-500 opacity-30 blur-sm"
                 animate={{ 
                   scale: [1.1, 1.2, 1.1],
-                  opacity: [0.1, 0.15, 0.15],
+                  opacity: [0.1, 0.11, 0.11],
                   rotate: [0, 360]
                 }}
                 transition={{ 
@@ -213,45 +214,69 @@ export default function Navbar() {
               {navLinks.map((link, index) => {
                 const sectionId = link.href.substring(1)
                 const isActive = activeSection === sectionId
+                
+                const handleMobileClick = (e) => {
+                  e.preventDefault()
+                  e.stopPropagation()
+                  
+                  console.log(`Mobile click: ${link.name} -> ${link.href}`)
+                  
+                  // Close mobile menu immediately
+                  setIsMobileMenuOpen(false)
+                  
+                  // Navigate to section
+                  const targetId = link.href.substring(1)
+                  const element = document.getElementById(targetId)
+                  
+                  if (element) {
+                    console.log(`Found element: ${targetId}`)
+                    
+                    // Use a small timeout to ensure menu animation doesn't interfere
+                    setTimeout(() => {
+                      const offset = 96
+                      const elementPosition = element.getBoundingClientRect().top
+                      const offsetPosition = elementPosition + window.pageYOffset - offset
+
+                      console.log(`Scrolling to position: ${offsetPosition}`)
+                      
+                      window.scrollTo({
+                        top: offsetPosition,
+                        behavior: 'smooth'
+                      })
+                    }, 150)
+                  } else {
+                    console.error(`Element not found: ${targetId}`)
+                  }
+                }
+
                 return (
-                  <motion.a
-                    key={link.name}
-                    href={link.href}
-                    onClick={(e) => handleSmoothScroll(e, link.href)}
-                    initial={{ opacity: 0, x: -20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    exit={{ opacity: 0, x: -20 }}
-                    transition={{ duration: 0.3, delay: index * 0.1 }}
-                    whileHover={{ scale: 1.02 }}
-                    whileTap={{ scale: 0.98 }}
-                  >
-                    <motion.div
-                      className={`px-6 py-4 rounded-xl text-lg font-semibold transition-all duration-300 ${
+                  <div key={link.name} className="w-full">
+                    <button
+                      onClick={handleMobileClick}
+                      className={`w-full px-6 py-4 rounded-xl text-lg font-semibold transition-all duration-300 text-left cursor-pointer touch-manipulation select-none ${
                         isActive
                           ? 'bg-gradient-to-r from-indigo-600 to-purple-600 text-white shadow-lg shadow-indigo-500/20'
-                          : 'text-gray-300 hover:text-white hover:bg-slate-800/50'
+                          : 'text-gray-300 hover:text-white hover:bg-slate-800/50 active:bg-slate-700/50'
                       }`}
-                      whileHover={!isActive ? { 
-                        x: 8,
-                        backgroundColor: 'rgba(30, 41, 59, 0.8)',
-                        boxShadow: '0 4px 20px rgba(99, 102, 241, 0.1)'
-                      } : { x: 8 }}
+                      type="button"
+                      style={{ 
+                        WebkitTapHighlightColor: 'transparent',
+                        touchAction: 'manipulation'
+                      }}
                     >
                       <div className="flex items-center justify-between">
                         <span>{link.name}</span>
-                        <motion.svg
+                        <svg
                           className="w-5 h-5 opacity-60"
                           fill="none"
                           stroke="currentColor"
                           viewBox="0 0 24 24"
-                          animate={{ x: [0, 4, 0] }}
-                          transition={{ duration: 1.5, repeat: Infinity }}
                         >
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                        </motion.svg>
+                        </svg>
                       </div>
-                    </motion.div>
-                  </motion.a>
+                    </button>
+                  </div>
                 )
               })}
             </div>
