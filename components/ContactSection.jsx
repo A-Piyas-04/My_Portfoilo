@@ -1,9 +1,21 @@
 'use client'
 
 import { motion } from 'framer-motion'
+import { useState } from 'react'
 import SectionHeader from './SectionHeader'
 
 export default function ContactSection() {
+  const [emailCopied, setEmailCopied] = useState(false)
+
+  const copyEmailToClipboard = async () => {
+    try {
+      await navigator.clipboard.writeText('ahnafpias@iut-dhaka.edu')
+      setEmailCopied(true)
+      setTimeout(() => setEmailCopied(false), 2000) // Reset after 2 seconds
+    } catch (err) {
+      console.error('Failed to copy email: ', err)
+    }
+  }
 
   const socialLinks = [
     {
@@ -241,30 +253,42 @@ export default function ContactSection() {
           <p className="text-xl text-gray-300 mb-6">
             Don&apos;t see your preferred platform? Drop me an email directly!
           </p>
-          <motion.a
-            href="mailto:ahnafpias@iut-dhaka.edu"
-            className="inline-flex items-center gap-3 px-8 py-4 bg-gradient-to-r from-indigo-600 to-purple-600 text-white font-semibold rounded-xl hover:from-indigo-700 hover:to-purple-700 transition-all duration-300 shadow-lg shadow-indigo-500/20 hover:shadow-indigo-500/30"
+          <motion.button
+            onClick={copyEmailToClipboard}
+            className={`inline-flex items-center gap-3 px-8 py-4 font-semibold rounded-xl transition-all duration-300 shadow-lg ${
+              emailCopied 
+                ? 'bg-gradient-to-r from-green-600 to-emerald-600 shadow-green-500/20' 
+                : 'bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 shadow-indigo-500/20 hover:shadow-indigo-500/30'
+            } text-white`}
             whileHover={{ 
               scale: 1.05,
-              boxShadow: '0 20px 40px rgba(99, 102, 241, 0.3)'
+              boxShadow: emailCopied ? '0 20px 40px rgba(34, 197, 94, 0.3)' : '0 20px 40px rgba(99, 102, 241, 0.3)'
             }}
             whileTap={{ scale: 0.95 }}
           >
-            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-            </svg>
-            ahnafpias@iut-dhaka.edu
-            <motion.svg
-              className="w-5 h-5"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-              animate={{ x: [0, 4, 0] }}
-              transition={{ duration: 1.5, repeat: Infinity }}
-            >
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-            </motion.svg>
-          </motion.a>
+            {emailCopied ? (
+              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+              </svg>
+            ) : (
+              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+              </svg>
+            )}
+            {emailCopied ? 'Email Copied!' : 'ahnafpias@iut-dhaka.edu'}
+            {!emailCopied && (
+              <motion.svg
+                className="w-5 h-5"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+                animate={{ x: [0, 4, 0] }}
+                transition={{ duration: 1.5, repeat: Infinity }}
+              >
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+              </motion.svg>
+            )}
+          </motion.button>
         </motion.div>
       </div>
     </section>

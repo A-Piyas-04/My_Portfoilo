@@ -98,10 +98,10 @@ export default function AboutSection() {
                 </div>
                 <div className="flex-grow">
                   <h3 className="text-2xl font-bold text-white mb-2">
-                    Islamic University of Technology (IUT)
+                    Islamic University of Technology (IUT) , Bangladesh
                   </h3>
                   <p className="text-indigo-300 font-medium mb-3">
-                    Bachelor of Science in Software Engineering
+                    Bachelor of Science in &quot;Software Engineering&quot;
                   </p>
                   <p className="text-gray-400 mb-4">
                     Department of Computer Science and Engineering

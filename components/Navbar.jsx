@@ -79,7 +79,7 @@ export default function Navbar() {
               whileTap={{ scale: 1.1, transition: { duration: 0.15 } }}
               className="relative"
             >
-              <div className="w-12 h-12 relative rounded-full overflow-hidden shadow-lg shadow-cyan-500/20 ring-2 ring-cyan-400/30 logo-glow">
+              <div className="w-16 h-16 relative rounded-full overflow-hidden shadow-lg shadow-cyan-500/20 ring-2 ring-cyan-400/30 logo-glow">
                 <Image
                   src="/images/logo.gif"
                   alt="Logo"
@@ -90,7 +90,7 @@ export default function Navbar() {
               </div>
               {/* Animated glow ring */}
               <motion.div
-                className="absolute -inset-1 rounded-full bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-500 opacity-30 blur-sm"
+                className="absolute -inset-2 rounded-full bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-500 opacity-30 blur-sm"
                 animate={{ 
                   scale: [1.1, 1.2, 1.1],
                   opacity: [0.1, 0.15, 0.15],
@@ -103,8 +103,8 @@ export default function Navbar() {
                 }}
               />
               {/* Inner glow */}
-              {/* <motion.div
-                className="absolute inset-0 rounded-full bg-cyan-400/20 blur-md"
+              {/*               <motion.div
+                className="absolute inset-0 rounded-full bg-cyan-400/20 blur-lg"
                 animate={{ 
                   scale: [0.8, 1.2, 0.8],
                   opacity: [0.2, 0.4, 0.2]
