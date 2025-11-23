@@ -79,7 +79,7 @@ export default function HeroSection() {
   return (
     <section 
       id="home" 
-      className="min-h-screen flex items-center justify-center relative overflow-hidden pt-20"
+      className="min-h-screen flex items-center justify-center relative overflow-hidden pt-20 px-4 sm:px-6 lg:px-8"
     >
       {/* Subtle glassmorphism background */}
       <div className="absolute inset-0 z-0">
@@ -247,13 +247,13 @@ export default function HeroSection() {
       />
 
       <div className="container-custom relative z-10">
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-12 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 sm:gap-8 lg:gap-12 items-center">
           {/* Professions - Left Side */}
           <motion.div
             variants={containerVariants}
             initial="hidden"
             animate="visible"
-            className="text-center lg:text-left order-2 lg:order-1"
+            className="text-center lg:text-left order-2 lg:order-1 hero-mobile-spacing"
           >
             <motion.div
               variants={itemVariants}
@@ -274,7 +274,7 @@ export default function HeroSection() {
                     Expertise
                   </p> */}
                   
-                  <div className="space-y-8">
+                  <div className="space-y-4 sm:space-y-6 lg:space-y-8">
                     {['Aspiring Software Engineer','Full-Stack Developer', 'Automation Specialist','UI/UX Designer'].map((profession, index) => (
                       <motion.div
                         key={profession}
@@ -287,7 +287,7 @@ export default function HeroSection() {
                         <div className="absolute -left-6 top-3 w-2 h-2 bg-indigo-500 rounded-full opacity-60 group-hover:opacity-100 group-hover:scale-125 transition-all duration-300" />
                         
                         <h3 
-                          className="text-2xl md:text-3xl lg:text-4xl font-black text-white/95 leading-tight group-hover:text-indigo-300 transition-colors duration-500"
+                          className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-black text-white/95 leading-tight group-hover:text-indigo-300 transition-colors duration-500"
                           style={{ 
                             fontFamily: 'var(--font-space-grotesk), "Arial Black", sans-serif',
                             fontWeight: '900',
@@ -320,8 +320,8 @@ export default function HeroSection() {
             transition={{ duration: 1, delay: 0.6, ease: [0.22, 1, 0.36, 1] }}
             className="relative flex justify-center order-1 lg:order-2"
           >
-            <div className="relative w-full" style={{ transform: 'scale(1.6)', transformOrigin: 'center' }}>
-              <div className="relative aspect-[3/4] w-full max-w-sm lg:max-w-md rounded-2xl overflow-hidden">
+            <div className="relative w-full scale-100 sm:scale-110 md:scale-125 lg:scale-150 xl:scale-[1.6] transform-gpu" style={{ transformOrigin: 'center' }}>
+              <div className="relative aspect-[3/4] w-full max-w-xs sm:max-w-sm lg:max-w-md rounded-2xl overflow-hidden">
                 <Image
                   src="/images/dp.jpg"
                   alt="Ahnaf Shahriar Pias"
@@ -406,7 +406,7 @@ export default function HeroSection() {
               variants={itemVariants}
               className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-end pt-4"
             >
-              {/* Download CV Button - Primary */}
+              {/* Download Resume Button - Primary */}
               <motion.a
                 href="/images/Ahnaf_Shahriar_Pias_Resume.pdf"
                 download="Ahnaf_Shahriar_Pias_Resume.pdf"
@@ -419,7 +419,7 @@ export default function HeroSection() {
                 transition={{ duration: 0.2 }}
               >
                 <span className="relative z-10 flex items-center gap-2">
-                  Download CV
+                  Download Resume
                   <motion.svg
                     className="w-5 h-5"
                     fill="none"

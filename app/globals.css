@@ -32,4 +32,21 @@
   .card {
     @apply rounded-xl bg-slate-800/50 backdrop-blur-sm p-6 shadow-lg border border-indigo-500/20 transition-all duration-300 hover:shadow-xl hover:shadow-indigo-500/20 hover:border-indigo-500/40;
   }
+
+  /* Mobile responsive fixes for hero section */
+  @media (max-width: 640px) {
+    .hero-mobile-spacing {
+      padding-top: 2rem;
+      padding-bottom: 2rem;
+    }
+  }
+
+  /* Logo glow effects */
+  .logo-glow {
+    filter: drop-shadow(0 0 10px rgba(34, 211, 238, 0.4));
+  }
+
+  .logo-glow:hover {
+    filter: drop-shadow(0 0 20px rgba(34, 211, 238, 0.6));
+  }
 }

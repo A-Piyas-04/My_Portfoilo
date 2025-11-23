@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
+import Image from 'next/image'
 
 const navLinks = [
   { name: 'Home', href: '#home' },
@@ -42,7 +43,7 @@ export default function Navbar() {
     const targetId = href.substring(1)
     const element = document.getElementById(targetId)
     if (element) {
-      const offset = 80 // Navbar height
+      const offset = 96 // Navbar height
       const elementPosition = element.getBoundingClientRect().top
       const offsetPosition = elementPosition + window.pageYOffset - offset
 
@@ -66,7 +67,7 @@ export default function Navbar() {
       }`}
     >
       <div className="container-custom">
-        <div className="flex items-center justify-between h-16 md:h-20">
+        <div className="flex items-center justify-between h-18 md:h-24">
           {/* Logo */}
           <a 
             href="#home" 
@@ -74,56 +75,110 @@ export default function Navbar() {
             className="flex items-center space-x-2"
           >
             <motion.div
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="text-2xl font-bold text-indigo-400"
+              whileHover={{ scale: 1, rotate: 48, transition: { duration: 0.24 } }}
+              whileTap={{ scale: 1.1, transition: { duration: 0.15 } }}
+              className="relative"
             >
-              ASP
+              <div className="w-12 h-12 relative rounded-full overflow-hidden shadow-lg shadow-cyan-500/20 ring-2 ring-cyan-400/30 logo-glow">
+                <Image
+                  src="/images/logo.gif"
+                  alt="Logo"
+                  fill
+                  className="object-cover"
+                  priority
+                />
+              </div>
+              {/* Animated glow ring */}
+              <motion.div
+                className="absolute -inset-1 rounded-full bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-500 opacity-30 blur-sm"
+                animate={{ 
+                  scale: [1.1, 1.2, 1.1],
+                  opacity: [0.1, 0.15, 0.15],
+                  rotate: [0, 360]
+                }}
+                transition={{ 
+                  duration: 3,
+                  repeat: Infinity,
+                  ease: "easeInOut"
+                }}
+              />
+              {/* Inner glow */}
+              {/* <motion.div
+                className="absolute inset-0 rounded-full bg-cyan-400/20 blur-md"
+                animate={{ 
+                  scale: [0.8, 1.2, 0.8],
+                  opacity: [0.2, 0.4, 0.2]
+                }}
+                transition={{ 
+                  duration: 2,
+                  repeat: Infinity,
+                  ease: "easeInOut"
+                }}
+              /> */}
             </motion.div>
           </a>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center space-x-8">
-            {navLinks.map((link) => {
+          <div className="hidden md:flex items-center space-x-2">
+            {navLinks.map((link, index) => {
               const sectionId = link.href.substring(1)
               const isActive = activeSection === sectionId
               return (
-                <a
+                <motion.a
                   key={link.name}
                   href={link.href}
                   onClick={(e) => handleSmoothScroll(e, link.href)}
-                  className="relative"
+                  className="relative group"
+                  initial={{ opacity: 0, y: -20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: index * 0.1 }}
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
                 >
-                  <motion.span
-                    className={`text-sm font-medium transition-colors ${
+                  <motion.div
+                    className={`px-6 py-3 rounded-xl font-semibold text-base transition-all duration-300 ${
                       isActive
-                        ? 'text-indigo-400'
-                        : 'text-gray-300 hover:text-indigo-400'
+                        ? 'bg-gradient-to-r from-indigo-600 to-purple-600 text-white shadow-lg shadow-indigo-500/20'
+                        : 'text-gray-300 hover:text-white hover:bg-slate-800/50 backdrop-blur-sm'
                     }`}
-                    whileHover={{ y: -2 }}
+                    whileHover={!isActive ? { 
+                      backgroundColor: 'rgba(30, 41, 59, 0.8)',
+                      boxShadow: '0 4px 20px rgba(99, 102, 241, 0.1)'
+                    } : {}}
                   >
                     {link.name}
+                    
+                    {/* Hover glow effect */}
+                    <motion.div
+                      className="absolute inset-0 rounded-xl bg-gradient-to-r from-indigo-500/20 to-purple-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                      initial={false}
+                    />
+                    
+                    {/* Active indicator */}
                     {isActive && (
                       <motion.div
-                        layoutId="activeIndicator"
-                        className="absolute -bottom-1 left-0 right-0 h-0.5 bg-gradient-to-r from-indigo-400 via-purple-400 to-pink-400"
+                        layoutId="activeNavIndicator"
+                        className="absolute inset-0 rounded-xl bg-gradient-to-r from-indigo-600 to-purple-600"
                         initial={false}
                         transition={{ type: 'spring', stiffness: 380, damping: 30 }}
+                        style={{ zIndex: -1 }}
                       />
                     )}
-                  </motion.span>
-                </a>
+                  </motion.div>
+                </motion.a>
               )
             })}
           </div>
 
           {/* Mobile Menu Button */}
-          <button
+          <motion.button
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="md:hidden p-2 rounded-lg text-gray-300 hover:bg-gray-800 focus:outline-none"
+            className="md:hidden p-3 rounded-xl text-gray-300 hover:text-white hover:bg-slate-800/50 focus:outline-none transition-all duration-300"
             aria-label="Toggle menu"
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
           >
-            <svg
+            <motion.svg
               className="w-6 h-6"
               fill="none"
               strokeLinecap="round"
@@ -131,14 +186,16 @@ export default function Navbar() {
               strokeWidth="2"
               viewBox="0 0 24 24"
               stroke="currentColor"
+              animate={{ rotate: isMobileMenuOpen ? 90 : 0 }}
+              transition={{ duration: 0.3 }}
             >
               {isMobileMenuOpen ? (
                 <path d="M6 18L18 6M6 6l12 12" />
               ) : (
                 <path d="M4 6h16M4 12h16M4 18h16" />
               )}
-            </svg>
-          </button>
+            </motion.svg>
+          </motion.button>
         </div>
       </div>
 
@@ -149,30 +206,52 @@ export default function Navbar() {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
-            transition={{ duration: 0.3 }}
-            className="md:hidden bg-slate-900 border-t border-indigo-500/20"
+            transition={{ duration: 0.3, ease: 'easeInOut' }}
+            className="md:hidden bg-slate-900/95 backdrop-blur-md border-t border-indigo-500/20"
           >
-            <div className="container-custom py-4 space-y-2">
-              {navLinks.map((link) => {
+            <div className="container-custom py-6 space-y-3">
+              {navLinks.map((link, index) => {
                 const sectionId = link.href.substring(1)
                 const isActive = activeSection === sectionId
                 return (
-                  <a
+                  <motion.a
                     key={link.name}
                     href={link.href}
                     onClick={(e) => handleSmoothScroll(e, link.href)}
+                    initial={{ opacity: 0, x: -20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    exit={{ opacity: 0, x: -20 }}
+                    transition={{ duration: 0.3, delay: index * 0.1 }}
+                    whileHover={{ scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
                   >
                     <motion.div
-                      className={`px-4 py-2 rounded-lg text-base font-medium transition-colors ${
+                      className={`px-6 py-4 rounded-xl text-lg font-semibold transition-all duration-300 ${
                         isActive
-                          ? 'bg-indigo-900/50 text-indigo-400'
-                          : 'text-gray-300 hover:bg-slate-800'
+                          ? 'bg-gradient-to-r from-indigo-600 to-purple-600 text-white shadow-lg shadow-indigo-500/20'
+                          : 'text-gray-300 hover:text-white hover:bg-slate-800/50'
                       }`}
-                      whileHover={{ x: 4 }}
+                      whileHover={!isActive ? { 
+                        x: 8,
+                        backgroundColor: 'rgba(30, 41, 59, 0.8)',
+                        boxShadow: '0 4px 20px rgba(99, 102, 241, 0.1)'
+                      } : { x: 8 }}
                     >
-                      {link.name}
+                      <div className="flex items-center justify-between">
+                        <span>{link.name}</span>
+                        <motion.svg
+                          className="w-5 h-5 opacity-60"
+                          fill="none"
+                          stroke="currentColor"
+                          viewBox="0 0 24 24"
+                          animate={{ x: [0, 4, 0] }}
+                          transition={{ duration: 1.5, repeat: Infinity }}
+                        >
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                        </motion.svg>
+                      </div>
                     </motion.div>
-                  </a>
+                  </motion.a>
                 )
               })}
             </div>
