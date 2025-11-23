@@ -1,3 +1,4 @@
+import ClientLayout from '@/components/ClientLayout'
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
 import HeroSection from '@/components/HeroSection'
@@ -13,7 +14,7 @@ export const metadata = {
 
 export default function Home() {
   return (
-    <>
+    <ClientLayout>
       <Navbar />
       <main>
         <HeroSection />
@@ -23,6 +24,6 @@ export default function Home() {
         <ContactSection />
       </main>
       <Footer />
-    </>
+    </ClientLayout>
   )
 }
