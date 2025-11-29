@@ -7,6 +7,13 @@
       "githubUrl": "https://github.com/A-Piyas-04/IUTverse"
     },
     {
+      "id": 7,
+      "title": "TaskIt",
+      "description": "A category based task management application with neon aesthetic, built with Next.js and Firebase.",
+      "githubUrl": "https://github.com/A-Piyas-04/taskit",
+      "websiteUrl": "https://taskit-8zuo.vercel.app/"
+    },
+    {
       "id": 2,
       "title": "NestUp-BD",
       "description": "ANestUp-BD is an all-in-one web platform designed to support Bangladeshi people relocating to new cities for exams or other events.",

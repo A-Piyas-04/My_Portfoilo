@@ -35,8 +35,7 @@ export default function ProjectCard({ project, index }) {
           {project.description}
         </p>
 
-        {/* Action Button */}
-        <div className="flex justify-center">
+        <div className="flex justify-center gap-4">
           {project.githubUrl && (
             <motion.a
               href={project.githubUrl}
@@ -60,6 +59,21 @@ export default function ProjectCard({ project, index }) {
               >
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
               </motion.svg>
+            </motion.a>
+          )}
+          {project.websiteUrl && (
+            <motion.a
+              href={project.websiteUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-3 px-6 py-3 text-sm font-semibold text-indigo-400 border-2 border-indigo-400 rounded-xl hover:bg-indigo-400 hover:text-slate-950 transition-all duration-300"
+              whileHover={{ scale: 1.05, y: -2 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7H7v10h10V11m0-4l-6 6" />
+              </svg>
+              Try Now
             </motion.a>
           )}
         </div>

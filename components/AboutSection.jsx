@@ -107,10 +107,7 @@ export default function AboutSection() {
                     Department of Computer Science and Engineering
                   </p>
                   <div className="flex flex-wrap gap-4 text-sm">
-                    <div className="bg-slate-700/50 px-3 py-1 rounded-full">
-                      <span className="text-gray-300">CGPA: </span>
-                      <span className="text-indigo-300 font-semibold">3.87</span>
-                    </div>
+
                     <div className="bg-slate-700/50 px-3 py-1 rounded-full">
                       <span className="text-gray-300">Status: </span>
                       <span className="text-green-400 font-semibold">Undergraduate</span>
@@ -120,7 +117,7 @@ export default function AboutSection() {
               </div>
               <div className="mt-6 pt-6 border-t border-slate-700/50">
                 <p className="text-gray-400 text-sm leading-relaxed">
-                  International university established under the Organization of Islamic Cooperation (OIC), 
+                  International university established under the Organization of Islamic Cooperation (OIC),
                   focusing on engineering and technology excellence.
                 </p>
               </div>
@@ -151,10 +148,7 @@ export default function AboutSection() {
                     Dhaka, Bangladesh
                   </p>
                   <div className="flex flex-wrap gap-4 text-sm">
-                    <div className="bg-slate-700/50 px-3 py-1 rounded-full">
-                      <span className="text-gray-300">GPA: </span>
-                      <span className="text-green-300 font-semibold">5.00</span>
-                    </div>
+
                     <div className="bg-slate-700/50 px-3 py-1 rounded-full">
                       <span className="text-gray-300">Status: </span>
                       <span className="text-blue-400 font-semibold">Completed</span>
