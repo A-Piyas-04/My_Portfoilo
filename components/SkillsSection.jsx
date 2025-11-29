@@ -18,6 +18,7 @@ const skillCategories = {
     { name: 'Node.js', iconPath: '/images/skills/nodejs.svg' },
     { name: 'Express', iconPath: '/images/skills/express.svg' },
     { name: 'Vue.js', iconPath: '/images/skills/vue.svg' },
+    { name: 'FastAPI', iconPath: '/images/skills/FastAPI.svg' },
   ],
   Databases: [
     { name: 'MongoDB', iconPath: '/images/skills/mongodb.svg' },
@@ -29,6 +30,8 @@ const skillCategories = {
     { name: 'Git', iconPath: '/images/skills/git.svg' },
     { name: 'Docker', iconPath: '/images/skills/docker.svg' },
     { name: 'n8n', iconPath: '/images/skills/n8n.svg' },
+    { name: 'Firebase', iconPath: '/images/skills/Firebase.svg' },
+    { name: 'Vite', iconPath: '/images/skills/Vite.js.svg' },
   ],
   'Soft Skills': [
     { name: 'Problem Solving', icon: '💡' },
