@@ -275,7 +275,7 @@ export default function HeroSection() {
                   </p> */}
                   
                   <div className="space-y-4 sm:space-y-6 lg:space-y-8">
-                    {['Aspiring Software Engineer','Full-Stack Developer', 'Automation Specialist','UI/UX Designer'].map((profession, index) => (
+                    {['Aspiring Software Engineer','Full-Stack Developer', 'AI Developer', 'Frontend Designer'].map((profession, index) => (
                       <motion.div
                         key={profession}
                         initial={{ opacity: 0, x: -20 }}

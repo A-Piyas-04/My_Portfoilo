@@ -1,5 +1,38 @@
 {
   "projects": [
+
+    {
+      "id": 2,
+      "title": "NexusRide",
+      "description": "Transport subscription platform (FastAPI + React/Vite) with staff/subscriber dashboards, PostgreSQL, and RBAC across 4 user types. System design, Transport-Officer and faculty backend features, profile management.",
+      "githubUrl": "https://github.com/A-Piyas-04/Nexus-Ride"
+    },
+    {
+      "id": 3,
+      "title": "SQLens",
+      "description": "Run real PostgreSQL queries in the browser; visualize schema and query execution with optional AI SQL hints. React, TypeScript, CodeMirror, pglite, AST; Express 5 + Gemini backend.",
+      "githubUrl": "https://github.com/A-Piyas-04/SQLens",
+      "websiteUrl": "https://sq-lens-phi.vercel.app/"
+    },
+    {
+      "id": 10,
+      "title": "Blind75 Tracker",
+      "description": "Offline NeetCode Blind 75 tracker built with Python, CustomTkinter, and SQLite. Runs fully offline with no login or internet required.",
+      "githubUrl": "https://github.com/A-Piyas-04/Blind75-NeetCode--tracker"
+    },
+    {
+      "id": 11,
+      "title": "CareerPilot",
+      "description": "CV intelligence agent (chunk, embed, RAG retrieval, grounded Q&A) plus job-to-skill gap analysis with roadmap-to-goals mechanism.",
+      "githubUrl": "https://github.com/A-Piyas-04/CareerPilot"
+    },
+    {
+      "id": 12,
+      "title": "BackfireOS",
+      "description": "Simulate page with counterfactual branching and Three.js animations; Banglish RAG pipeline (pgvector + BnSentMix embeddings) with 6 red-team AI personas.",
+      "githubUrl": "https://github.com/adibqt/BackfireOS"
+    },
+
     {
       "id": 1,
       "title": "IUTverse",
@@ -14,13 +47,13 @@
       "websiteUrl": "https://taskit-8zuo.vercel.app/"
     },
     {
-      "id": 2,
+      "id": 8,
       "title": "NestUp-BD",
       "description": "ANestUp-BD is an all-in-one web platform designed to support Bangladeshi people relocating to new cities for exams or other events.",
       "githubUrl": "https://github.com/A-Piyas-04/NestUp-BD"
     },
     {
-      "id": 3,
+      "id": 9,
       "title": "PHARMASYNC",
       "description": "A command-line based Pharmacy Management System implemented in C++.",
       "githubUrl": "https://github.com/A-Piyas-04/PHARMASYNC"

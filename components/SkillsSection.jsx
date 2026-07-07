@@ -19,12 +19,23 @@ const skillCategories = {
     { name: 'Express', iconPath: '/images/skills/express.svg' },
     { name: 'Vue.js', iconPath: '/images/skills/vue.svg' },
     { name: 'FastAPI', iconPath: '/images/skills/FastAPI.svg' },
+    { name: 'Three.js', icon: '🎮' },
+    { name: 'CustomTkinter', icon: '🖥️' },
   ],
   Databases: [
     { name: 'MongoDB', iconPath: '/images/skills/mongodb.svg' },
     { name: 'PostgreSQL', iconPath: '/images/skills/postgresql.svg' },
     { name: 'MySQL', iconPath: '/images/skills/mysql.svg' },
     { name: 'Redis', iconPath: '/images/skills/redis.svg' },
+    { name: 'SQLite', icon: '🗄️' },
+    { name: 'pgvector', icon: '🔍' },
+    { name: 'PGlite', icon: '⚡' },
+  ],
+  'AI & ML': [
+    { name: 'RAG', icon: '🤖' },
+    { name: 'Vector Embeddings', icon: '📊' },
+    { name: 'Gemini', icon: '✨' },
+    { name: 'Agentic AI', icon: '🧠' },
   ],
   'Tools & Platforms': [
     { name: 'Git', iconPath: '/images/skills/git.svg' },
@@ -32,6 +43,9 @@ const skillCategories = {
     { name: 'n8n', iconPath: '/images/skills/n8n.svg' },
     { name: 'Firebase', iconPath: '/images/skills/Firebase.svg' },
     { name: 'Vite', iconPath: '/images/skills/Vite.js.svg' },
+    { name: 'CodeMirror', icon: '📝' },
+    { name: 'RBAC', icon: '🔐' },
+    { name: 'AST', icon: '🌳' },
   ],
   'Soft Skills': [
     { name: 'Problem Solving', icon: '💡' },
