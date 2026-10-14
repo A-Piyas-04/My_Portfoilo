@@ -1,17 +1,16 @@
 export default function NotFound() {
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-slate-950 via-indigo-950/50 to-slate-950">
-      <div className="text-center">
-        <h1 className="text-6xl font-bold text-white mb-4">404</h1>
-        <p className="text-xl text-slate-400 mb-8">Page Not Found</p>
-        <a
-          href="/"
-          className="px-6 py-3 bg-gradient-to-r from-indigo-600 to-purple-600 text-white font-semibold rounded-xl hover:shadow-lg hover:shadow-indigo-500/20 transition-all"
-        >
-          Go Home
+    <div className="min-h-screen flex items-center justify-center bg-netflix-black vignette">
+      <div className="text-center px-6">
+        <p className="eyebrow mb-4">Lost your way?</p>
+        <h1 className="font-display text-8xl md:text-9xl text-white mb-4">404</h1>
+        <p className="text-lg text-white/60 mb-8 max-w-md mx-auto">
+          Sorry, we can&apos;t find that page. You&apos;ll find lots to explore on the home page.
+        </p>
+        <a href="/" className="btn-netflix-red">
+          Portfolio Home
         </a>
       </div>
     </div>
   )
 }
-

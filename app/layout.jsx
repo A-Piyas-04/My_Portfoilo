@@ -1,27 +1,18 @@
 import './globals.css'
-import { Inter, Space_Grotesk, Playfair_Display } from 'next/font/google'
+import { Inter, Bebas_Neue } from 'next/font/google'
 
-const inter = Inter({ subsets: ['latin'] })
-const spaceGrotesk = Space_Grotesk({ 
-  subsets: ['latin'],
-  variable: '--font-space-grotesk',
-  weight: ['400', '500', '600', '700'],
-})
-const playfairDisplay = Playfair_Display({
-  subsets: ['latin'],
-  variable: '--font-playfair',
-  weight: ['400', '500', '600', '700'],
-  style: ['normal', 'italic'],
-})
+const inter = Inter({ subsets: ['latin'], variable: '--font-inter' })
+const bebas = Bebas_Neue({ subsets: ['latin'], weight: '400', variable: '--font-bebas' })
 
 export const metadata = {
-  title: 'Ahnaf Shahriar Pias - Software Developer',
-  description: 'Personal portfolio website of Ahnaf Shahriar Pias, a Software Developer showcasing projects, skills, and experience.',
-  keywords: 'software developer, portfolio, web development, programming',
+  title: 'Ahnaf Shahriar Pias - ML Engineering Intern & Software Developer',
+  description:
+    'Portfolio of Ahnaf Shahriar Pias, ML Engineering Intern at Red-Dot Digital Limited and full-stack / AI developer, showcasing projects, skills, and experience.',
+  keywords: 'software developer, ML engineering, machine learning, full stack, portfolio, RAG, Next.js',
   authors: [{ name: 'Ahnaf Shahriar Pias' }],
   openGraph: {
-    title: 'Ahnaf Shahriar Pias - Software Developer',
-    description: 'Personal portfolio website showcasing projects, skills, and experience.',
+    title: 'Ahnaf Shahriar Pias - ML Engineering Intern & Software Developer',
+    description: 'A Netflix-inspired portfolio: projects, skills and experience.',
     type: 'website',
   },
 }
@@ -29,9 +20,7 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en" className="scroll-smooth">
-      <body className={`${inter.className} ${spaceGrotesk.variable} ${playfairDisplay.variable}`}>
-        {children}
-      </body>
+      <body className={`${inter.variable} ${bebas.variable}`}>{children}</body>
     </html>
   )
 }

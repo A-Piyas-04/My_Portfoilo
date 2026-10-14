@@ -4,45 +4,48 @@ module.exports = {
     './pages/**/*.{js,ts,jsx,tsx,mdx}',
     './components/**/*.{js,ts,jsx,tsx,mdx}',
     './app/**/*.{js,ts,jsx,tsx,mdx}',
+    './data/**/*.{js,ts}',
   ],
   theme: {
     extend: {
       colors: {
-        primary: {
-          50: '#eef2ff',
-          100: '#e0e7ff',
-          200: '#c7d2fe',
-          300: '#a5b4fc',
-          400: '#818cf8',
-          500: '#6366f1',
-          600: '#4f46e5',
-          700: '#4338ca',
-          800: '#3730a3',
-          900: '#312e81',
-          950: '#1e1b4b',
+        netflix: {
+          black: '#0a0a0a',
+          dark: '#141414',
+          card: '#181818',
+          gray: '#808080',
+          red: '#E50914',
+          deep: '#B20710',
         },
+      },
+      fontFamily: {
+        display: ['var(--font-bebas)', 'Impact', 'sans-serif'],
+        sans: ['var(--font-inter)', 'system-ui', 'sans-serif'],
       },
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
-        'gradient-conic': 'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
       },
       animation: {
-        'float': 'float 6s ease-in-out infinite',
-        'glow': 'glow 2s ease-in-out infinite alternate',
-        'gradient': 'gradient 15s ease infinite',
+        marquee: 'marquee 40s linear infinite',
+        'pulse-red': 'pulseRed 2s ease-in-out infinite',
+        grain: 'grain 8s steps(10) infinite',
       },
       keyframes: {
-        float: {
-          '0%, 100%': { transform: 'translateY(0px)' },
-          '50%': { transform: 'translateY(-20px)' },
+        marquee: {
+          '0%': { transform: 'translateX(0%)' },
+          '100%': { transform: 'translateX(-50%)' },
         },
-        glow: {
-          '0%': { boxShadow: '0 0 5px rgba(99, 102, 241, 0.5), 0 0 10px rgba(99, 102, 241, 0.5)' },
-          '100%': { boxShadow: '0 0 20px rgba(99, 102, 241, 0.8), 0 0 30px rgba(99, 102, 241, 0.6)' },
+        pulseRed: {
+          '0%, 100%': { boxShadow: '0 0 0 0 rgba(229, 9, 20, 0.6)' },
+          '50%': { boxShadow: '0 0 0 8px rgba(229, 9, 20, 0)' },
         },
-        gradient: {
-          '0%, 100%': { backgroundPosition: '0% 50%' },
-          '50%': { backgroundPosition: '100% 50%' },
+        grain: {
+          '0%, 100%': { transform: 'translate(0, 0)' },
+          '10%': { transform: 'translate(-5%, -10%)' },
+          '30%': { transform: 'translate(3%, -15%)' },
+          '50%': { transform: 'translate(12%, 9%)' },
+          '70%': { transform: 'translate(9%, 4%)' },
+          '90%': { transform: 'translate(-1%, 7%)' },
         },
       },
     },

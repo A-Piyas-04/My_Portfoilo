@@ -1,288 +1,172 @@
 'use client'
 
-import { useState, useEffect } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
+import { useEffect, useState } from 'react'
 import Image from 'next/image'
+import { AnimatePresence, motion } from 'framer-motion'
+import { profile } from '@/data/portfolio'
+import { useViewer } from './ViewerContext'
+import { scrollToId } from '@/lib/scroll'
 
 const navLinks = [
-  { name: 'Home', href: '#home' },
-  { name: 'About', href: '#about' },
-  { name: 'Projects', href: '#projects' },
-  { name: 'Skills', href: '#skills' },
-  { name: 'Contact', href: '#contact' },
+  { name: 'Home', id: 'home' },
+  { name: 'About', id: 'about' },
+  { name: 'Now Streaming', id: 'experience' },
+  { name: 'Skills', id: 'skills' },
+  { name: 'Projects', id: 'projects' },
+  { name: 'Contact', id: 'contact' },
 ]
 
 export default function Navbar() {
-  const [isScrolled, setIsScrolled] = useState(false)
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
-  const [activeSection, setActiveSection] = useState('home')
+  const { viewer, switchProfile } = useViewer()
+  const [scrolled, setScrolled] = useState(false)
+  const [active, setActive] = useState('home')
+  const [menuOpen, setMenuOpen] = useState(false)
+  const [profileOpen, setProfileOpen] = useState(false)
 
   useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20)
-      
-      // Update active section based on scroll position
-      const sections = navLinks.map(link => link.href.substring(1))
-      const current = sections.find(section => {
-        const element = document.getElementById(section)
-        if (element) {
-          const rect = element.getBoundingClientRect()
-          return rect.top <= 100 && rect.bottom >= 100
-        }
-        return false
+    const onScroll = () => {
+      setScrolled(window.scrollY > 40)
+      const current = [...navLinks].reverse().find((l) => {
+        const el = document.getElementById(l.id)
+        return el && el.getBoundingClientRect().top <= 140
       })
-      if (current) setActiveSection(current)
+      if (current) setActive(current.id)
     }
-    
-    window.addEventListener('scroll', handleScroll)
-    return () => window.removeEventListener('scroll', handleScroll)
+    onScroll()
+    window.addEventListener('scroll', onScroll, { passive: true })
+    return () => window.removeEventListener('scroll', onScroll)
   }, [])
 
-   const handleSmoothScroll = (e, href) => {
-     if (e) e.preventDefault()
-     
-     const targetId = href.substring(1)
-     const element = document.getElementById(targetId)
-     
-     if (element) {
-       const offset = 96 // Navbar height
-       const elementPosition = element.getBoundingClientRect().top
-       const offsetPosition = elementPosition + window.pageYOffset - offset
-
-       window.scrollTo({
-         top: offsetPosition,
-         behavior: 'smooth'
-       })
-     }
-   }
+  const go = (id) => {
+    setMenuOpen(false)
+    setTimeout(() => scrollToId(id), menuOpen ? 150 : 0)
+  }
 
   return (
-    <motion.nav
-      initial={{ y: -100 }}
-      animate={{ y: 0 }}
-      transition={{ duration: 0.5 }}
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled
-          ? 'bg-slate-950/95 backdrop-blur-md shadow-lg border-b border-indigo-500/20'
-          : 'bg-slate-950/80 backdrop-blur-sm'
+    <header
+      className={`fixed inset-x-0 top-0 z-50 transition-colors duration-500 ${
+        scrolled ? 'bg-netflix-black/95 backdrop-blur-md shadow-[0_8px_30px_rgba(0,0,0,0.6)]' : 'bg-gradient-to-b from-black/80 to-transparent'
       }`}
     >
-      <div className="container-custom">
-        <div className="flex items-center justify-between h-18 md:h-24">
-          {/* Logo */}
-          <a 
-            href="#home" 
-            onClick={(e) => handleSmoothScroll(e, '#home')}
-            className="flex items-center space-x-2"
-          >
-            <motion.div
-              whileHover={{ scale: 1, rotate: 48, transition: { duration: 0.24 } }}
-              whileTap={{ scale: 1.1, transition: { duration: 0.15 } }}
-              className="relative"
-            >
-              <div className="w-16 h-16 relative rounded-full overflow-hidden shadow-lg shadow-cyan-500/20 ring-2 ring-cyan-400/30 logo-glow">
-                <Image
-                  src="/images/logo.gif"
-                  alt="Logo"
-                  fill
-                  className="object-cover"
-                  priority
-                />
-              </div>
-              {/* Animated glow ring */}
-              <motion.div
-                className="absolute -inset-2 rounded-full bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-500 opacity-30 blur-sm"
-                animate={{ 
-                  scale: [1.1, 1.2, 1.1],
-                  opacity: [0.1, 0.11, 0.11],
-                  rotate: [0, 360]
-                }}
-                transition={{ 
-                  duration: 3,
-                  repeat: Infinity,
-                  ease: "easeInOut"
-                }}
-              />
-              {/* Inner glow */}
-              {/*               <motion.div
-                className="absolute inset-0 rounded-full bg-cyan-400/20 blur-lg"
-                animate={{ 
-                  scale: [0.8, 1.2, 0.8],
-                  opacity: [0.2, 0.4, 0.2]
-                }}
-                transition={{ 
-                  duration: 2,
-                  repeat: Infinity,
-                  ease: "easeInOut"
-                }}
-              /> */}
-            </motion.div>
+      <nav className="container-custom flex h-16 md:h-[72px] items-center justify-between gap-6">
+        <div className="flex items-center gap-8">
+          <button type="button" onClick={() => go('home')} className="flex items-center gap-2" aria-label="Home">
+            <span className="relative h-9 w-9 overflow-hidden rounded-full ring-2 ring-netflix-red/60">
+              <Image src={profile.logo} alt="" fill sizes="36px" className="object-cover" unoptimized />
+            </span>
+            <span className="font-display text-3xl tracking-wider text-netflix-red drop-shadow-[0_0_12px_rgba(229,9,20,0.5)]">
+              {profile.shortName}
+            </span>
+          </button>
+
+          <ul className="hidden lg:flex items-center gap-6">
+            {navLinks.map((l) => (
+              <li key={l.id}>
+                <button
+                  type="button"
+                  onClick={() => go(l.id)}
+                  className={`text-sm transition-colors ${
+                    active === l.id ? 'font-bold text-white' : 'text-white/70 hover:text-white/50'
+                  }`}
+                >
+                  {l.name}
+                </button>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        <div className="flex items-center gap-4">
+          <a href="#contact" onClick={(e) => { e.preventDefault(); go('contact') }} className="hidden sm:inline-flex btn-netflix-red !px-4 !py-1.5 text-sm">
+            Hire Me
           </a>
 
-          {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center space-x-2">
-            {navLinks.map((link, index) => {
-              const sectionId = link.href.substring(1)
-              const isActive = activeSection === sectionId
-              return (
-                <motion.a
-                  key={link.name}
-                  href={link.href}
-                  onClick={(e) => handleSmoothScroll(e, link.href)}
-                  className="relative group"
-                  initial={{ opacity: 0, y: -20 }}
+          <div className="relative hidden md:block" onMouseLeave={() => setProfileOpen(false)}>
+            <button
+              type="button"
+              onClick={() => setProfileOpen((v) => !v)}
+              onMouseEnter={() => setProfileOpen(true)}
+              className="flex items-center gap-2"
+              aria-label="Profile menu"
+            >
+              <span className={`relative block h-8 w-8 overflow-hidden rounded bg-gradient-to-br ${viewer.tint}`}>
+                <Image src={viewer.avatar} alt={viewer.label} fill sizes="32px" className="object-cover object-top scale-110" />
+              </span>
+              <svg className={`h-3 w-3 text-white transition-transform ${profileOpen ? 'rotate-180' : ''}`} viewBox="0 0 10 6" fill="currentColor">
+                <path d="M0 0l5 6 5-6z" />
+              </svg>
+            </button>
+            <AnimatePresence>
+              {profileOpen && (
+                <motion.div
+                  initial={{ opacity: 0, y: -6 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5, delay: index * 0.1 }}
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
+                  exit={{ opacity: 0, y: -6 }}
+                  className="absolute right-0 top-full pt-3"
                 >
-                  <motion.div
-                    className={`px-6 py-3 rounded-xl font-semibold text-base transition-all duration-300 ${
-                      isActive
-                        ? 'bg-gradient-to-r from-indigo-600 to-purple-600 text-white shadow-lg shadow-indigo-500/20'
-                        : 'text-gray-300 hover:text-white hover:bg-slate-800/50 backdrop-blur-sm'
-                    }`}
-                    whileHover={!isActive ? { 
-                      backgroundColor: 'rgba(30, 41, 59, 0.8)',
-                      boxShadow: '0 4px 20px rgba(99, 102, 241, 0.1)'
-                    } : {}}
-                  >
-                    {link.name}
-                    
-                    {/* Hover glow effect */}
-                    <motion.div
-                      className="absolute inset-0 rounded-xl bg-gradient-to-r from-indigo-500/20 to-purple-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-                      initial={false}
-                    />
-                    
-                    {/* Active indicator */}
-                    {isActive && (
-                      <motion.div
-                        layoutId="activeNavIndicator"
-                        className="absolute inset-0 rounded-xl bg-gradient-to-r from-indigo-600 to-purple-600"
-                        initial={false}
-                        transition={{ type: 'spring', stiffness: 380, damping: 30 }}
-                        style={{ zIndex: -1 }}
-                      />
-                    )}
-                  </motion.div>
-                </motion.a>
-              )
-            })}
+                  <div className="w-52 border border-white/10 bg-black/95 py-3 text-sm">
+                    <p className="px-4 pb-2 text-white/50">Watching as <span className="text-white">{viewer.label}</span></p>
+                    <button
+                      type="button"
+                      onClick={() => { setProfileOpen(false); switchProfile() }}
+                      className="w-full px-4 py-2 text-left text-white/80 hover:underline"
+                    >
+                      Switch Profiles
+                    </button>
+                    <a href={profile.resume} download={profile.resumeFileName} className="block px-4 py-2 text-white/80 hover:underline">
+                      Download Resume
+                    </a>
+                  </div>
+                </motion.div>
+              )}
+            </AnimatePresence>
           </div>
 
-          {/* Mobile Menu Button */}
-          <motion.button
-            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="md:hidden p-3 rounded-xl text-gray-300 hover:text-white hover:bg-slate-800/50 focus:outline-none transition-all duration-300"
+          <button
+            type="button"
+            onClick={() => setMenuOpen((v) => !v)}
+            className="lg:hidden p-2 text-white"
             aria-label="Toggle menu"
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
+            aria-expanded={menuOpen}
           >
-            <motion.svg
-              className="w-6 h-6"
-              fill="none"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="2"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-              animate={{ rotate: isMobileMenuOpen ? 90 : 0 }}
-              transition={{ duration: 0.3 }}
-            >
-              {isMobileMenuOpen ? (
-                <path d="M6 18L18 6M6 6l12 12" />
-              ) : (
-                <path d="M4 6h16M4 12h16M4 18h16" />
-              )}
-            </motion.svg>
-          </motion.button>
+            <svg className="h-6 w-6" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+              {menuOpen ? <path d="M6 18L18 6M6 6l12 12" /> : <path d="M4 6h16M4 12h16M4 18h16" />}
+            </svg>
+          </button>
         </div>
-      </div>
+      </nav>
 
-      {/* Mobile Menu */}
       <AnimatePresence>
-        {isMobileMenuOpen && (
+        {menuOpen && (
           <motion.div
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: 'auto' }}
-            exit={{ opacity: 0, height: 0 }}
-            transition={{ duration: 0.3, ease: 'easeInOut' }}
-            className="md:hidden bg-slate-900/95 backdrop-blur-md border-t border-indigo-500/20"
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: 'auto', opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            className="lg:hidden overflow-hidden border-t border-white/10 bg-netflix-black/98"
           >
-            <div className="container-custom py-6 space-y-3">
-              {navLinks.map((link, index) => {
-                const sectionId = link.href.substring(1)
-                const isActive = activeSection === sectionId
-                
-                const handleMobileClick = (e) => {
-                  e.preventDefault()
-                  e.stopPropagation()
-                  
-                  console.log(`Mobile click: ${link.name} -> ${link.href}`)
-                  
-                  // Close mobile menu immediately
-                  setIsMobileMenuOpen(false)
-                  
-                  // Navigate to section
-                  const targetId = link.href.substring(1)
-                  const element = document.getElementById(targetId)
-                  
-                  if (element) {
-                    console.log(`Found element: ${targetId}`)
-                    
-                    // Use a small timeout to ensure menu animation doesn't interfere
-                    setTimeout(() => {
-                      const offset = 96
-                      const elementPosition = element.getBoundingClientRect().top
-                      const offsetPosition = elementPosition + window.pageYOffset - offset
-
-                      console.log(`Scrolling to position: ${offsetPosition}`)
-                      
-                      window.scrollTo({
-                        top: offsetPosition,
-                        behavior: 'smooth'
-                      })
-                    }, 150)
-                  } else {
-                    console.error(`Element not found: ${targetId}`)
-                  }
-                }
-
-                return (
-                  <div key={link.name} className="w-full">
-                    <button
-                      onClick={handleMobileClick}
-                      className={`w-full px-6 py-4 rounded-xl text-lg font-semibold transition-all duration-300 text-left cursor-pointer touch-manipulation select-none ${
-                        isActive
-                          ? 'bg-gradient-to-r from-indigo-600 to-purple-600 text-white shadow-lg shadow-indigo-500/20'
-                          : 'text-gray-300 hover:text-white hover:bg-slate-800/50 active:bg-slate-700/50'
-                      }`}
-                      type="button"
-                      style={{ 
-                        WebkitTapHighlightColor: 'transparent',
-                        touchAction: 'manipulation'
-                      }}
-                    >
-                      <div className="flex items-center justify-between">
-                        <span>{link.name}</span>
-                        <svg
-                          className="w-5 h-5 opacity-60"
-                          fill="none"
-                          stroke="currentColor"
-                          viewBox="0 0 24 24"
-                        >
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                        </svg>
-                      </div>
-                    </button>
-                  </div>
-                )
-              })}
-            </div>
+            <ul className="container-custom py-4">
+              {navLinks.map((l) => (
+                <li key={l.id}>
+                  <button
+                    type="button"
+                    onClick={() => go(l.id)}
+                    className={`flex w-full items-center justify-between border-l-4 px-4 py-3 text-left text-base ${
+                      active === l.id ? 'border-netflix-red bg-white/5 font-bold text-white' : 'border-transparent text-white/70'
+                    }`}
+                  >
+                    {l.name}
+                  </button>
+                </li>
+              ))}
+              <li className="mt-2 flex gap-3 px-4">
+                <button type="button" onClick={() => { setMenuOpen(false); switchProfile() }} className="text-sm text-white/60 underline">
+                  Switch profile ({viewer.label})
+                </button>
+              </li>
+            </ul>
           </motion.div>
         )}
       </AnimatePresence>
-    </motion.nav>
+    </header>
   )
 }

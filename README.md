@@ -1,13 +1,13 @@
 # Portfolio Website - Ahnaf Shahriar Pias
 
-A modern, responsive portfolio website built with Next.js 14, Tailwind CSS, and Framer Motion.
+A Netflix-inspired, cinematic portfolio built with Next.js 14, Tailwind CSS, GSAP and Three.js.
 
 ## 🚀 Technology Stack
 
 - **Framework:** Next.js 14 (App Router)
-- **Styling:** Tailwind CSS
-- **Animation:** Framer Motion
-- **Email Service:** EmailJS
+- **Styling:** Tailwind CSS (Netflix black / crimson theme)
+- **Animation:** GSAP + ScrollTrigger, Framer Motion (modal / menus)
+- **3D:** Three.js via @react-three/fiber (hero light tunnel)
 - **Deployment:** Vercel (optimized)
 
 ## 📁 Project Structure
@@ -15,28 +15,28 @@ A modern, responsive portfolio website built with Next.js 14, Tailwind CSS, and 
 ```
 portfolio/
 ├── app/
-│   ├── layout.jsx          # Root layout with metadata
-│   ├── page.jsx            # Home page
-│   ├── about/
-│   │   └── page.jsx        # About page
-│   ├── projects/
-│   │   └── page.jsx        # Projects page
-│   ├── skills/
-│   │   └── page.jsx        # Skills page
-│   ├── contact/
-│   │   ├── layout.jsx     # Contact page metadata
-│   │   └── page.jsx        # Contact page
+│   ├── layout.jsx          # Root layout, fonts, metadata
+│   ├── page.jsx            # Home page (composes all sections)
 │   └── globals.css         # Global styles
 ├── components/
-│   ├── Navbar.jsx          # Navigation component
-│   ├── Footer.jsx          # Footer component
-│   ├── HeroSection.jsx     # Hero section component
-│   ├── ProjectCard.jsx     # Project card component
-│   ├── SkillCard.jsx       # Skill card component
-│   └── SectionHeader.jsx   # Section header component
-├── public/
-│   └── images/             # Image assets
-└── .env.example            # Environment variables template
+│   ├── ClientLayout.jsx    # Preloader -> "Who's watching?" gate -> site
+│   ├── Preloader.jsx       # Netflix-style intro
+│   ├── ProfileGate.jsx     # Viewer profile picker (changes hero copy + CTA)
+│   ├── Navbar.jsx / Footer.jsx
+│   ├── Hero.jsx            # 3D tilt poster, marquee, spotlight
+│   ├── HeroScene.jsx       # Three.js particle / ring tunnel (lazy loaded)
+│   ├── About.jsx           # Director's Cut + education episodes
+│   ├── Experience.jsx      # "Now Streaming" current role
+│   ├── Expertise.jsx       # Stacked scroll cards
+│   ├── Skills.jsx          # Pinned arc carousel
+│   ├── Projects.jsx        # Folder-open project archive
+│   ├── ProjectModal.jsx    # "More Info" project modal
+│   └── Contact.jsx
+├── data/
+│   └── portfolio.js        # ALL content: profile, experience, skills, projects, socials
+├── lib/                    # scroll + reveal helpers
+└── public/
+    └── images/             # Photos, logo, resume, skill icons
 ```
 
 ## 🛠️ Quick Start
@@ -93,11 +93,8 @@ This creates an optimized production build in the `out/` directory (static expor
 
 ### Quick Updates
 
-- **Personal Info:** `app/page.jsx` (HeroSection)
-- **Projects:** `app/projects/page.jsx`
-- **Skills:** `app/skills/page.jsx`
-- **Social Links:** `components/Footer.jsx` and `app/contact/page.jsx`
-- **Colors:** `tailwind.config.js`
+- **All content (bio, experience, education, skills, projects, socials):** `data/portfolio.js`
+- **Colors & fonts:** `tailwind.config.js`, `app/layout.jsx`
 
 See [DEPLOYMENT.md](./DEPLOYMENT.md) for detailed customization instructions.
 
