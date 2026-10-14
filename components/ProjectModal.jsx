@@ -3,28 +3,35 @@
 import { useEffect } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
 import SocialIcon from './SocialIcon'
+import { getLenis } from '@/lib/scroll'
 
 export default function ProjectModal({ project, related, onClose, onSelect }) {
+  const isOpen = Boolean(project)
+
   useEffect(() => {
-    if (!project) return
+    if (!isOpen) return
     const onKey = (e) => e.key === 'Escape' && onClose()
     const prev = document.body.style.overflow
     document.body.style.overflow = 'hidden'
+    getLenis()?.stop()
     window.addEventListener('keydown', onKey)
     return () => {
       document.body.style.overflow = prev
+      getLenis()?.start()
       window.removeEventListener('keydown', onKey)
     }
-  }, [project, onClose])
+  }, [isOpen, onClose])
 
   return (
     <AnimatePresence>
       {project && (
         <motion.div
-          className="fixed inset-0 z-[150] flex items-start justify-center overflow-y-auto bg-black/75 px-3 py-8 md:py-14 backdrop-blur-sm"
+          data-lenis-prevent
+          className="fixed inset-0 z-[150] flex items-start justify-center overflow-y-auto overscroll-contain bg-black/80 px-3 py-8 md:py-14"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
+          transition={{ duration: 0.35, ease: 'easeOut' }}
           onClick={onClose}
         >
           <motion.div
@@ -33,10 +40,10 @@ export default function ProjectModal({ project, related, onClose, onSelect }) {
             aria-modal="true"
             aria-label={project.title}
             className="relative w-full max-w-3xl overflow-hidden rounded-lg bg-netflix-dark shadow-[0_40px_100px_rgba(0,0,0,0.9)]"
-            initial={{ opacity: 0, scale: 0.92, y: 30 }}
+            initial={{ opacity: 0, scale: 0.94, y: 40 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
-            exit={{ opacity: 0, scale: 0.95, y: 20 }}
-            transition={{ type: 'spring', stiffness: 260, damping: 26 }}
+            exit={{ opacity: 0, scale: 0.97, y: 20 }}
+            transition={{ type: 'spring', stiffness: 170, damping: 24, mass: 0.9 }}
             onClick={(e) => e.stopPropagation()}
           >
             <button
@@ -95,7 +102,11 @@ export default function ProjectModal({ project, related, onClose, onSelect }) {
                   <span className="text-white/85">{project.tech.join(', ')}</span>
                 </p>
                 <p>
-                  <span className="text-white/45">Genre: </span>
+                  <span className="text-white/45">Genres: </span>
+                  <span className="text-white/85">{project.genres.join(', ')}</span>
+                </p>
+                <p>
+                  <span className="text-white/45">This show is: </span>
                   <span className="text-white/85">{project.category}</span>
                 </p>
               </div>

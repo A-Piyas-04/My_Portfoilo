@@ -176,10 +176,14 @@ export const skillCategories = [
   },
 ]
 
+export const projectGenres = ['AI & Machine Learning', 'Full-Stack & Web', 'DevOps', 'Mobile Apps', 'Desktop, Games & Systems']
+
 export const projects = [
   {
     id: 2,
     title: 'NexusRide',
+    featured: true,
+    genres: ['Full-Stack & Web'],
     category: 'Full-Stack Platform',
     description:
       'Transport subscription platform (FastAPI + React/Vite) with staff/subscriber dashboards, PostgreSQL, and RBAC across 4 user types. System design, Transport-Officer and faculty backend features, profile management.',
@@ -189,7 +193,9 @@ export const projects = [
   {
     id: 3,
     title: 'SQLens',
-    category: 'Developer Tools + AI',
+    featured: true,
+    genres: ['Full-Stack & Web'],
+    category: 'Developer Tools',
     description:
       'Run real PostgreSQL queries in the browser; visualize schema and query execution with optional AI SQL hints. React, TypeScript, CodeMirror, pglite, AST; Express 5 + Gemini backend.',
     tech: ['React', 'TypeScript', 'CodeMirror', 'PGlite', 'Express', 'Gemini'],
@@ -199,6 +205,8 @@ export const projects = [
   {
     id: 10,
     title: 'Blind75 Tracker',
+    featured: true,
+    genres: ['Desktop, Games & Systems'],
     category: 'Desktop App',
     description:
       'Offline NeetCode Blind 75 tracker built with Python, CustomTkinter, and SQLite. Runs fully offline with no login or internet required.',
@@ -208,6 +216,8 @@ export const projects = [
   {
     id: 11,
     title: 'CareerPilot',
+    featured: true,
+    genres: ['AI & Machine Learning'],
     category: 'AI Agent',
     description:
       'CV intelligence agent (chunk, embed, RAG retrieval, grounded Q&A) plus job-to-skill gap analysis with roadmap-to-goals mechanism.',
@@ -217,6 +227,8 @@ export const projects = [
   {
     id: 12,
     title: 'BackfireOS',
+    featured: true,
+    genres: ['AI & Machine Learning', 'Full-Stack & Web'],
     category: 'AI + 3D Simulation',
     description:
       'Simulate page with counterfactual branching and Three.js animations; Banglish RAG pipeline (pgvector + BnSentMix embeddings) with 6 red-team AI personas.',
@@ -224,8 +236,100 @@ export const projects = [
     githubUrl: 'https://github.com/adibqt/BackfireOS',
   },
   {
+    id: 13,
+    title: 'Recoil AI',
+    genres: ['AI & Machine Learning', 'Full-Stack & Web'],
+    category: 'AI Red-Team Tool',
+    description:
+      'Predicts how a marketing campaign could backfire before launch. Four AI red-team agents (Activist, Journalist, Competitor, Meme Creator), a mock meme generator, a 0-100 backfire risk score and a pre-mortem headline generator, all in a single LLM request with switchable Gemini/OpenAI providers.',
+    tech: ['FastAPI', 'React', 'TypeScript', 'PostgreSQL', 'Gemini', 'Docker'],
+    githubUrl: 'https://github.com/A-Piyas-04/Recoil-AI',
+  },
+  {
+    id: 14,
+    title: 'ScholarGrid',
+    genres: ['AI & Machine Learning', 'Full-Stack & Web'],
+    category: 'Research Explorer',
+    description:
+      'Turns recent arXiv computer-science papers into an interactive semantic research landscape. An offline pipeline embeds titles and abstracts, clusters them with UMAP + HDBSCAN, labels areas with c-TF-IDF and tracks publication growth; a Streamlit app offers semantic search, trends, investigation leads and BibTeX export.',
+    tech: ['Python', 'Sentence Transformers', 'UMAP', 'HDBSCAN', 'Streamlit'],
+    githubUrl: 'https://github.com/A-Piyas-04/PaperPorteHobe',
+  },
+  {
+    id: 15,
+    title: 'SATD Embedding Study',
+    genres: ['AI & Machine Learning'],
+    category: 'ML Research',
+    description:
+      'Tests whether frozen modern embeddings (Qwen3, E5, BGE-M3) with an XGBoost head can replace BiLSTM/BERT for detecting and categorizing Self-Admitted Technical Debt across comments, issues, commits and pull requests. Beat the BERT baseline on categorization, then classified 458k unseen GitHub issues on a 2xT4 Kaggle pipeline.',
+    tech: ['Python', 'Vector Embeddings', 'XGBoost', 'Kaggle'],
+    githubUrl: 'https://github.com/A-Piyas-04/SATD-embedding-DP2',
+  },
+  {
+    id: 16,
+    title: 'Cross-Platform Sentiment',
+    genres: ['AI & Machine Learning'],
+    category: 'NLP Research',
+    description:
+      'Studies how sentiment classifiers trained on Reddit generalize to Twitter. TF-IDF baselines (LR, SVM, Naive Bayes, Random Forest), linguistic-compression and calibration (ECE) analysis, plus a CORAL domain-adaptation experiment. The best SVM drops from 0.72 to 0.653 F1 across platforms.',
+    tech: ['Python', 'scikit-learn', 'NLTK', 'pandas'],
+    githubUrl: 'https://github.com/A-Piyas-04/cross-platform-sentiment',
+  },
+  {
+    id: 17,
+    title: 'PulseGrid',
+    genres: ['DevOps'],
+    category: 'Microservices / DevOps',
+    description:
+      'Habit tracker deliberately split into three FastAPI microservices behind an Nginx API gateway, with Prometheus metrics, a provisioned Grafana dashboard (request rate, p95 latency, 5xx rate) and GitHub Actions CI that tests and builds every service.',
+    tech: ['FastAPI', 'Docker', 'Nginx', 'Prometheus', 'Grafana'],
+    githubUrl: 'https://github.com/A-Piyas-04/PulseGrid',
+  },
+  {
+    id: 21,
+    title: 'PixelFlow',
+    genres: ['DevOps'],
+    category: 'Async Pipeline / DevOps',
+    description:
+      'Asynchronous image processing pipeline: uploads go through Nginx to FastAPI, jobs are queued on RabbitMQ, and a Pillow worker produces thumbnails, resizes and watermarks while Redis tracks job status. Includes a monitoring dashboard for queue depth and service health, plus GitHub Actions CI that publishes images to GHCR.',
+    tech: ['FastAPI', 'RabbitMQ', 'Redis', 'Nginx', 'Docker', 'GitHub Actions'],
+    githubUrl: 'https://github.com/A-Piyas-04/PixelFlow',
+  },
+  {
+    id: 18,
+    title: 'woTask',
+    genres: ['Desktop, Games & Systems'],
+    category: 'Desktop App',
+    description:
+      'An offline, local-first task manager that puts work in 3D space: each project is a constellation and every task a glass sphere sized and lit by priority, with chained tasks, a command palette, full keyboard control and Bangla support. Ships as a 2.3 MB Windows installer.',
+    tech: ['Tauri', 'Rust', 'React Three Fiber', 'TypeScript', 'SQLite'],
+    githubUrl: 'https://github.com/A-Piyas-04/woTask',
+  },
+  {
+    id: 19,
+    title: 'Firdaws',
+    genres: ['Mobile Apps'],
+    category: 'Mobile App',
+    description:
+      'An Islamic daily companion app with GPS prayer times and reminders, a Qibla compass, a mood-based Qur\'anic ayah jar, a dhikr counter, a nearby mosque finder and sourced daily history stories, all built around one signature wood-ring dial.',
+    tech: ['React Native', 'Expo', 'TypeScript'],
+    githubUrl: 'https://github.com/A-Piyas-04/Firdaws',
+  },
+  {
+    id: 20,
+    title: 'Campus Horror',
+    genres: ['Desktop, Games & Systems'],
+    category: 'Game',
+    description:
+      'A 2.5D horror game in Godot set on a faithfully reconstructed university campus. Landmarks are modelled in Blender and rendered into game art, with zone-based maps, save/load and a night mode with a lantern. (In Development)',
+    tech: ['Godot', 'GDScript', 'Blender'],
+    githubUrl: 'https://github.com/A-Piyas-04/CampusHorror',
+  },
+  {
     id: 1,
     title: 'IUTverse',
+    featured: true,
+    genres: ['Full-Stack & Web'],
     category: 'Campus Platform',
     description:
       'A comprehensive campus-centric platform designed to streamline communication, collaboration, and resource sharing for students at the Islamic University of Technology (IUT)',
@@ -235,6 +339,8 @@ export const projects = [
   {
     id: 7,
     title: 'TaskIt',
+    featured: true,
+    genres: ['Full-Stack & Web'],
     category: 'Productivity',
     description: 'A category based task management application with neon aesthetic, built with Next.js and Firebase.',
     tech: ['Next.js', 'Firebase'],
@@ -244,6 +350,8 @@ export const projects = [
   {
     id: 8,
     title: 'NestUp-BD',
+    featured: true,
+    genres: ['Full-Stack & Web'],
     category: 'Web Platform',
     description:
       'NestUp-BD is an all-in-one web platform designed to support Bangladeshi people relocating to new cities for exams or other events.',
@@ -253,6 +361,7 @@ export const projects = [
   {
     id: 9,
     title: 'PHARMASYNC',
+    genres: ['Desktop, Games & Systems'],
     category: 'Systems / CLI',
     description: 'A command-line based Pharmacy Management System implemented in C++.',
     tech: ['C++', 'CLI'],
@@ -261,6 +370,7 @@ export const projects = [
   {
     id: 4,
     title: 'Smoothie Maker Simulator',
+    genres: ['Desktop, Games & Systems'],
     category: 'Desktop App',
     description:
       'A Java Swing application that lets users create and customize their own smoothies with various ingredients, flavors, and toppings.',
@@ -270,6 +380,7 @@ export const projects = [
   {
     id: 5,
     title: 'Campus Lockdown',
+    genres: ['Desktop, Games & Systems'],
     category: 'Game',
     description:
       'A top-down exploration game built with Python and Pygame, where you navigate a dark campus environment using limited visibility and a flashlight to survive and explore. (In Development)',
@@ -279,6 +390,7 @@ export const projects = [
   {
     id: 6,
     title: 'Banking Management System',
+    genres: ['Desktop, Games & Systems'],
     category: 'OOP System',
     description:
       'A simple banking management system following OOP principles which offers basic banking features that can be done from an online banking app.',

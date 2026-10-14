@@ -46,6 +46,7 @@ export default function ProfileGate({ onSelect }) {
             key={p.id}
             type="button"
             onClick={() => choose(p)}
+            data-cursor="WATCH"
             className="gate-anim group flex flex-col items-center gap-3 focus:outline-none"
           >
             <div

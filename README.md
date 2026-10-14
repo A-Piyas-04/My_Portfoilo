@@ -6,7 +6,7 @@ A Netflix-inspired, cinematic portfolio built with Next.js 14, Tailwind CSS, GSA
 
 - **Framework:** Next.js 14 (App Router)
 - **Styling:** Tailwind CSS (Netflix black / crimson theme)
-- **Animation:** GSAP + ScrollTrigger, Framer Motion (modal / menus)
+- **Animation:** GSAP + ScrollTrigger, Lenis smooth scrolling, Framer Motion (modal / menus)
 - **3D:** Three.js via @react-three/fiber (hero light tunnel)
 - **Deployment:** Vercel (optimized)
 

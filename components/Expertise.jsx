@@ -22,14 +22,14 @@ export default function Expertise() {
         gsap.to(card, {
           scale: 0.92 - i * 0.02,
           y: -15 - i * 8,
-          filter: 'blur(5px)',
-          opacity: 0.35,
+          opacity: 0.3,
           ease: 'none',
+          force3D: true,
           scrollTrigger: {
             trigger: cards[i + 1],
             start: 'top 75%',
             end: `top ${110 + (i + 1) * 24}px`,
-            scrub: true,
+            scrub: 0.6,
           },
         })
       })
