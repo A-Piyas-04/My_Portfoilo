@@ -27,7 +27,7 @@ export default function Expertise() {
           ease: 'none',
           scrollTrigger: {
             trigger: cards[i + 1],
-            start: 'top bottom',
+            start: 'top 75%',
             end: `top ${110 + (i + 1) * 24}px`,
             scrub: true,
           },

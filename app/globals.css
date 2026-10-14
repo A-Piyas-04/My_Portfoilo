@@ -112,6 +112,10 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto !important;
+  }
+
   .film-grain,
   .animate-marquee,
   .animate-pulse-red {

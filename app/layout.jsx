@@ -10,6 +10,7 @@ export const metadata = {
     'Portfolio of Ahnaf Shahriar Pias, ML Engineering Intern at Red-Dot Digital Limited and full-stack / AI developer, showcasing projects, skills, and experience.',
   keywords: 'software developer, ML engineering, machine learning, full stack, portfolio, RAG, Next.js',
   authors: [{ name: 'Ahnaf Shahriar Pias' }],
+  icons: { icon: '/images/logo.gif' },
   openGraph: {
     title: 'Ahnaf Shahriar Pias - ML Engineering Intern & Software Developer',
     description: 'A Netflix-inspired portfolio: projects, skills and experience.',
@@ -19,7 +20,7 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en" className="scroll-smooth">
+    <html lang="en">
       <body className={`${inter.variable} ${bebas.variable}`}>{children}</body>
     </html>
   )

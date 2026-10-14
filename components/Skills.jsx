@@ -154,7 +154,15 @@ export default function Skills() {
                   key={s.name}
                   className="inline-flex items-center gap-1.5 rounded-md border border-white/10 bg-white/5 px-2.5 py-1.5 text-xs font-medium text-white/85 transition-colors hover:border-netflix-red/60 hover:bg-netflix-red/10"
                 >
-                  {s.icon && <Image src={s.icon} alt="" width={14} height={14} className="h-3.5 w-3.5 object-contain" />}
+                  {s.icon && (
+                    <Image
+                      src={s.icon}
+                      alt=""
+                      width={14}
+                      height={14}
+                      className={`h-3.5 w-3.5 object-contain ${s.mono ? 'brightness-0 invert' : ''}`}
+                    />
+                  )}
                   {s.name}
                 </span>
               ))}

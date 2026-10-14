@@ -134,7 +134,7 @@ export default function Hero() {
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_70%_40%,rgba(229,9,20,0.22),transparent_60%)]" />
       {show3D && <HeroScene />}
 
-      <div className="pointer-events-none absolute inset-x-0 top-[18%] select-none overflow-hidden opacity-[0.07]">
+      <div className="pointer-events-none absolute inset-x-0 top-[18%] select-none overflow-hidden opacity-[0.04] md:opacity-[0.07]">
         <div className="flex w-max animate-marquee whitespace-nowrap">
           {[...roles, ...roles].map((r, i) => (
             <span key={i} className="mx-8 font-display text-[9vw] leading-none text-white">
@@ -240,7 +240,7 @@ export default function Hero() {
           </div>
         </div>
 
-        <div className="hero-anim mt-14 flex items-center justify-between border-t border-white/10 pt-4 text-[10px] font-bold uppercase tracking-[0.35em] text-white/40">
+        <div className="hero-anim mt-14 hidden sm:flex items-center justify-between border-t border-white/10 pt-4 text-[10px] font-bold uppercase tracking-[0.35em] text-white/40">
           <span>Engineered for scale</span>
           <button type="button" onClick={() => scrollToId('about')} className="hidden sm:inline hover:text-white">
             Scroll to explore &darr;

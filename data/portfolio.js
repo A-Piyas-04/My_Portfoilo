@@ -118,9 +118,9 @@ export const skillCategories = [
     desc: 'Frameworks and libraries for interactive frontends, APIs, 3D scenes and desktop apps.',
     skills: [
       { name: 'React', icon: '/images/skills/react.svg' },
-      { name: 'Next.js', icon: '/images/skills/nextjs.svg' },
+      { name: 'Next.js', icon: '/images/skills/nextjs.svg', mono: true },
       { name: 'Node.js', icon: '/images/skills/nodejs.svg' },
-      { name: 'Express', icon: '/images/skills/express.svg' },
+      { name: 'Express', icon: '/images/skills/express.svg', mono: true },
       { name: 'Vue.js', icon: '/images/skills/vue.svg' },
       { name: 'FastAPI', icon: '/images/skills/FastAPI.svg' },
       { name: 'Three.js' },
@@ -152,7 +152,7 @@ export const skillCategories = [
     tag: 'PRODUCTIVITY',
     desc: 'Tooling for version control, containers, automation, auth and developer experience.',
     skills: [
-      { name: 'Git', icon: '/images/skills/git.svg' },
+      { name: 'Git', icon: '/images/skills/git.svg', mono: true },
       { name: 'Docker', icon: '/images/skills/docker.svg' },
       { name: 'n8n', icon: '/images/skills/n8n.svg' },
       { name: 'Firebase', icon: '/images/skills/Firebase.svg' },
