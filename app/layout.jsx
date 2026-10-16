@@ -5,14 +5,15 @@ const inter = Inter({ subsets: ['latin'], variable: '--font-inter' })
 const bebas = Bebas_Neue({ subsets: ['latin'], weight: '400', variable: '--font-bebas' })
 
 export const metadata = {
-  title: 'Ahnaf Shahriar Pias - ML Engineering Intern & Software Developer',
+  title: 'Ahnaf Shahriar Pias',
   description:
     'Portfolio of Ahnaf Shahriar Pias, ML Engineering Intern at Red-Dot Digital Limited and full-stack / AI developer, showcasing projects, skills, and experience.',
   keywords: 'software developer, ML engineering, machine learning, full stack, portfolio, RAG, Next.js',
   authors: [{ name: 'Ahnaf Shahriar Pias' }],
   icons: { icon: '/images/logo.gif' },
   openGraph: {
-    title: 'Ahnaf Shahriar Pias - ML Engineering Intern & Software Developer',
+    title: 'Ahnaf Shahriar Pias',
+
     description: 'A Netflix-inspired portfolio: projects, skills and experience.',
     type: 'website',
   },

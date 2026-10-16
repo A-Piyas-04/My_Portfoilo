@@ -85,7 +85,13 @@ function CardBody({ project, compact = false }) {
         <span className="rounded-sm bg-netflix-red px-1.5 py-0.5">{project.episode}</span>
         <span className="flex items-center gap-2">
           <span className="text-[#46d369]">{project.match}% Match</span>
-          <span className="rounded-sm border border-white/30 px-1 text-white/70">{project.websiteUrl ? 'LIVE' : 'HD'}</span>
+          {project.status === 'coming-soon' ? (
+            <span className="rounded-sm bg-white px-1 py-0.5 text-[9px] font-extrabold uppercase tracking-wide text-black">
+              Coming Soon
+            </span>
+          ) : (
+            <span className="rounded-sm border border-white/30 px-1 text-white/70">{project.websiteUrl ? 'LIVE' : 'HD'}</span>
+          )}
         </span>
       </div>
       <div className="relative">

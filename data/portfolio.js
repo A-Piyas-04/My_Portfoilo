@@ -6,7 +6,7 @@ export const profile = {
   email: 'ahnafpias@iut-dhaka.edu',
   resume: '/images/Ahnaf_Shahriar_Pias_Resume.pdf',
   resumeFileName: 'Ahnaf_Shahriar_Pias_Resume.pdf',
-  logo: '/images/logo.gif',
+  logo: '/images/dp-2.png',
   photos: {
     primary: '/images/dp-3.png',
     secondary: '/images/dp-2.png',
@@ -250,6 +250,7 @@ export const projects = [
     title: 'ScholarGrid',
     genres: ['AI & Machine Learning', 'Full-Stack & Web'],
     category: 'Research Explorer',
+    status: 'coming-soon',
     description:
       'Turns recent arXiv computer-science papers into an interactive semantic research landscape. An offline pipeline embeds titles and abstracts, clusters them with UMAP + HDBSCAN, labels areas with c-TF-IDF and tracks publication growth; a Streamlit app offers semantic search, trends, investigation leads and BibTeX export.',
     tech: ['Python', 'Sentence Transformers', 'UMAP', 'HDBSCAN', 'Streamlit'],
@@ -320,8 +321,9 @@ export const projects = [
     title: 'Campus Horror',
     genres: ['Desktop, Games & Systems'],
     category: 'Game',
+    status: 'coming-soon',
     description:
-      'A 2.5D horror game in Godot set on a faithfully reconstructed university campus. Landmarks are modelled in Blender and rendered into game art, with zone-based maps, save/load and a night mode with a lantern. (In Development)',
+      'A 2.5D horror game in Godot set on a faithfully reconstructed university campus. Landmarks are modelled in Blender and rendered into game art, with zone-based maps, save/load and a night mode with a lantern.',
     tech: ['Godot', 'GDScript', 'Blender'],
     githubUrl: 'https://github.com/A-Piyas-04/CampusHorror',
   },
@@ -378,16 +380,6 @@ export const projects = [
     githubUrl: 'https://github.com/A-Piyas-04/Smoothie_Maker_Simulator',
   },
   {
-    id: 5,
-    title: 'Campus Lockdown',
-    genres: ['Desktop, Games & Systems'],
-    category: 'Game',
-    description:
-      'A top-down exploration game built with Python and Pygame, where you navigate a dark campus environment using limited visibility and a flashlight to survive and explore. (In Development)',
-    tech: ['Python', 'Pygame'],
-    githubUrl: 'https://github.com/A-Piyas-04/Campus_Lockdown',
-  },
-  {
     id: 6,
     title: 'Banking Management System',
     genres: ['Desktop, Games & Systems'],
@@ -397,6 +389,29 @@ export const projects = [
     tech: ['OOP'],
     githubUrl: 'https://github.com/A-Piyas-04/Banking-Management-System-Project-',
   },
+  {
+    id: 22,
+    title: 'Aqua Vault',
+    genres: ['Desktop, Games & Systems'],
+    category: 'Game',
+    status: 'coming-soon',
+    description:
+      'A cozy browser game set in a Bangladeshi monsoon village. Dig canals so rain reaches the rice paddy, store it in a reservoir, turn falling water into power, clean it for homes, and grow a living pond and wetland until the village is in bloom. Static Next.js + Canvas 2D, playable with mouse, touch and keyboard.',
+    tech: ['Next.js', 'TypeScript', 'Canvas 2D'],
+    githubUrl: 'https://github.com/A-Piyas-04/aqua-vault',
+  },
+  {
+    id: 23,
+    title: 'Bellwether Index',
+    genres: ['Desktop, Games & Systems'],
+    category: 'Game',
+    status: 'coming-soon',
+    description:
+      'An upcoming game built around reading early signals and acting on them before the rest of the map catches up. Currently in active development.',
+    tech: ['In Development'],
+    githubUrl: 'https://github.com/A-Piyas-04/The-Bellwether-Index',
+  },
+
 ]
 
 export const socials = [

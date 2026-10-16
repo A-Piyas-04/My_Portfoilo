@@ -89,9 +89,17 @@ export default function ProjectModal({ project, related, onClose, onSelect }) {
                 <div className="flex flex-wrap items-center gap-3 text-sm font-semibold">
                   <span className="text-[#46d369]">{project.match}% Match</span>
                   <span className="text-white/70">{project.episode}</span>
-                  <span className="rounded-sm border border-white/40 px-1.5 text-[11px] text-white/80">HD</span>
-                  {project.websiteUrl && (
-                    <span className="rounded-sm bg-netflix-red px-1.5 text-[11px] font-bold">LIVE</span>
+                  {project.status === 'coming-soon' ? (
+                    <span className="rounded-sm bg-white px-1.5 py-0.5 text-[11px] font-extrabold uppercase tracking-wide text-black">
+                      Coming Soon
+                    </span>
+                  ) : (
+                    <>
+                      <span className="rounded-sm border border-white/40 px-1.5 text-[11px] text-white/80">HD</span>
+                      {project.websiteUrl && (
+                        <span className="rounded-sm bg-netflix-red px-1.5 text-[11px] font-bold">LIVE</span>
+                      )}
+                    </>
                   )}
                 </div>
                 <p className="mt-4 leading-relaxed text-white/80">{project.description}</p>
