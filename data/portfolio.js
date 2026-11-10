@@ -178,7 +178,7 @@ export const skillCategories = [
 
 export const projectGenres = ['AI & Machine Learning', 'Full-Stack & Web', 'DevOps', 'Mobile Apps', 'Desktop, Games & Systems']
 
-export const tryNowIds = [3, 18, 25, 10]
+export const tryNowIds = [3, 18, 25, 10, 27]
 
 export const projects = [
   {
@@ -244,6 +244,22 @@ export const projects = [
       'An independent AI engineering review board for your code. Connect chosen GitHub repos, pick a branch and request a review: a planner routes a read-only snapshot pinned to one commit to specialist AI reviewers, whose findings are validated in code against the real files. Includes a Risk Center, Solution Lab, Decision Ledger and an advisory Go / No-Go Release Gate, all on free Gemini models with a fallback chain.',
     tech: ['Next.js', 'TypeScript', 'PostgreSQL', 'Prisma', 'Gemini', 'Agentic AI'],
     githubUrl: 'https://github.com/A-Piyas-04/Athenyx',
+  },
+  {
+    id: 27,
+    title: 'Socialized-Claude',
+    genres: ['AI & Machine Learning'],
+    category: 'Claude Skill',
+    description:
+      'A Claude Skill that changes how Claude explains things: answer first, ideas in dependency order, the causal mechanism made explicit, and a table or diagram where the idea has a shape. 12 operations selected per request plus always-on accuracy rules, shipped as plain Markdown for claude.ai, Cowork and Claude Code with deterministic builds and an offline validation gate in CI.',
+    tech: ['Claude Skills', 'Prompt Engineering', 'Markdown', 'Python'],
+    githubUrl: 'https://github.com/A-Piyas-04/Socialized-Claude',
+    tryNow: {
+      kind: 'skill',
+      label: 'Get the Skill',
+      url: 'https://github.com/A-Piyas-04/Socialized-Claude/raw/production/dist/socialized.zip',
+      note: 'Upload to claude.ai Skills, no API key',
+    },
   },
   {
     id: 11,

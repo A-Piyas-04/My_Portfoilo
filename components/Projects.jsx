@@ -322,6 +322,10 @@ const TRY_KINDS = {
     tag: 'Windows App',
     icon: <path d="M12 4v11m0 0l-4.5-4.5M12 15l4.5-4.5M5 19h14" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" />,
   },
+  skill: {
+    tag: 'Claude Skill',
+    icon: <path d="M12 3l1.9 5.6L19.5 10l-5.6 1.9L12 17.5l-1.9-5.6L4.5 10l5.6-1.4zM18.5 16l.8 2.2 2.2.8-2.2.8-.8 2.2-.8-2.2-2.2-.8 2.2-.8z" fill="currentColor" />,
+  },
   offline: {
     tag: 'Offline',
     icon: <path d="M5 7l5 5-5 5M13 17h6" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" />,
@@ -349,7 +353,7 @@ function TryNow({ open }) {
         </p>
       </div>
 
-      <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
+      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {tryNow.map((p) => {
           const kind = TRY_KINDS[p.tryNow.kind] ?? TRY_KINDS.web
           return (
