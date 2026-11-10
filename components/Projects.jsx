@@ -336,7 +336,7 @@ function TryNow({ open }) {
   if (!tryNow.length) return null
 
   return (
-    <div className="mt-16 md:mt-20">
+    <div id="try-now" className="mt-16 md:mt-20">
       <div className="reveal mb-6 flex flex-col gap-2 md:flex-row md:items-end md:justify-between">
         <div>
           <p className="eyebrow mb-2 flex items-center gap-2">

@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from 'react'
 import dynamic from 'next/dynamic'
 import Image from 'next/image'
 import { gsap } from 'gsap'
-import { profile, roles, socials, experience } from '@/data/portfolio'
+import { profile, roles, socials, experience, tryNowIds } from '@/data/portfolio'
 import { useViewer } from './ViewerContext'
 import { scrollToId } from '@/lib/scroll'
 
@@ -16,15 +16,6 @@ function PlayIcon() {
   return (
     <svg className="h-6 w-6" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
       <path d="M6 4v16a1 1 0 001.524.852l13-8a1 1 0 000-1.704l-13-8A1 1 0 006 4z" />
-    </svg>
-  )
-}
-
-function InfoIcon() {
-  return (
-    <svg className="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
-      <circle cx="12" cy="12" r="10" />
-      <path d="M12 16v-4M12 8h.01" strokeLinecap="round" />
     </svg>
   )
 }
@@ -191,8 +182,19 @@ export default function Hero() {
 
             <div className="hero-anim mt-8 flex flex-wrap gap-3">
               <PrimaryCta type={viewer.primaryCta} />
-              <button type="button" onClick={() => scrollToId('about')} className="btn-netflix-ghost">
-                <InfoIcon /> More Info
+              <button
+                type="button"
+                onClick={() => scrollToId('try-now', 110)}
+                className="btn-netflix-red shadow-[0_10px_30px_rgba(229,9,20,0.35)]"
+              >
+                <span className="relative flex h-2.5 w-2.5">
+                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-white opacity-75 motion-reduce:hidden" />
+                  <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-white" />
+                </span>
+                Try It Now
+                <span className="rounded-sm bg-black/30 px-1.5 py-0.5 text-[11px] font-extrabold tracking-wide">
+                  {tryNowIds.length} READY
+                </span>
               </button>
             </div>
           </div>
