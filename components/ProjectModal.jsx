@@ -72,12 +72,17 @@ export default function ProjectModal({ project, related, onClose, onSelect }) {
                   <a href={project.githubUrl} target="_blank" rel="noopener noreferrer" className="btn-netflix !py-2">
                     <SocialIcon name="GitHub" className="h-5 w-5" /> Source
                   </a>
-                  {project.websiteUrl && (
-                    <a href={project.websiteUrl} target="_blank" rel="noopener noreferrer" className="btn-netflix-ghost !py-2">
+                  {(project.tryNow || project.websiteUrl) && (
+                    <a
+                      href={project.tryNow?.url ?? project.websiteUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="btn-netflix-ghost !py-2"
+                    >
                       <svg className="h-5 w-5" viewBox="0 0 24 24" fill="currentColor">
                         <path d="M6 4v16l14-8z" />
                       </svg>
-                      Watch Live
+                      {project.tryNow?.label ?? 'Watch Live'}
                     </a>
                   )}
                 </div>

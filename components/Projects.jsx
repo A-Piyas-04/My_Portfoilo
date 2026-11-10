@@ -3,7 +3,7 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
-import { projects as rawProjects, projectGenres } from '@/data/portfolio'
+import { projects as rawProjects, projectGenres, tryNowIds } from '@/data/portfolio'
 import { useReveal } from '@/lib/useReveal'
 import ProjectModal from './ProjectModal'
 
@@ -26,6 +26,8 @@ const featured = (() => {
   const marked = projects.filter((p) => p.featured)
   return (marked.length ? marked : projects).slice(0, FOLDER_LIMIT)
 })()
+
+const tryNow = tryNowIds.map((id) => projects.find((p) => p.id === id)).filter((p) => p?.tryNow)
 
 const genres = (() => {
   const found = new Set(projects.flatMap((p) => p.genres))
@@ -314,6 +316,88 @@ function ProjectRow({ title, items, open, className = '' }) {
   )
 }
 
+const TRY_KINDS = {
+  web: { tag: 'In Browser', icon: <path d="M6 4v16l14-8z" fill="currentColor" /> },
+  download: {
+    tag: 'Windows App',
+    icon: <path d="M12 4v11m0 0l-4.5-4.5M12 15l4.5-4.5M5 19h14" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" />,
+  },
+  offline: {
+    tag: 'Offline',
+    icon: <path d="M5 7l5 5-5 5M13 17h6" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" />,
+  },
+}
+
+function TryNow({ open }) {
+  if (!tryNow.length) return null
+
+  return (
+    <div className="mt-16 md:mt-20">
+      <div className="reveal mb-6 flex flex-col gap-2 md:flex-row md:items-end md:justify-between">
+        <div>
+          <p className="eyebrow mb-2 flex items-center gap-2">
+            <span className="relative flex h-2 w-2">
+              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-netflix-red opacity-75 motion-reduce:hidden" />
+              <span className="relative inline-flex h-2 w-2 rounded-full bg-netflix-red" />
+            </span>
+            Now Streaming
+          </p>
+          <h3 className="text-2xl font-bold md:text-3xl">Try It Right Now</h3>
+        </div>
+        <p className="text-sm text-white/55 md:max-w-sm md:text-right">
+          Live in the browser or ready to run on your machine. No waitlist, just press play.
+        </p>
+      </div>
+
+      <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
+        {tryNow.map((p) => {
+          const kind = TRY_KINDS[p.tryNow.kind] ?? TRY_KINDS.web
+          return (
+            <article
+              key={p.id}
+              className="reveal group relative flex flex-col overflow-hidden rounded-xl border border-white/10 p-5 shadow-[0_20px_40px_rgba(0,0,0,0.6)] transition-colors duration-300 hover:border-netflix-red/60"
+              style={{ background: 'radial-gradient(circle at 0% 0%, rgba(229,9,20,0.18), transparent 50%), linear-gradient(160deg, #1c1c1c, #121212 60%, #0b0b0b)' }}
+            >
+              <div className="flex items-center justify-between text-[10px] font-bold uppercase tracking-wider">
+                <span className="rounded-sm bg-netflix-red px-1.5 py-0.5">{kind.tag}</span>
+                <span className="text-[#46d369]">Available now</span>
+              </div>
+              <p className="mt-5 text-[10px] font-bold uppercase tracking-[0.2em] text-netflix-red">{p.category}</p>
+              <h4 className="mt-1 font-display text-3xl leading-none tracking-wide">{p.title}</h4>
+              <p className="mt-2 line-clamp-3 flex-1 text-xs leading-snug text-white/55">{p.description}</p>
+              {p.tryNow.note && <p className="mt-3 text-[11px] font-medium text-white/40">{p.tryNow.note}</p>}
+              <div className="mt-4 flex gap-2">
+                <a
+                  href={p.tryNow.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn-netflix flex-1 whitespace-nowrap !px-3 !py-2 text-sm"
+                >
+                  <svg className="h-4 w-4 shrink-0" viewBox="0 0 24 24" aria-hidden="true">
+                    {kind.icon}
+                  </svg>
+                  {p.tryNow.label}
+                </a>
+                <button
+                  type="button"
+                  onClick={() => open(p)}
+                  aria-label={`More info about ${p.title}`}
+                  className="btn-netflix-ghost !px-3 !py-2 text-sm"
+                >
+                  <svg className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24" aria-hidden="true">
+                    <circle cx="12" cy="12" r="9" />
+                    <path d="M12 11v5M12 8h.01" strokeLinecap="round" />
+                  </svg>
+                </button>
+              </div>
+            </article>
+          )
+        })}
+      </div>
+    </div>
+  )
+}
+
 function Browse({ open }) {
   const [query, setQuery] = useState('')
   const [genre, setGenre] = useState('All')
@@ -442,6 +526,7 @@ export default function Projects() {
         </div>
 
         <FeaturedFolder open={open} />
+        <TryNow open={open} />
         <Browse open={open} />
       </div>
 

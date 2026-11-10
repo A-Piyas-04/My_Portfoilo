@@ -178,6 +178,8 @@ export const skillCategories = [
 
 export const projectGenres = ['AI & Machine Learning', 'Full-Stack & Web', 'DevOps', 'Mobile Apps', 'Desktop, Games & Systems']
 
+export const tryNowIds = [3, 18, 25, 10]
+
 export const projects = [
   {
     id: 2,
@@ -201,6 +203,19 @@ export const projects = [
     tech: ['React', 'TypeScript', 'CodeMirror', 'PGlite', 'Express', 'Gemini'],
     githubUrl: 'https://github.com/A-Piyas-04/SQLens',
     websiteUrl: 'https://sq-lens-phi.vercel.app/',
+    tryNow: { kind: 'web', label: 'Open in Browser', url: 'https://sq-lens-phi.vercel.app/', note: 'Postgres runs right in your browser' },
+  },
+  {
+    id: 25,
+    title: 'tour-e-chol',
+    genres: ['Full-Stack & Web'],
+    category: 'Expense Splitter',
+    description:
+      'Mobile-first web app for friends on a tour to record shared expenses and see who owes whom, without ever moving money. Integer-paisa accounting splits each expense among its participants and nets opposite debts pairwise, with Google sign-in, PIN-based tour joining and leader roles enforced by server-side authorization.',
+    tech: ['Next.js', 'TypeScript', 'Supabase', 'PostgreSQL', 'Tailwind CSS'],
+    githubUrl: 'https://github.com/A-Piyas-04/tour-e-chol',
+    websiteUrl: 'https://tour-e-chol.vercel.app/',
+    tryNow: { kind: 'web', label: 'Open in Browser', url: 'https://tour-e-chol.vercel.app/', note: 'Sign in with Google' },
   },
   {
     id: 10,
@@ -212,12 +227,19 @@ export const projects = [
       'Offline NeetCode Blind 75 tracker built with Python, CustomTkinter, and SQLite. Runs fully offline with no login or internet required.',
     tech: ['Python', 'CustomTkinter', 'SQLite'],
     githubUrl: 'https://github.com/A-Piyas-04/Blind75-NeetCode--tracker',
+    tryNow: {
+      kind: 'offline',
+      label: 'Run Offline',
+      url: 'https://github.com/A-Piyas-04/Blind75-NeetCode--tracker#getting-started',
+      note: 'Python 3.10+, no internet',
+    },
   },
   {
     id: 24,
     title: 'Athenyx',
     genres: ['AI & Machine Learning', 'Full-Stack & Web'],
     category: 'AI Code Review',
+    status: 'coming-soon',
     description:
       'An independent AI engineering review board for your code. Connect chosen GitHub repos, pick a branch and request a review: a planner routes a read-only snapshot pinned to one commit to specialist AI reviewers, whose findings are validated in code against the real files. Includes a Risk Center, Solution Lab, Decision Ledger and an advisory Go / No-Go Release Gate, all on free Gemini models with a fallback chain.',
     tech: ['Next.js', 'TypeScript', 'PostgreSQL', 'Prisma', 'Gemini', 'Agentic AI'],
@@ -315,6 +337,12 @@ export const projects = [
       'An offline, local-first task manager that puts work in 3D space: each project is a constellation and every task a glass sphere sized and lit by priority, with chained tasks, a command palette, full keyboard control and Bangla support. Ships as a 2.3 MB Windows installer.',
     tech: ['Tauri', 'Rust', 'React Three Fiber', 'TypeScript', 'SQLite'],
     githubUrl: 'https://github.com/A-Piyas-04/woTask',
+    tryNow: {
+      kind: 'download',
+      label: 'Download',
+      url: 'https://github.com/A-Piyas-04/woTask/releases/download/v0.1.0/woTask-0.1.0-windows-x64-setup.exe',
+      note: '2.3 MB installer, works offline',
+    },
   },
   {
     id: 19,
@@ -325,6 +353,17 @@ export const projects = [
       'An Islamic daily companion app with GPS prayer times and reminders, a Qibla compass, a mood-based Qur\'anic ayah jar, a dhikr counter, a nearby mosque finder and sourced daily history stories, all built around one signature wood-ring dial.',
     tech: ['React Native', 'Expo', 'TypeScript'],
     githubUrl: 'https://github.com/A-Piyas-04/Firdaws',
+  },
+  {
+    id: 26,
+    title: 'HishebNama',
+    genres: ['Full-Stack & Web', 'Mobile Apps'],
+    category: 'Debt Ledger PWA',
+    status: 'coming-soon',
+    description:
+      'A consent-based debt ledger for friend groups, built as a mobile-first PWA. Expenses and settlements are proposals the other side must approve; the ledger is append-only, balances are always derived, and every rule lives in the database through Postgres RPCs, row-level security and realtime updates.',
+    tech: ['React', 'Vite', 'TypeScript', 'Supabase', 'PostgreSQL'],
+    githubUrl: 'https://github.com/A-Piyas-04/denapaona',
   },
   {
     id: 20,
