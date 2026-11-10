@@ -214,6 +214,16 @@ export const projects = [
     githubUrl: 'https://github.com/A-Piyas-04/Blind75-NeetCode--tracker',
   },
   {
+    id: 24,
+    title: 'Athenyx',
+    genres: ['AI & Machine Learning', 'Full-Stack & Web'],
+    category: 'AI Code Review',
+    description:
+      'An independent AI engineering review board for your code. Connect chosen GitHub repos, pick a branch and request a review: a planner routes a read-only snapshot pinned to one commit to specialist AI reviewers, whose findings are validated in code against the real files. Includes a Risk Center, Solution Lab, Decision Ledger and an advisory Go / No-Go Release Gate, all on free Gemini models with a fallback chain.',
+    tech: ['Next.js', 'TypeScript', 'PostgreSQL', 'Prisma', 'Gemini', 'Agentic AI'],
+    githubUrl: 'https://github.com/A-Piyas-04/Athenyx',
+  },
+  {
     id: 11,
     title: 'CareerPilot',
     featured: true,
