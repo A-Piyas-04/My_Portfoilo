@@ -14,7 +14,7 @@ export const metadata = {
   openGraph: {
     title: 'Ahnaf Shahriar Pias',
 
-    description: 'A Netflix-inspired portfolio: projects, skills and experience.',
+    description: 'Portfolio of Ahnaf Shahriar Pias — ML Engineering Intern and full-stack / AI developer. Projects, skills and experience.',
     type: 'website',
   },
 }
