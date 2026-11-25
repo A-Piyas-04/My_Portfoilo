@@ -4,7 +4,7 @@ import { projects, tryNowIds } from '@/data/portfolio'
 
 export const usableProjects = tryNowIds.map((id) => projects.find((p) => p.id === id)).filter((p) => p?.tryNow)
 
-const TRY_KINDS = {
+export const TRY_KINDS = {
   plugin: {
     tag: 'Claude Code Plugin',
     icon: <path d="M9 3v5m6-5v5M6 8h12v3a6 6 0 0 1-12 0V8zm6 9v4" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />,

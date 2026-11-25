@@ -1,4 +1,5 @@
 import './globals.css'
+import './robot.css'
 import { Inter, Bebas_Neue } from 'next/font/google'
 
 const inter = Inter({ subsets: ['latin'], variable: '--font-inter' })

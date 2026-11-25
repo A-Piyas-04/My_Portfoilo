@@ -10,8 +10,6 @@ import TryNowGrid from './TryNowGrid'
 
 gsap.registerPlugin(ScrollTrigger)
 
-const GAP = 24
-const FOLDER_LIMIT = 8
 const PAGE_SIZE = 12
 const OTHER_GENRE = 'More Originals'
 const pad = (n) => String(n).padStart(2, '0')
@@ -22,11 +20,6 @@ const projects = rawProjects.map((p, i) => ({
   episode: `S01 E${pad(i + 1)}`,
   match: 99 - ((i * 7) % 6),
 }))
-
-const featured = (() => {
-  const marked = projects.filter((p) => p.featured)
-  return (marked.length ? marked : projects).slice(0, FOLDER_LIMIT)
-})()
 
 const tryNow = tryNowIds.map((id) => projects.find((p) => p.id === id)).filter((p) => p?.tryNow)
 
@@ -58,25 +51,6 @@ function matchesQuery(p, q) {
     .toLowerCase()
     .split(/\s+/)
     .every((word) => hay.includes(word))
-}
-
-function computeLayout(width) {
-  const cols = width >= 1100 ? 4 : 3
-  const cardW = Math.min(300, (width - GAP * (cols - 1)) / cols)
-  const cardH = Math.round(cardW * 0.7)
-  const rows = Math.ceil(featured.length / cols)
-  return { cols, rows, cardW, cardH, height: rows * cardH + (rows - 1) * GAP + 60 }
-}
-
-function gridTarget(i, { cols, rows, cardW, cardH }) {
-  const row = Math.floor(i / cols)
-  const col = i % cols
-  const inRow = row === rows - 1 ? featured.length - row * cols : cols
-  const rowShift = ((cols - inRow) * (cardW + GAP)) / 2
-  return {
-    x: (col - (cols - 1) / 2) * (cardW + GAP) + rowShift,
-    y: (row - (rows - 1) / 2) * (cardH + GAP),
-  }
 }
 
 function CardBody({ project, compact = false }) {
@@ -127,118 +101,6 @@ function cardProps(p, open) {
       }
     },
   }
-}
-
-function FeaturedFolder({ open }) {
-  const scopeRef = useRef(null)
-  const stageRef = useRef(null)
-  const folderBackRef = useRef(null)
-  const folderFrontRef = useRef(null)
-  const cardsRef = useRef([])
-  const [layout, setLayout] = useState(() => computeLayout(1200))
-
-  useEffect(() => {
-    let last = 0
-    const ro = new ResizeObserver(([entry]) => {
-      const w = Math.round(entry.contentRect.width)
-      if (w && Math.abs(w - last) > 20) {
-        last = w
-        setLayout(computeLayout(w))
-      }
-    })
-    ro.observe(stageRef.current)
-    return () => ro.disconnect()
-  }, [])
-
-  useEffect(() => {
-    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches
-    const cards = cardsRef.current.filter(Boolean)
-    const ctx = gsap.context(() => {
-      const mm = gsap.matchMedia()
-      mm.add('(min-width: 768px)', () => {
-        const toGrid = { x: (i) => gridTarget(i, layout).x, y: (i) => gridTarget(i, layout).y }
-        gsap.set([folderBackRef.current, folderFrontRef.current], { xPercent: -50, yPercent: -50 })
-        gsap.set(folderFrontRef.current, { transformOrigin: 'bottom center' })
-        gsap.set(cards, {
-          xPercent: -50,
-          yPercent: -50,
-          x: 0,
-          y: 0,
-          scale: 0.75,
-          rotation: () => gsap.utils.random(-7, 7),
-          zIndex: (i) => 10 + i,
-          force3D: true,
-        })
-
-        if (reduced) {
-          gsap.set([folderBackRef.current, folderFrontRef.current], { opacity: 0 })
-          gsap.set(cards, { ...toGrid, rotation: 0, scale: 1, zIndex: 70 })
-          return
-        }
-
-        gsap
-          .timeline({
-            scrollTrigger: { trigger: stageRef.current, start: 'top 70%', toggleActions: 'play none none reverse' },
-            defaults: { force3D: true },
-          })
-          .to(folderFrontRef.current, { rotationX: -130, duration: 1.1, ease: 'power3.inOut' })
-          .to(cards, { y: -150, scale: 0.85, zIndex: 70, duration: 0.6, stagger: 0.04, ease: 'power3.out' }, '-=0.55')
-          .to(cards, {
-            ...toGrid,
-            rotation: 0,
-            scale: 1,
-            duration: 1.5,
-            stagger: { amount: 0.35, from: 'center' },
-            ease: 'expo.out',
-          })
-          .to([folderBackRef.current, folderFrontRef.current], { opacity: 0.1, scale: 0.8, duration: 0.9, ease: 'power2.out' }, '-=1.3')
-      })
-    }, scopeRef)
-    return () => ctx.revert()
-  }, [layout])
-
-  return (
-    <div ref={scopeRef} className="hidden md:block">
-      <h3 className="reveal mb-4 flex items-center gap-3 text-xl font-bold">
-        <span className="font-display text-3xl leading-none text-netflix-red">N</span> Top Picks For You
-      </h3>
-      <div ref={stageRef} className="relative" style={{ height: layout.height, perspective: '1400px' }}>
-        <div
-          ref={folderBackRef}
-          className="absolute left-1/2 top-1/2 z-0 h-[230px] w-[340px] rounded-xl border border-white/10 bg-gradient-to-b from-[#2a2a2a] to-[#161616] shadow-[0_30px_60px_rgba(0,0,0,0.8)]"
-        >
-          <div className="absolute -top-6 left-0 h-7 w-32 rounded-t-lg border border-b-0 border-white/10 bg-[#2a2a2a] px-3 pt-1.5 text-[10px] font-bold tracking-[0.2em] text-white/50">
-            TOP PICKS
-          </div>
-        </div>
-
-        {featured.map((p, i) => (
-          <div
-            key={p.id}
-            ref={(el) => (cardsRef.current[i] = el)}
-            {...cardProps(p, open)}
-            className="group absolute left-1/2 top-1/2 rounded-xl will-change-transform focus:outline-none focus-visible:ring-2 focus-visible:ring-netflix-red"
-            style={{ width: layout.cardW, height: layout.cardH }}
-          >
-            <div className="h-full w-full transition-transform duration-500 ease-out group-hover:scale-[1.06]">
-              <CardBody project={p} />
-            </div>
-          </div>
-        ))}
-
-        <div
-          ref={folderFrontRef}
-          className="absolute left-1/2 top-1/2 z-50 mt-6 h-[190px] w-[350px] rounded-xl border border-white/10 bg-gradient-to-b from-[#3a3a3a] via-[#222] to-[#151515] shadow-[0_-10px_40px_rgba(0,0,0,0.6)]"
-          style={{ transformStyle: 'preserve-3d' }}
-        >
-          <div className="flex h-full flex-col items-center justify-center gap-2">
-            <span className="font-display text-6xl leading-none text-netflix-red drop-shadow-[0_0_20px_rgba(229,9,20,0.5)]">N</span>
-            <span className="text-[10px] font-bold tracking-[0.4em] text-white/40">ORIGINALS</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  )
 }
 
 function ProjectRow({ title, items, open, className = '' }) {
@@ -321,7 +183,7 @@ function TryNow({ open }) {
   if (!tryNow.length) return null
 
   return (
-    <div id="try-now" className="mt-16 md:mt-20">
+    <div id="try-now">
       <div className="reveal mb-6 flex flex-col gap-2 md:flex-row md:items-end md:justify-between">
         <div>
           <p className="eyebrow mb-2 flex items-center gap-2">
@@ -432,7 +294,6 @@ function Browse({ open }) {
         </div>
       ) : (
         <div className="space-y-10">
-          <ProjectRow title="Top Picks For You" items={featured} open={open} className="md:hidden" />
           {genres.map((g) => (
             <ProjectRow key={g} title={g} items={projects.filter((p) => p.genres.includes(g))} open={open} />
           ))}
@@ -470,7 +331,6 @@ export default function Projects() {
           </p>
         </div>
 
-        <FeaturedFolder open={open} />
         <TryNow open={open} />
         <Browse open={open} />
       </div>

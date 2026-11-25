@@ -1,14 +1,14 @@
 'use client'
 
-import { useEffect, useRef, useState } from 'react'
+import { useCallback, useEffect, useRef, useState } from 'react'
 import dynamic from 'next/dynamic'
 import Image from 'next/image'
 import { gsap } from 'gsap'
 import { profile, roles, socials, experience } from '@/data/portfolio'
 import { useViewer } from './ViewerContext'
 import { scrollToId } from '@/lib/scroll'
-import TryNowModal from './TryNowModal'
-import { usableProjects } from './TryNowGrid'
+import HoloDeck from './HoloDeck'
+import RobotStage from './robot/RobotStage'
 
 const HeroScene = dynamic(() => import('./HeroScene'), { ssr: false })
 
@@ -53,13 +53,29 @@ export default function Hero() {
   const spotlightRef = useRef(null)
   const contentRef = useRef(null)
   const [show3D, setShow3D] = useState(false)
-  const [tryNowOpen, setTryNowOpen] = useState(false)
+  const [holo, setHolo] = useState(null)
+  const [robotLayout, setRobotLayout] = useState(null)
 
   useEffect(() => {
     const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches
     const lowPower = (navigator.hardwareConcurrency || 8) <= 2
     setShow3D(!reduced && !lowPower)
   }, [])
+
+  // One robot instance: a tall column left of the text on wide screens,
+  // a band under the call to action everywhere else.
+  useEffect(() => {
+    const mq = window.matchMedia('(min-width: 1280px)')
+    const apply = () => setRobotLayout(mq.matches ? 'column' : 'band')
+    apply()
+    mq.addEventListener('change', apply)
+    return () => mq.removeEventListener('change', apply)
+  }, [])
+
+  const openHolo = useCallback((origin) => setHolo({ origin }), [])
+  const closeHolo = useCallback(() => setHolo(null), [])
+  const robot = (layout) =>
+    robotLayout === layout && <RobotStage layout={layout} onActivate={openHolo} open={!!holo} />
 
   useEffect(() => {
     const section = sectionRef.current
@@ -148,7 +164,9 @@ export default function Hero() {
       <div className="absolute inset-x-0 bottom-0 h-48 bg-gradient-to-t from-netflix-black to-transparent" />
 
       <div ref={contentRef} className="container-custom relative z-10 flex min-h-[calc(100vh-5rem)] flex-col justify-center py-10">
-        <div className="grid items-center gap-12 lg:grid-cols-[1.2fr_1fr]">
+        <div className="grid items-center gap-12 lg:grid-cols-[1.2fr_1fr] xl:grid-cols-[250px_minmax(0,1fr)_minmax(0,340px)] xl:gap-10">
+          <div className="relative hidden h-[520px] xl:block">{robot('column')}</div>
+
           <div>
             <div className="hero-anim mb-5 flex items-center gap-3">
               <span className="font-display text-4xl leading-none text-netflix-red">N</span>
@@ -185,27 +203,12 @@ export default function Hero() {
 
             <div className="hero-anim mt-8 flex flex-wrap gap-3">
               <PrimaryCta type={viewer.primaryCta} />
-              <button
-                type="button"
-                onClick={() => setTryNowOpen(true)}
-                aria-haspopup="dialog"
-                aria-expanded={tryNowOpen}
-                aria-controls="try-now-modal"
-                className="btn-netflix-red shadow-[0_10px_30px_rgba(229,9,20,0.35)]"
-              >
-                <span className="relative flex h-2.5 w-2.5">
-                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-white opacity-75 motion-reduce:hidden" />
-                  <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-white" />
-                </span>
-                Try It Now
-                <span className="rounded-sm bg-black/30 px-1.5 py-0.5 text-[11px] font-extrabold tracking-wide">
-                  {usableProjects.length} READY
-                </span>
-              </button>
             </div>
+
+            <div className="relative mt-8 h-[210px] max-w-xl sm:h-[230px] xl:hidden">{robot('band')}</div>
           </div>
 
-          <div className="perspective-1000 mx-auto w-full max-w-[380px]">
+          <div className="perspective-1000 mx-auto w-full max-w-[380px] xl:max-w-[340px]">
             <div ref={cardRef} className="preserve-3d relative aspect-[2/3] w-full will-change-transform">
               <div className="absolute -inset-6 rounded-[2rem] bg-netflix-red/30 blur-3xl" />
               <div className="relative h-full w-full overflow-hidden rounded-xl border border-white/10 bg-gradient-to-b from-[#3a0306] via-[#160102] to-black shadow-[0_40px_80px_rgba(0,0,0,0.9)]">
@@ -256,7 +259,7 @@ export default function Hero() {
           <span>[ Portfolio Release v3.0 ]</span>
         </div>
       </div>
-      {tryNowOpen && <TryNowModal onClose={() => setTryNowOpen(false)} />}
+      {holo && <HoloDeck origin={holo.origin} onClose={closeHolo} />}
     </section>
   )
 }

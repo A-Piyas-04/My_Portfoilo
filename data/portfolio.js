@@ -93,9 +93,9 @@ export const expertise = [
   },
   {
     number: '04',
-    title: 'Automation & DevOps',
+    title: 'Automation',
     text: 'Containerizing services with Docker, automating workflows with n8n and shipping to the cloud with Firebase and Vercel.',
-    tag: 'DEVOPS & AUTOMATION',
+    tag: 'AUTOMATION',
   },
 ]
 

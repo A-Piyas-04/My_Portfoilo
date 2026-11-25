@@ -2,17 +2,17 @@
 @tailwind components;
 @tailwind utilities;
 
-.try-now-dialog::backdrop {
+.holo-dialog::backdrop {
   background: transparent;
 }
 
-body.has-custom-cursor .try-now-dialog,
-body.has-custom-cursor .try-now-dialog * {
+body.has-custom-cursor .holo-dialog,
+body.has-custom-cursor .holo-dialog * {
   cursor: auto !important;
 }
 
-body.has-custom-cursor .try-now-dialog :is(a, button),
-body.has-custom-cursor .try-now-dialog :is(a, button) * {
+body.has-custom-cursor .holo-dialog :is(a, button),
+body.has-custom-cursor .holo-dialog :is(a, button) * {
   cursor: pointer !important;
 }
 

@@ -3,12 +3,26 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
 import Image from 'next/image'
 import { gsap } from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { skillCategories } from '@/data/portfolio'
 import { useReveal } from '@/lib/useReveal'
+import { getLenis } from '@/lib/scroll'
+
+gsap.registerPlugin(ScrollTrigger)
 
 const total = skillCategories.length
 const pad = (n) => String(n).padStart(2, '0')
 const clamp = (v, min, max) => Math.max(min, Math.min(max, v))
+const smoothstep = (a, b, v) => {
+  const t = clamp((v - a) / (b - a), 0, 1)
+  return t * t * (3 - 2 * t)
+}
+// Scroll progress -> card position, with a short dwell on every card so the
+// carousel settles on each one instead of drifting between them.
+const dwell = (seg) => {
+  const i = Math.floor(seg)
+  return i >= total - 1 ? total - 1 : i + smoothstep(0.2, 0.8, seg - i)
+}
 
 export default function Skills() {
   const sectionRef = useRef(null)
@@ -17,6 +31,9 @@ export default function Skills() {
   const labelsRef = useRef([])
   const state = useRef({ p: 0, tween: null, dragged: false })
   const geometry = useRef({ radius: 1800, angle: 18, cardW: 420 })
+  const pinRef = useRef(null)
+  const syncRef = useRef({ on: false, timer: null })
+  const activeRef = useRef(0)
   const [active, setActive] = useState(0)
   useReveal(sectionRef)
 
@@ -45,6 +62,7 @@ export default function Skills() {
   const goTo = useCallback(
     (index, duration = 0.95) => {
       const target = clamp(index, 0, total - 1)
+      activeRef.current = target
       setActive(target)
       state.current.tween?.kill()
       state.current.tween = gsap.to(state.current, {
@@ -53,9 +71,62 @@ export default function Skills() {
         ease: 'power3.out',
         onUpdate: render,
       })
+
+      // While the section is scroll-driven, move the page to the matching
+      // position so scrolling continues from the chosen card.
+      const st = pinRef.current
+      if (!st) return
+      const y = st.start + (target / (total - 1)) * (st.end - st.start)
+      const sync = syncRef.current
+      const release = () => {
+        clearTimeout(sync.timer)
+        sync.on = false
+      }
+      sync.on = true
+      clearTimeout(sync.timer)
+      sync.timer = setTimeout(release, duration * 1000 + 250)
+      const lenis = getLenis()
+      if (lenis) lenis.scrollTo(y, { duration, force: true, onComplete: release })
+      else window.scrollTo(0, y)
     },
     [render]
   )
+
+  // Desktop: pin the section and turn vertical scroll into carousel progress.
+  useEffect(() => {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
+    const mm = gsap.matchMedia()
+    mm.add('(min-width: 769px)', () => {
+      pinRef.current = ScrollTrigger.create({
+        trigger: sectionRef.current,
+        start: 'center center',
+        end: () => `+=${(total - 1) * window.innerHeight * 0.75}`,
+        pin: true,
+        anticipatePin: 1,
+        invalidateOnRefresh: true,
+        onUpdate: (self) => {
+          if (syncRef.current.on) return
+          const seg = self.progress * (total - 1)
+          state.current.tween?.kill()
+          state.current.p = dwell(seg)
+          render()
+          const idx = clamp(Math.round(seg), 0, total - 1)
+          if (idx !== activeRef.current) {
+            activeRef.current = idx
+            setActive(idx)
+          }
+        },
+      })
+      return () => {
+        pinRef.current = null
+      }
+    })
+    const sync = syncRef.current
+    return () => {
+      clearTimeout(sync.timer)
+      mm.revert()
+    }
+  }, [render])
 
   useEffect(() => {
     const measure = () => {
@@ -160,7 +231,7 @@ export default function Skills() {
             </h2>
           </div>
           <p className="text-white/60 md:max-w-sm md:justify-self-end md:text-right">
-            Drag, swipe or use the arrows to flip through the collection.
+            Scroll, drag, swipe or use the arrows to flip through the collection.
           </p>
         </div>
       </div>
