@@ -4,6 +4,7 @@ import { useEffect } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
 import SocialIcon from './SocialIcon'
 import { getLenis } from '@/lib/scroll'
+import { projectStatusLabels } from '@/data/portfolio'
 
 export default function ProjectModal({ project, related, onClose, onSelect }) {
   const isOpen = Boolean(project)
@@ -82,7 +83,7 @@ export default function ProjectModal({ project, related, onClose, onSelect }) {
                       <svg className="h-5 w-5" viewBox="0 0 24 24" fill="currentColor">
                         <path d="M6 4v16l14-8z" />
                       </svg>
-                      {project.tryNow?.label ?? 'Watch Live'}
+                      {project.tryNow?.label ?? project.websiteLabel ?? 'Watch Live'}
                     </a>
                   )}
                 </div>
@@ -94,14 +95,14 @@ export default function ProjectModal({ project, related, onClose, onSelect }) {
                 <div className="flex flex-wrap items-center gap-3 text-sm font-semibold">
                   <span className="text-[#46d369]">{project.match}% Match</span>
                   <span className="text-white/70">{project.episode}</span>
-                  {project.status === 'coming-soon' ? (
+                  {projectStatusLabels[project.status] ? (
                     <span className="rounded-sm bg-white px-1.5 py-0.5 text-[11px] font-extrabold uppercase tracking-wide text-black">
-                      Coming Soon
+                      {projectStatusLabels[project.status]}
                     </span>
                   ) : (
                     <>
                       <span className="rounded-sm border border-white/40 px-1.5 text-[11px] text-white/80">HD</span>
-                      {project.websiteUrl && (
+                      {project.websiteUrl && project.websiteVerified !== false && (
                         <span className="rounded-sm bg-netflix-red px-1.5 text-[11px] font-bold">LIVE</span>
                       )}
                     </>

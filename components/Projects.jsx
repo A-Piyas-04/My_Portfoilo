@@ -3,7 +3,7 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
-import { projects as rawProjects, projectGenres, tryNowIds } from '@/data/portfolio'
+import { projects as rawProjects, projectGenres, projectStatusLabels, tryNowIds } from '@/data/portfolio'
 import { useReveal } from '@/lib/useReveal'
 import ProjectModal from './ProjectModal'
 
@@ -87,12 +87,12 @@ function CardBody({ project, compact = false }) {
         <span className="rounded-sm bg-netflix-red px-1.5 py-0.5">{project.episode}</span>
         <span className="flex items-center gap-2">
           <span className="text-[#46d369]">{project.match}% Match</span>
-          {project.status === 'coming-soon' ? (
+          {projectStatusLabels[project.status] ? (
             <span className="rounded-sm bg-white px-1 py-0.5 text-[9px] font-extrabold uppercase tracking-wide text-black">
-              Coming Soon
+              {projectStatusLabels[project.status]}
             </span>
           ) : (
-            <span className="rounded-sm border border-white/30 px-1 text-white/70">{project.websiteUrl ? 'LIVE' : 'HD'}</span>
+            <span className="rounded-sm border border-white/30 px-1 text-white/70">{project.websiteUrl && project.websiteVerified !== false ? 'LIVE' : 'HD'}</span>
           )}
         </span>
       </div>
@@ -317,6 +317,10 @@ function ProjectRow({ title, items, open, className = '' }) {
 }
 
 const TRY_KINDS = {
+  plugin: {
+    tag: 'Claude Code Plugin',
+    icon: <path d="M9 3v5m6-5v5M6 8h12v3a6 6 0 0 1-12 0V8zm6 9v4" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />,
+  },
   web: { tag: 'In Browser', icon: <path d="M6 4v16l14-8z" fill="currentColor" /> },
   download: {
     tag: 'Windows App',

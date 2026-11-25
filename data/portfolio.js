@@ -178,9 +178,57 @@ export const skillCategories = [
 
 export const projectGenres = ['AI & Machine Learning', 'Full-Stack & Web', 'DevOps', 'Mobile Apps', 'Desktop, Games & Systems']
 
-export const tryNowIds = [3, 18, 25, 10, 27]
+export const projectStatusLabels = {
+  'coming-soon': 'Coming Soon',
+  'in-development': 'In Development',
+}
+
+export const tryNowIds = [28, 3, 18, 25, 10, 27]
 
 export const projects = [
+  {
+    id: 28,
+    title: 'schema-guide',
+    featured: true,
+    genres: ['AI & Machine Learning', 'Full-Stack & Web'],
+    category: 'Claude Code Plugin',
+    description:
+      'Turn a database schema into an interactive, offline HTML guide with a relationship map, guided tour, deletion-impact analysis and JOIN path finder. A zero-dependency CLI keeps schema facts separate from Claude-written explanations and validates referenced schema names. Supports live PostgreSQL, MySQL and SQLite inspection as well as project-declared schemas.',
+    tech: ['Claude Code', 'Node.js', 'JavaScript', 'SQL', 'HTML'],
+    githubUrl: 'https://github.com/A-Piyas-04/schema-guide',
+    tryNow: {
+      kind: 'plugin',
+      label: 'Install Plugin',
+      url: 'https://github.com/A-Piyas-04/schema-guide#quick-start',
+      note: 'Requires Claude Code and Node.js; generated guides open offline',
+    },
+  },
+  {
+    id: 29,
+    title: 'PorikkhaDao',
+    featured: true,
+    genres: ['Full-Stack & Web'],
+    category: 'Education Platform',
+    description:
+      'A bilingual Bangla/English HSC exam platform for private tutors. Build exams from selected subjects, chapters and topics, publish share links, and review student scores. Tutors sign in with Google; students enter their name and email to take timed exams without a Google account. Built with Next.js, Supabase authentication and PostgreSQL.',
+    tech: ['Next.js', 'React', 'TypeScript', 'Supabase', 'PostgreSQL'],
+    githubUrl: 'https://github.com/A-Piyas-04/PorikkhaDao',
+    websiteUrl: 'https://porikkha-dao.vercel.app/',
+    websiteLabel: 'Visit Website',
+    websiteVerified: false,
+  },
+  {
+    id: 30,
+    title: 'Nudge',
+    featured: true,
+    genres: ['AI & Machine Learning', 'Full-Stack & Web'],
+    category: 'Student Engagement Assistant',
+    status: 'in-development',
+    description:
+      'An in-development assistant that flags changes in student engagement using transparent activity rules, drafts personalized check-ins with Gemini, and requires instructor approval before sending. Combines CSV imports, editable thresholds, outreach review and response tracking, with opt-out handling and personal follow-up for students who need an instructor. Includes a local 40-student demo.',
+    tech: ['Next.js', 'TypeScript', 'Gemini', 'Prisma', 'SQLite', 'Vitest'],
+    githubUrl: 'https://github.com/A-Piyas-04/Nudge',
+  },
   {
     id: 2,
     title: 'NexusRide',
@@ -302,7 +350,7 @@ export const projects = [
     description:
       'Turns recent arXiv computer-science papers into an interactive semantic research landscape. An offline pipeline embeds titles and abstracts, clusters them with UMAP + HDBSCAN, labels areas with c-TF-IDF and tracks publication growth; a Streamlit app offers semantic search, trends, investigation leads and BibTeX export.',
     tech: ['Python', 'Sentence Transformers', 'UMAP', 'HDBSCAN', 'Streamlit'],
-    githubUrl: 'https://github.com/A-Piyas-04/PaperPorteHobe',
+    githubUrl: 'https://github.com/A-Piyas-04/ScholarGrid',
   },
   {
     id: 15,
