@@ -4,9 +4,11 @@ import { useEffect, useRef, useState } from 'react'
 import dynamic from 'next/dynamic'
 import Image from 'next/image'
 import { gsap } from 'gsap'
-import { profile, roles, socials, experience, tryNowIds } from '@/data/portfolio'
+import { profile, roles, socials, experience } from '@/data/portfolio'
 import { useViewer } from './ViewerContext'
 import { scrollToId } from '@/lib/scroll'
+import TryNowModal from './TryNowModal'
+import { usableProjects } from './TryNowGrid'
 
 const HeroScene = dynamic(() => import('./HeroScene'), { ssr: false })
 
@@ -51,6 +53,7 @@ export default function Hero() {
   const spotlightRef = useRef(null)
   const contentRef = useRef(null)
   const [show3D, setShow3D] = useState(false)
+  const [tryNowOpen, setTryNowOpen] = useState(false)
 
   useEffect(() => {
     const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches
@@ -184,7 +187,10 @@ export default function Hero() {
               <PrimaryCta type={viewer.primaryCta} />
               <button
                 type="button"
-                onClick={() => scrollToId('try-now', 110)}
+                onClick={() => setTryNowOpen(true)}
+                aria-haspopup="dialog"
+                aria-expanded={tryNowOpen}
+                aria-controls="try-now-modal"
                 className="btn-netflix-red shadow-[0_10px_30px_rgba(229,9,20,0.35)]"
               >
                 <span className="relative flex h-2.5 w-2.5">
@@ -193,7 +199,7 @@ export default function Hero() {
                 </span>
                 Try It Now
                 <span className="rounded-sm bg-black/30 px-1.5 py-0.5 text-[11px] font-extrabold tracking-wide">
-                  {tryNowIds.length} READY
+                  {usableProjects.length} READY
                 </span>
               </button>
             </div>
@@ -250,6 +256,7 @@ export default function Hero() {
           <span>[ Portfolio Release v3.0 ]</span>
         </div>
       </div>
+      {tryNowOpen && <TryNowModal onClose={() => setTryNowOpen(false)} />}
     </section>
   )
 }

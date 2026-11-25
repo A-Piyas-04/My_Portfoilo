@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+.try-now-dialog::backdrop {
+  background: transparent;
+}
+
 @layer base {
   html.lenis,
   html.lenis body {

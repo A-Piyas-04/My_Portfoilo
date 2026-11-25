@@ -183,7 +183,7 @@ export const projectStatusLabels = {
   'in-development': 'In Development',
 }
 
-export const tryNowIds = [28, 3, 18, 25, 10, 27]
+export const tryNowIds = [28, 29, 3, 18, 25, 10, 27]
 
 export const projects = [
   {
@@ -215,7 +215,7 @@ export const projects = [
     githubUrl: 'https://github.com/A-Piyas-04/PorikkhaDao',
     websiteUrl: 'https://porikkha-dao.vercel.app/',
     websiteLabel: 'Visit Website',
-    websiteVerified: false,
+    tryNow: { kind: 'web', label: 'Open in Browser', url: 'https://porikkha-dao.vercel.app/', note: 'Tutors sign in with Google; students join via exam links' },
   },
   {
     id: 30,
@@ -420,7 +420,7 @@ export const projects = [
   },
   {
     id: 26,
-    title: 'HishebNama',
+    title: 'DenaPaona',
     genres: ['Full-Stack & Web', 'Mobile Apps'],
     category: 'Debt Ledger PWA',
     status: 'coming-soon',
