@@ -6,6 +6,16 @@
   background: transparent;
 }
 
+body.has-custom-cursor .try-now-dialog,
+body.has-custom-cursor .try-now-dialog * {
+  cursor: auto !important;
+}
+
+body.has-custom-cursor .try-now-dialog :is(a, button),
+body.has-custom-cursor .try-now-dialog :is(a, button) * {
+  cursor: pointer !important;
+}
+
 @layer base {
   html.lenis,
   html.lenis body {

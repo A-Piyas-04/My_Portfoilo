@@ -183,7 +183,7 @@ export const projectStatusLabels = {
   'in-development': 'In Development',
 }
 
-export const tryNowIds = [28, 29, 3, 18, 25, 10, 27]
+export const tryNowIds = [28, 27, 29, 3, 18, 25, 10]
 
 export const projects = [
   {
